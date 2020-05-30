@@ -30,4 +30,32 @@ public class Peliculas extends Publicaciones {
 		return "Peliculas{" + "anio=" + anio + ", duracion=" + duracion + '}';
 	}
 
+	/**
+	 * @return the anio
+	 */
+	public int getAnio() {
+		return anio;
+	}
+
+	/**
+	 * @param anio the anio to set
+	 */
+	public void setAnio(int anio) {
+		this.anio = anio;
+	}
+
+	/**
+	 * @return the duracion
+	 */
+	public float getDuracion() {
+		return duracion;
+	}
+
+	/**
+	 * @param duracion the duracion to set
+	 */
+	public void setDuracion(float duracion) {
+		this.duracion = duracion;
+	}
+
 }

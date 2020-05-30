@@ -59,4 +59,74 @@ public class Calendario implements iMontos {
 																		// Tools | Templates.
 	}
 
+	/**
+	 * @return the codigoID
+	 */
+	public int getCodigoID() {
+		return codigoID;
+	}
+
+	/**
+	 * @param codigoID the codigoID to set
+	 */
+	public void setCodigoID(int codigoID) {
+		this.codigoID = codigoID;
+	}
+
+	/**
+	 * @return the semPago
+	 */
+	public static int getSemPago() {
+		return semPago;
+	}
+
+	/**
+	 * @param semPago the semPago to set
+	 */
+	public static void setSemPago(int semPago) {
+		Calendario.semPago = semPago;
+	}
+
+	/**
+	 * @return the montoTotal
+	 */
+	public float getMontoTotal() {
+		return montoTotal;
+	}
+
+	/**
+	 * @param montoTotal the montoTotal to set
+	 */
+	public void setMontoTotal(float montoTotal) {
+		this.montoTotal = montoTotal;
+	}
+
+	/**
+	 * @return the fechaPago
+	 */
+	public Calendar getFechaPago() {
+		return fechaPago;
+	}
+
+	/**
+	 * @param fechaPago the fechaPago to set
+	 */
+	public void setFechaPago(Calendar fechaPago) {
+		this.fechaPago = fechaPago;
+	}
+
+	/**
+	 * @return the pulic
+	 */
+	public Publicaciones getPulic() {
+		return pulic;
+	}
+
+	/**
+	 * @param pulic the pulic to set
+	 */
+	public void setPulic(Publicaciones pulic) {
+		this.pulic = pulic;
+	}
+
 }

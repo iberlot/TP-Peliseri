@@ -66,4 +66,131 @@ public abstract class Publicaciones {
 	public int cantidadDeActores() {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
+
+	/**
+	 * @return the codigo
+	 */
+	public int getCodigo() {
+		return codigo;
+	}
+
+	/**
+	 * @param codigo the codigo to set
+	 */
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
+	}
+
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	/**
+	 * @return the generos
+	 */
+	public ArrayList<Generos> getGeneros() {
+		return generos;
+	}
+
+	/**
+	 * @param generos the generos to set
+	 */
+	public void setGeneros(ArrayList<Generos> generos) {
+		this.generos = generos;
+	}
+
+	/**
+	 * @return the sinopsis
+	 */
+	public String getSinopsis() {
+		return sinopsis;
+	}
+
+	/**
+	 * @param sinopsis the sinopsis to set
+	 */
+	public void setSinopsis(String sinopsis) {
+		this.sinopsis = sinopsis;
+	}
+
+	/**
+	 * @return the clasificaciones
+	 */
+	public ArrayList<Clasificaciones> getClasificaciones() {
+		return clasificaciones;
+	}
+
+	/**
+	 * @param clasificaciones the clasificaciones to set
+	 */
+	public void setClasificaciones(ArrayList<Clasificaciones> clasificaciones) {
+		this.clasificaciones = clasificaciones;
+	}
+
+	/**
+	 * @return the actores
+	 */
+	public ArrayList<Actores> getActores() {
+		return actores;
+	}
+
+	/**
+	 * @param actores the actores to set
+	 */
+	public void setActores(ArrayList<Actores> actores) {
+		this.actores = actores;
+	}
+
+	/**
+	 * @return the empresa
+	 */
+	public String getEmpresa() {
+		return empresa;
+	}
+
+	/**
+	 * @param empresa the empresa to set
+	 */
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
+
+	/**
+	 * @return the publicacion
+	 */
+	public String getPublicacion() {
+		return publicacion;
+	}
+
+	/**
+	 * @param publicacion the publicacion to set
+	 */
+	public void setPublicacion(String publicacion) {
+		this.publicacion = publicacion;
+	}
+
+	/**
+	 * @return the fechaPubli
+	 */
+	public Calendar getFechaPubli() {
+		return fechaPubli;
+	}
+
+	/**
+	 * @param fechaPubli the fechaPubli to set
+	 */
+	public void setFechaPubli(Calendar fechaPubli) {
+		this.fechaPubli = fechaPubli;
+	}
+
 }

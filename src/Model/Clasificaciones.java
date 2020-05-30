@@ -28,4 +28,60 @@ public class Clasificaciones {
 				+ suscriptor + ", fecha=" + fecha + '}';
 	}
 
+	/**
+	 * @return the calificacion
+	 */
+	public int getCalificacion() {
+		return calificacion;
+	}
+
+	/**
+	 * @param calificacion the calificacion to set
+	 */
+	public void setCalificacion(int calificacion) {
+		this.calificacion = calificacion;
+	}
+
+	/**
+	 * @return the descripcion
+	 */
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	/**
+	 * @param descripcion the descripcion to set
+	 */
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	/**
+	 * @return the suscriptor
+	 */
+	public Suscriptores getSuscriptor() {
+		return suscriptor;
+	}
+
+	/**
+	 * @param suscriptor the suscriptor to set
+	 */
+	public void setSuscriptor(Suscriptores suscriptor) {
+		this.suscriptor = suscriptor;
+	}
+
+	/**
+	 * @return the fecha
+	 */
+	public Calendar getFecha() {
+		return fecha;
+	}
+
+	/**
+	 * @param fecha the fecha to set
+	 */
+	public void setFecha(Calendar fecha) {
+		this.fecha = fecha;
+	}
+
 }
