@@ -2,11 +2,11 @@ package Model;
 
 public interface iMontos {
 
-    public int alto();
+	public int alto();
 
-    public int medio();
- 
-    public int bajo();
+	public int medio();
 
-    public double calculaMonto();
+	public int bajo();
+
+	public double calculaMonto();
 }
