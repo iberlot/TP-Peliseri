@@ -1,65 +1,31 @@
 package Vista;
 
-import java.util.ArrayList;
+import java.io.IOException;
 
-import Model.*;
+public class VPeliSeri implements iVistas {
 
-public class VPeliSeri {
-
-	private ArrayList<Generos> generos;
-
-	private ArrayList<Publicaciones> publicaciones;
-
-	private ArrayList<Actores> actores;
-
-	private ArrayList<Suscriptores> suscriptores;
-
-	private ArrayList<Calendario> pagos;
-
-	public Episodios buscarSerieMejorCalif() {
-		throw new UnsupportedOperationException("Not supported yet.");
+	@Override
+	public boolean crear() throws IOException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
-	public Peliculas buscarPeliMejorCalif() {
-		throw new UnsupportedOperationException("Not supported yet.");
+	@Override
+	public boolean eliminar() throws IOException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
-	public void recomendar() {
+	@Override
+	public boolean modificar() throws IOException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
-	public ArrayList<Publicaciones> publicacionesVencidas() {
-		throw new UnsupportedOperationException("Not supported yet.");
+	@Override
+	public void mostrarElemento(String dato) throws IOException {
+		// TODO Auto-generated method stub
+		
 	}
-
-	public void agregarPublicacion() {
-	}
-
-	public void seriesPorGenero() {
-	}
-
-	public void mayoresSinClasificacion() {
-	}
-
-	public void untitledMethod() {
-	}
-
-	public void datosPeliculaAlAzar() {
-	}
-
-	public void seriesParaMayores() {
-	}
-
-	public int actoresTematicos() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	public Publicaciones pelisPobres() {
-		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	public void untitledMethod1() {
-	}
-
-	public void actricesActuales() {
-	}
+// XXX tengo que chequear que hay que poner aca <@>
 }

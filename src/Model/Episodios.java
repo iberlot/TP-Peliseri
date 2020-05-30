@@ -22,9 +22,9 @@ public class Episodios extends Publicaciones {
 	public Episodios() {
 	}
 
-	public Episodios(int codigo, String nombre, ArrayList<Generos> generos, String sinopsis, ArrayList<Actores> actores,
+	public Episodios(int codigo, String nombre, Generos genero, String sinopsis, ArrayList<Actores> actores,
 			String empresa, String publicacion, Calendar fechaPubli) {
-		super(codigo, nombre, generos, sinopsis, actores, empresa, publicacion, fechaPubli);
+		super(codigo, nombre, genero, sinopsis, actores, empresa, publicacion, fechaPubli);
 	}
 
 	@Override

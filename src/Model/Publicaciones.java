@@ -9,7 +9,7 @@ public abstract class Publicaciones {
 
 	protected String nombre;
 
-	protected ArrayList<Generos> generos;
+	protected Generos genero;
 
 	protected String sinopsis;
 
@@ -26,11 +26,11 @@ public abstract class Publicaciones {
 	public Publicaciones() {
 	}
 
-	public Publicaciones(int codigo, String nombre, ArrayList<Generos> generos, String sinopsis,
+	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis,
 			ArrayList<Actores> actores, String empresa, String publicacion, Calendar fechaPubli) {
 		this.codigo = codigo;
 		this.nombre = nombre;
-		this.generos = generos;
+		this.genero = genero;
 		this.sinopsis = sinopsis;
 		this.actores = actores;
 		this.empresa = empresa;
@@ -38,12 +38,12 @@ public abstract class Publicaciones {
 		this.fechaPubli = fechaPubli;
 	}
 
-	public Publicaciones(int codigo, String nombre, ArrayList<Generos> generos, String sinopsis,
+	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis,
 			ArrayList<Clasificaciones> clasificaciones, ArrayList<Actores> actores, String empresa, String publicacion,
 			Calendar fechaPubli) {
 		this.codigo = codigo;
 		this.nombre = nombre;
-		this.generos = generos;
+		this.genero = genero;
 		this.sinopsis = sinopsis;
 		this.clasificaciones = clasificaciones;
 		this.actores = actores;
@@ -54,7 +54,7 @@ public abstract class Publicaciones {
 
 	@Override
 	public String toString() {
-		return "Publicaciones{" + "codigo=" + codigo + ", nombre=" + nombre + ", generos=" + generos + ", sinopsis="
+		return "Publicaciones{" + "codigo=" + codigo + ", nombre=" + nombre + ", genero=" + genero + ", sinopsis="
 				+ sinopsis + ", clasificaciones=" + clasificaciones + ", actores=" + actores + ", empresa=" + empresa
 				+ ", publicacion=" + publicacion + ", fechaPubli=" + fechaPubli + '}';
 	}
@@ -98,15 +98,15 @@ public abstract class Publicaciones {
 	/**
 	 * @return the generos
 	 */
-	public ArrayList<Generos> getGeneros() {
-		return generos;
+	public Generos getGenero() {
+		return genero;
 	}
 
 	/**
 	 * @param generos the generos to set
 	 */
-	public void setGeneros(ArrayList<Generos> generos) {
-		this.generos = generos;
+	public void setGenero(Generos genero) {
+		this.genero = genero;
 	}
 
 	/**

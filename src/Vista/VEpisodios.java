@@ -4,35 +4,96 @@
 package Vista;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 /**
  * @author IVANB
  *
  */
-public class VEpisodios implements iVistas {
+public class VEpisodios extends VPublicaciones {
 
 	@Override
 	public boolean crear() throws IOException {
-		// TODO Auto-generated method stub
-		return false;
+		return funciones.Funciones.pedirBooleano("Desea dar de alta un nuevo episodio? ", "S", "N");
 	}
 
 	@Override
 	public boolean eliminar() throws IOException {
-		// TODO Auto-generated method stub
-		return false;
+		return funciones.Funciones.pedirBooleano("Desea eliminar el episodio? ", "S", "N");
 	}
 
 	@Override
 	public boolean modificar() throws IOException {
-		// TODO Auto-generated method stub
-		return false;
+		return funciones.Funciones.pedirBooleano("Desea modificar el episodio? ", "S", "N");
 	}
 
 	@Override
-	public void mostrarElemento(String dato) throws IOException {
-		// TODO Auto-generated method stub
+	public void mostrarElemento(String dato) {
 
+		System.out.printf("Los datos del episodio son:\n%s\n", dato);
+	}
+
+	public void mostrarElemento(int anio, float duracion, int nroEpisodio, String serie, int temporada) {
+
+		System.out.printf("Los datos de la pelicula son:\n");
+		mostrarAnio(anio);
+		mostrarDuracion(duracion);
+		mostrarNroEpisodio(nroEpisodio);
+		mostrarSerie(serie);
+		mostrarTemporada(temporada);
+// No se si aca tengo que retornar los datos de Publicaciones o llamar a una
+		// funcion de VPublicaciones o Extender esto
+	}
+
+	public void mostrarElemento(int codigo, String nombre, String empresa, Calendar fPubli, String genero,
+			String sinopsis, int anio, float duracion, int nroEpisodio, String serie, int temporada) {
+
+		super.mostrarElemento(codigo, nombre, empresa, fPubli, genero, sinopsis);
+		mostrarAnio(anio);
+		mostrarDuracion(duracion);
+		mostrarNroEpisodio(nroEpisodio);
+		mostrarSerie(serie);
+		mostrarTemporada(temporada);
+	}
+
+	public int pedirAnio() {
+		return funciones.Funciones.pedirEnteroPositivo("Ingrese el anio:");
+	}
+
+	private void mostrarAnio(int dato) {
+		System.out.printf("El apellido es: %s\n", dato);
+	}
+
+	public float pedirDuracion() {
+		return funciones.Funciones.pedirFloat("Ingrese el anio:");
+	}
+
+	private void mostrarDuracion(float dato) {
+		System.out.printf("La duracion es de: %f\n", dato);
+	}
+
+	public int pedirNroEpisodio() {
+		return funciones.Funciones.pedirEnteroPositivo("Ingrese el Nro de episodio:");
+	}
+
+	private void mostrarNroEpisodio(int dato) {
+		System.out.printf("Episodio nro: %s\n", dato);
+	}
+
+	public String pedirSerie() {
+		return funciones.Funciones.pedirString("Ingrese el anio:");
+	}
+
+	private void mostrarSerie(String dato) {
+		System.out.printf("La serie es : %s\n", dato);
+	}
+
+	public int pedirTemporada() {
+		return funciones.Funciones.pedirEnteroPositivo("Ingrese el anio:");
+	}
+
+	private void mostrarTemporada(int dato) {
+		System.out.printf("La duracion es de: %i\n", dato);
 	}
 
 }
