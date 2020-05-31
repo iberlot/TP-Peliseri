@@ -56,6 +56,7 @@ public class VCalendario implements iVistas {
 	public Calendar pedirFPago() {
 		return funciones.Funciones.pedirFecha("Ingrese la fecha :");
 	}
+	
 	private void mostrarFPago(Calendar dato) {
 		System.out.printf("la feca es: %s\n", dato);
 		

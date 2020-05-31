@@ -40,9 +40,6 @@ public class CPeliSeri {
 	public void mayoresSinClasificacion() {
 	}
 
-	public void untitledMethod() {
-	}
-
 	public void datosPeliculaAlAzar() {
 	}
 
@@ -55,9 +52,6 @@ public class CPeliSeri {
 
 	public Publicaciones pelisPobres() {
 		throw new UnsupportedOperationException("Not supported yet.");
-	}
-
-	public void untitledMethod1() {
 	}
 
 	public void actricesActuales() {

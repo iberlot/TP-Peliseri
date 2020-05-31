@@ -2,6 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Funciones"/>
+	<classpathentry kind="lib" path="G:/Descargas/json-20190722.jar"/>
+	<classpathentry kind="lib" path="jarsExt/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="jarsExt/funciones.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
