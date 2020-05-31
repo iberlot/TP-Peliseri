@@ -5,6 +5,12 @@ import java.util.Calendar;
 
 import funciones.Fechas;
 
+/**
+ * Clase de la vista que muestra todo lo relacionado con una publicacion
+ * 
+ * @author iberlot <@>
+ *
+ */
 public class VPublicaciones implements iVistas {
 
 	@Override
@@ -28,6 +34,17 @@ public class VPublicaciones implements iVistas {
 		System.out.printf("Los datos de la publicacion son:\n%s\n", dato);
 	}
 
+	/**
+	 * Muestra por pantalla un mensaje con los datos pasados por parametro de la
+	 * publicacion
+	 * 
+	 * @param codigo
+	 * @param nombre
+	 * @param empresa
+	 * @param fPubli
+	 * @param genero
+	 * @param sinopsis
+	 */
 	public void mostrarElemento(int codigo, String nombre, String empresa, Calendar fPubli, String genero,
 			String sinopsis) {
 
@@ -41,58 +58,127 @@ public class VPublicaciones implements iVistas {
 
 	}
 
+	/**
+	 * Muestra por pantalla un mensaje con el parametro pasado de la sinopsis de la
+	 * publicacion
+	 * 
+	 * @param sinopsis
+	 */
 	private void mostrarSinopsis(String sinopsis) {
 		System.out.printf("la sinopsis es: %s\n", sinopsis);
 
 	}
 
+	/**
+	 * Pide que se ingrese por teclado la sinopsis de la publicacion
+	 * 
+	 * @return
+	 */
 	public String pedirSinopsis() {
 		return funciones.Funciones.pedirString("Ingrese la sinopsis: ");
 	}
 
-	// XXX esto creo que no va aca
+	/**
+	 * Muestra por pantalla un mensaje con el parametro pasado del genero de la
+	 * publicacion
+	 * 
+	 * XXX esto creo que no va aca, estoy casi seguro de que deberia llamarse a una
+	 * funcion de la clase VGenero - iberlot <@>
+	 * 
+	 * @param genero
+	 */
 	private void mostrarGenero(String genero) {
 		System.out.printf("El generos es es: %s\n", genero);
 
 	}
 
-	// XXX esto creo que no va aca
+	/**
+	 * Pide que se ingrese por teclado el genero de la publicacion
+	 * 
+	 * XXX esto creo que no va aca, estoy casi seguro de que deberia llamarse a una
+	 * funcion de la clase VGenero - iberlot <@>
+	 * 
+	 * @return
+	 */
 	public String pedirGenero() {
 		return funciones.Funciones.pedirString("Ingrese el genero: ");
 	}
 
+	/**
+	 * Muestra por pantalla un mensaje con el parametro pasado de la empresa
+	 * 
+	 * @param empresa
+	 */
 	private void mostrarEmpresa(String empresa) {
 		System.out.printf("la empresa es: %s\n", empresa);
 
 	}
 
+	/**
+	 * Pide que se ingrese por teclado la empresa
+	 * 
+	 * @return
+	 */
 	public String pedirEmpresa() {
 		return funciones.Funciones.pedirString("Ingrese la empresa: ");
 	}
 
+	/**
+	 * Muestra por pantalla un mensaje con el parametro pasado de la fecha de la
+	 * publicacion
+	 * 
+	 * @param fPubli
+	 */
 	private void mostrarFechaPubli(Calendar fPubli) {
 		System.out.printf("La fecha de publicaion es: %s\n", Fechas.fechaAString(fPubli, '/'));
 
 	}
 
+	/**
+	 * Pide que se ingrese por teclado la fecha de la publicacion
+	 * 
+	 * @return
+	 */
 	public Calendar pedirFechaPubli() {
 		return funciones.Funciones.pedirFecha("Ingrese la fecha de publicacion:");
 	}
 
+	/**
+	 * Muestra por pantalla un mensaje con el parametro pasado del nombre de la
+	 * publicacion
+	 * 
+	 * @param nombre
+	 */
 	private void mostrarNombre(String nombre) {
 		System.out.printf("El nombre de la publicacion es: %s\n", nombre);
 
 	}
 
+	/**
+	 * Pide que se ingrese por teclado el nombre de la publicacion
+	 * 
+	 * @return
+	 */
 	public String pedirNombre() {
 		return funciones.Funciones.pedirString("Ingrese el nombre de la publicacion: ");
 	}
 
+	/**
+	 * Muestra por pantalla un mensaje con el parametro pasado del codigo de la
+	 * publicacion
+	 * 
+	 * @param codigo
+	 */
 	private void mostrarCodigo(int codigo) {
 		System.out.printf("la codiga es: %s\n", codigo);
 
 	}
 
+	/**
+	 * Pide que se ingrese por teclado el codigo de la publicacion
+	 * 
+	 * @return
+	 */
 	public int pedirCodigo() {
 		return funciones.Funciones.pedirEnteroPositivo("Inferese el codigo de lapublicacion.: ");
 	}

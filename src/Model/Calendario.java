@@ -5,19 +5,45 @@ import java.util.Calendar;
 
 public class Calendario implements iMontos {
 
+	/**
+	 * Codigo de identificacion del elemento del calendario de pagos
+	 */
 	private int codigoID;
 
+	/**
+	 * Proxima semana de pago disponible
+	 */
 	private static int semPago;
 
+	/**
+	 * Monto a pagar
+	 */
 	private float montoTotal;
 
+	/**
+	 * Fecha en la que se realizara el pago
+	 */
 	private Calendar fechaPago;
 
+	/**
+	 * Publicacion que se va a abonar
+	 */
 	private Publicaciones pulic;
 
+	/**
+	 * Constructor de la clase
+	 */
 	public Calendario() {
 	}
 
+	/**
+	 * Constructor de la clase con los parametros correspondientes.
+	 * 
+	 * @param codigoID
+	 * @param montoTotal
+	 * @param fechaPago
+	 * @param pulic
+	 */
 	public Calendario(int codigoID, float montoTotal, Calendar fechaPago, Publicaciones pulic) {
 		this.codigoID = codigoID;
 		this.montoTotal = montoTotal;
@@ -31,10 +57,15 @@ public class Calendario implements iMontos {
 				+ ", pulic=" + pulic + '}';
 	}
 
+	/**
+	 * @return
+	 */
 	public int codigo() {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
+	// FIXME No me gusta la implementacion de esta interfaz =( la quitaria y le
+	// preguntaria a angy si con las interfaz del dao y la vista alcanza
 	@Override
 	public int alto() {
 		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
