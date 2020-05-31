@@ -8,14 +8,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import Model.Calificaciones;
 import Model.Suscriptores;
 import Model.DAO.Idao;
 import funciones.Archivos;
 import funciones.Fechas;
 
 /**
- * @author IVANB
+ * @author iberlot
  *
  */
 public class daoSuscriptores implements Idao<Suscriptores> {

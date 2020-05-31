@@ -6,7 +6,7 @@ public class Generos {
 
 	private String descripcion;
 
-	private static int CantidadTitulos;
+	private int CantidadTitulos;
 
 	public Generos() {
 	}
@@ -52,14 +52,14 @@ public class Generos {
 	/**
 	 * @return the cantidadTitulos
 	 */
-	public static int getCantidadTitulos() {
+	public int getCantidadTitulos() {
 		return CantidadTitulos;
 	}
 
 	/**
 	 * @param cantidadTitulos the cantidadTitulos to set
 	 */
-	public static void setCantidadTitulos(int cantidadTitulos) {
+	public void setCantidadTitulos(int cantidadTitulos) {
 		CantidadTitulos = cantidadTitulos;
 	}
 
