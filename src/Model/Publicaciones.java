@@ -13,7 +13,7 @@ public abstract class Publicaciones {
 
 	protected String sinopsis;
 
-	protected ArrayList<Clasificaciones> clasificaciones;
+	protected ArrayList<Calificaciones> calificaciones;
 
 	protected ArrayList<Actores> actores;
 
@@ -39,13 +39,13 @@ public abstract class Publicaciones {
 	}
 
 	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis,
-			ArrayList<Clasificaciones> clasificaciones, ArrayList<Actores> actores, String empresa, String publicacion,
+			ArrayList<Calificaciones> calificaciones, ArrayList<Actores> actores, String empresa, String publicacion,
 			Calendar fechaPubli) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.genero = genero;
 		this.sinopsis = sinopsis;
-		this.clasificaciones = clasificaciones;
+		this.calificaciones = calificaciones;
 		this.actores = actores;
 		this.empresa = empresa;
 		this.publicacion = publicacion;
@@ -55,7 +55,7 @@ public abstract class Publicaciones {
 	@Override
 	public String toString() {
 		return "Publicaciones{" + "codigo=" + codigo + ", nombre=" + nombre + ", genero=" + genero + ", sinopsis="
-				+ sinopsis + ", clasificaciones=" + clasificaciones + ", actores=" + actores + ", empresa=" + empresa
+				+ sinopsis + ", clasificaciones=" + calificaciones + ", actores=" + actores + ", empresa=" + empresa
 				+ ", publicacion=" + publicacion + ", fechaPubli=" + fechaPubli + '}';
 	}
 
@@ -126,15 +126,15 @@ public abstract class Publicaciones {
 	/**
 	 * @return the clasificaciones
 	 */
-	public ArrayList<Clasificaciones> getClasificaciones() {
-		return clasificaciones;
+	public ArrayList<Calificaciones> getClasificaciones() {
+		return calificaciones;
 	}
 
 	/**
-	 * @param clasificaciones the clasificaciones to set
+	 * @param calificaciones the clasificaciones to set
 	 */
-	public void setClasificaciones(ArrayList<Clasificaciones> clasificaciones) {
-		this.clasificaciones = clasificaciones;
+	public void setClasificaciones(ArrayList<Calificaciones> calificaciones) {
+		this.calificaciones = calificaciones;
 	}
 
 	/**

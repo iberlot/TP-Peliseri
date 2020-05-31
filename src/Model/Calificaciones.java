@@ -2,20 +2,44 @@ package Model;
 
 import java.util.Calendar;
 
-public class Clasificaciones {
+public class Calificaciones {
 
+	/**
+	 * Calificacion que se le dio a la publicacion. Su valor maximo es 5
+	 */
 	private int calificacion;
 
+	/**
+	 * Breve comentario del motivo de la calificación propuesta.
+	 */
 	private String descripcion;
 
+	/**
+	 * Suscriptor que realizo la calificacion
+	 */
 	private Suscriptores suscriptor;
 
+	/**
+	 * Fecha que se realizo la calificacion
+	 */
 	private Calendar fecha;
 
-	public Clasificaciones() {
+	/**
+	 * Constructor de la clase 
+	 *
+	 */
+	public Calificaciones() {
 	}
 
-	public Clasificaciones(int calificacion, String descripcion, Suscriptores suscriptor, Calendar fecha) {
+	/**
+	 * Constructor de la clase 
+	 *
+	 * @param calificacion
+	 * @param descripcion
+	 * @param suscriptor
+	 * @param fecha
+	 */
+	public Calificaciones(int calificacion, String descripcion, Suscriptores suscriptor, Calendar fecha) {
 		this.calificacion = calificacion;
 		this.descripcion = descripcion;
 		this.suscriptor = suscriptor;
@@ -29,59 +53,60 @@ public class Clasificaciones {
 	}
 
 	/**
-	 * @return the calificacion
+	 * @return El valor de calificacion, es un dato de tipo int
 	 */
 	public int getCalificacion() {
 		return calificacion;
 	}
 
 	/**
-	 * @param calificacion the calificacion to set
+	 * @param calificacion Que se seteara en calificacion
 	 */
 	public void setCalificacion(int calificacion) {
 		this.calificacion = calificacion;
 	}
 
 	/**
-	 * @return the descripcion
+	 * @return El valor de descripcion, es un dato de tipo String
 	 */
 	public String getDescripcion() {
 		return descripcion;
 	}
 
 	/**
-	 * @param descripcion the descripcion to set
+	 * @param descripcion Que se seteara en descripcion
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
 	/**
-	 * @return the suscriptor
+	 * @return El valor de suscriptor, es un dato de tipo Suscriptores
 	 */
 	public Suscriptores getSuscriptor() {
 		return suscriptor;
 	}
 
 	/**
-	 * @param suscriptor the suscriptor to set
+	 * @param suscriptor Que se seteara en suscriptor
 	 */
 	public void setSuscriptor(Suscriptores suscriptor) {
 		this.suscriptor = suscriptor;
 	}
 
 	/**
-	 * @return the fecha
+	 * @return El valor de fecha, es un dato de tipo Calendar
 	 */
 	public Calendar getFecha() {
 		return fecha;
 	}
 
 	/**
-	 * @param fecha the fecha to set
+	 * @param fecha Que se seteara en fecha
 	 */
 	public void setFecha(Calendar fecha) {
 		this.fecha = fecha;
 	}
+
 
 }

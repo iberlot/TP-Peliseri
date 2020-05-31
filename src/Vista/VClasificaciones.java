@@ -49,7 +49,7 @@ public class VClasificaciones implements iVistas {
 	}
 
 	public int pedirCalificacion() {
-		return funciones.Funciones.pedirEnteroPositivo("Ingrese la calificacion:");
+		return funciones.Funciones.pedirEnteroPositivo("Ingrese la calificacion:",0,6);
 	}
 
 	private void mostrarCalificacion(float dato) {

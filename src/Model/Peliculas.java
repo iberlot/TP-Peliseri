@@ -18,9 +18,9 @@ public class Peliculas extends Publicaciones {
 	}
 
 	public Peliculas(int anio, float duracion, int codigo, String nombre, Generos genero, String sinopsis,
-			ArrayList<Clasificaciones> clasificaciones, ArrayList<Actores> actores, String empresa, String publicacion,
+			ArrayList<Calificaciones> calificaciones, ArrayList<Actores> actores, String empresa, String publicacion,
 			Calendar fechaPubli) {
-		super(codigo, nombre, genero, sinopsis, clasificaciones, actores, empresa, publicacion, fechaPubli);
+		super(codigo, nombre, genero, sinopsis, calificaciones, actores, empresa, publicacion, fechaPubli);
 		this.anio = anio;
 		this.duracion = duracion;
 	}
