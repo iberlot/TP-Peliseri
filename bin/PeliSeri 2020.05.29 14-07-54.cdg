@@ -46,7 +46,7 @@
         <Method name="calculaMonto" returnType="double" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Clasificaciones" package="Controler" visibility="public" xPosition="1107.0" yPosition="1062.0">
+    <Class name="Calificaciones" package="Controler" visibility="public" xPosition="1107.0" yPosition="1062.0">
       <Fields>
         <Field name="calificacion" type="int" visibility="private"/>
         <Field name="descripcion" type="String" visibility="private"/>
@@ -73,8 +73,8 @@
         <Field name="anio" type="int" visibility="private"/>
         <Field name="duracion" type="int" visibility="private"/>
         <Field name="serie" type="String" visibility="private"/>
-        <Field name="cantEpisodios" type="int" visibility="private" isStatic="true"/>
-        <Field name="canTemporadas" type="int" visibility="private" isStatic="true"/>
+        <Field name="cantEpisodios" type="int" visibility="private"/>
+        <Field name="canTemporadas" type="int" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -98,7 +98,7 @@
       <Fields>
         <Field name="id" type="int" visibility="private"/>
         <Field name="descripcion" type="String" visibility="private"/>
-        <Field name="CantidadTitulos" type="int" visibility="private" isStatic="true"/>
+        <Field name="CantidadTitulos" type="int" visibility="private"/>
       </Fields>
       <Constructors>
         <Constructor visibility="public"/>
@@ -152,10 +152,9 @@
         <Field name="nombre" type="String" visibility="protected"/>
         <Field name="generos" type="ArrayList&lt;Generos&gt;" visibility="protected"/>
         <Field name="sinopsis" type="String" visibility="protected"/>
-        <Field name="clasificaciones" type="ArrayList&lt;Clasificaciones&gt;" visibility="protected"/>
+        <Field name="calificaciones" type="ArrayList&lt;Calificaciones&gt;" visibility="protected"/>
         <Field name="actores" type="ArrayList&lt;Actores&gt;" visibility="protected"/>
         <Field name="empresa" type="String" visibility="protected"/>
-        <Field name="publicacion" type="String" visibility="protected"/>
         <Field name="fechaPubli" type="Calendar" visibility="protected"/>
       </Fields>
       <Constructors>
@@ -253,12 +252,12 @@
     <IsRelation name="is" source="Controler.Peliculas" target="Controler.Publicaciones"/>
     <HasRelation name="suscriptores" source="Peliseri.PeliSeri" target="Controler.Suscriptores" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Suscriptores&gt;"/>
     <HasRelation name="pulic" source="Controler.Calendario" target="Controler.Publicaciones" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="clasificaciones" source="Controler.Publicaciones" target="Controler.Clasificaciones" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Clasificaciones&gt;"/>
     <HasRelation name="pagos" source="Peliseri.PeliSeri" target="Controler.Calendario" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Calendario&gt;"/>
     <UseRelation source="Peliseri.PeliSeri" target="Controler.Episodios" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="Peliseri.PeliSeri" target="Controler.Peliculas" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="calificaciones" source="Controler.Publicaciones" target="Controler.Calificaciones" type="Composition" sourceCardinality="0..1" targetCardinality="0..*" collectionType="List"/>
     <IsRelation name="is" source="Controler.Episodios" target="Controler.Publicaciones"/>
-    <HasRelation name="suscriptor" source="Controler.Clasificaciones" target="Controler.Suscriptores" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="suscriptor" source="Controler.Calificaciones" target="Controler.Suscriptores" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="Peliseri.PeliSeri" target="Controler.Publicaciones" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="actores" source="Controler.Publicaciones" target="Controler.Actores" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Actores&gt;"/>
     <HasRelation name="publicaciones" source="Peliseri.PeliSeri" target="Controler.Publicaciones" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Publicaciones&gt;"/>
