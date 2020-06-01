@@ -23,8 +23,23 @@ public class Episodios extends Publicaciones {
 	}
 
 	public Episodios(int codigo, String nombre, Generos genero, String sinopsis, ArrayList<Actores> actores,
-			String empresa, String publicacion, Calendar fechaPubli) {
-		super(codigo, nombre, genero, sinopsis, actores, empresa, publicacion, fechaPubli);
+			String empresa, String publicacion, Calendar fechaPubli, int nroEpisodio, String serie, int temporada) {
+		super(codigo, nombre, genero, sinopsis, actores, empresa, fechaPubli);
+
+		this.serie = serie;
+		this.nroEpisodio = nroEpisodio;
+		this.temporada = temporada;
+	}
+
+	public Episodios(int anio, float duracion, int codigo, String nombre, Generos genero, String sinopsis,
+			String empresa, Calendar fechaPubli, int nroEpisodio, String serie, int temporada) {
+
+		super(codigo, nombre, genero, sinopsis, empresa, fechaPubli);
+
+		this.serie = serie;
+		this.nroEpisodio = nroEpisodio;
+		this.temporada = temporada;
+
 	}
 
 	@Override
@@ -134,6 +149,5 @@ public class Episodios extends Publicaciones {
 	public static void setCanTemporadas(int canTemporadas) {
 		Episodios.canTemporadas = canTemporadas;
 	}
-	
-	
+
 }

@@ -32,73 +32,74 @@ public class Suscriptores {
 	}
 
 	/**
-	 * @return the nombre
+	 * @return El valor de nombre, es un dato de tipo String
 	 */
 	public String getNombre() {
 		return nombre;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre Que se seteara en nombre
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
 	/**
-	 * @return the apellido
+	 * @return El valor de apellido, es un dato de tipo String
 	 */
 	public String getApellido() {
 		return apellido;
 	}
 
 	/**
-	 * @param apellido the apellido to set
+	 * @param apellido Que se seteara en apellido
 	 */
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
 
 	/**
-	 * @return the documento
+	 * @return El valor de documento, es un dato de tipo long
 	 */
 	public long getDocumento() {
 		return documento;
 	}
 
 	/**
-	 * @param documento the documento to set
+	 * @param documento Que se seteara en documento
 	 */
 	public void setDocumento(long documento) {
 		this.documento = documento;
 	}
 
 	/**
-	 * @return the sexo
+	 * @return El valor de sexo, es un dato de tipo boolean
 	 */
 	public boolean isSexo() {
 		return sexo;
 	}
 
 	/**
-	 * @param sexo the sexo to set
+	 * @param sexo Que se seteara en sexo
 	 */
 	public void setSexo(boolean sexo) {
 		this.sexo = sexo;
 	}
 
 	/**
-	 * @return the fechaNac
+	 * @return El valor de fechaNac, es un dato de tipo Calendar
 	 */
 	public Calendar getFechaNac() {
 		return fechaNac;
 	}
 
 	/**
-	 * @param fechaNac the fechaNac to set
+	 * @param fechaNac Que se seteara en fechaNac
 	 */
 	public void setFechaNac(Calendar fechaNac) {
 		this.fechaNac = fechaNac;
 	}
+
 
 }

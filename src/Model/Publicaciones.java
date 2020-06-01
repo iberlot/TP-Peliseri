@@ -19,27 +19,33 @@ public abstract class Publicaciones {
 
 	protected String empresa;
 
-	protected String publicacion;
-
 	protected Calendar fechaPubli;
 
 	public Publicaciones() {
 	}
 
+	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis, String empresa, Calendar fechaPubli) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.genero = genero;
+		this.sinopsis = sinopsis;
+		this.empresa = empresa;
+		this.fechaPubli = fechaPubli;
+	}
+	
 	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis,
-			ArrayList<Actores> actores, String empresa, String publicacion, Calendar fechaPubli) {
+			ArrayList<Actores> actores, String empresa, Calendar fechaPubli) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.genero = genero;
 		this.sinopsis = sinopsis;
 		this.actores = actores;
 		this.empresa = empresa;
-		this.publicacion = publicacion;
 		this.fechaPubli = fechaPubli;
 	}
 
 	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis,
-			ArrayList<Calificaciones> calificaciones, ArrayList<Actores> actores, String empresa, String publicacion,
+			ArrayList<Calificaciones> calificaciones, ArrayList<Actores> actores, String empresa,
 			Calendar fechaPubli) {
 		this.codigo = codigo;
 		this.nombre = nombre;
@@ -48,7 +54,6 @@ public abstract class Publicaciones {
 		this.calificaciones = calificaciones;
 		this.actores = actores;
 		this.empresa = empresa;
-		this.publicacion = publicacion;
 		this.fechaPubli = fechaPubli;
 	}
 
@@ -56,7 +61,7 @@ public abstract class Publicaciones {
 	public String toString() {
 		return "Publicaciones{" + "codigo=" + codigo + ", nombre=" + nombre + ", genero=" + genero + ", sinopsis="
 				+ sinopsis + ", clasificaciones=" + calificaciones + ", actores=" + actores + ", empresa=" + empresa
-				+ ", publicacion=" + publicacion + ", fechaPubli=" + fechaPubli + '}';
+				+ ", fechaPubli=" + fechaPubli + '}';
 	}
 
 	public float promedioCalificaciones() {
@@ -68,126 +73,112 @@ public abstract class Publicaciones {
 	}
 
 	/**
-	 * @return the codigo
+	 * @return El valor de codigo, es un dato de tipo int
 	 */
 	public int getCodigo() {
 		return codigo;
 	}
 
 	/**
-	 * @param codigo the codigo to set
+	 * @param codigo Que se seteara en codigo
 	 */
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 
 	/**
-	 * @return the nombre
+	 * @return El valor de nombre, es un dato de tipo String
 	 */
 	public String getNombre() {
 		return nombre;
 	}
 
 	/**
-	 * @param nombre the nombre to set
+	 * @param nombre Que se seteara en nombre
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
 	/**
-	 * @return the generos
+	 * @return El valor de genero, es un dato de tipo Generos
 	 */
 	public Generos getGenero() {
 		return genero;
 	}
 
 	/**
-	 * @param generos the generos to set
+	 * @param genero Que se seteara en genero
 	 */
 	public void setGenero(Generos genero) {
 		this.genero = genero;
 	}
 
 	/**
-	 * @return the sinopsis
+	 * @return El valor de sinopsis, es un dato de tipo String
 	 */
 	public String getSinopsis() {
 		return sinopsis;
 	}
 
 	/**
-	 * @param sinopsis the sinopsis to set
+	 * @param sinopsis Que se seteara en sinopsis
 	 */
 	public void setSinopsis(String sinopsis) {
 		this.sinopsis = sinopsis;
 	}
 
 	/**
-	 * @return the clasificaciones
+	 * @return El valor de calificaciones, es un dato de tipo ArrayList<Calificaciones>
 	 */
-	public ArrayList<Calificaciones> getClasificaciones() {
+	public ArrayList<Calificaciones> getCalificaciones() {
 		return calificaciones;
 	}
 
 	/**
-	 * @param calificaciones the clasificaciones to set
+	 * @param calificaciones Que se seteara en calificaciones
 	 */
-	public void setClasificaciones(ArrayList<Calificaciones> calificaciones) {
+	public void setCalificaciones(ArrayList<Calificaciones> calificaciones) {
 		this.calificaciones = calificaciones;
 	}
 
 	/**
-	 * @return the actores
+	 * @return El valor de actores, es un dato de tipo ArrayList<Actores>
 	 */
 	public ArrayList<Actores> getActores() {
 		return actores;
 	}
 
 	/**
-	 * @param actores the actores to set
+	 * @param actores Que se seteara en actores
 	 */
 	public void setActores(ArrayList<Actores> actores) {
 		this.actores = actores;
 	}
 
 	/**
-	 * @return the empresa
+	 * @return El valor de empresa, es un dato de tipo String
 	 */
 	public String getEmpresa() {
 		return empresa;
 	}
 
 	/**
-	 * @param empresa the empresa to set
+	 * @param empresa Que se seteara en empresa
 	 */
 	public void setEmpresa(String empresa) {
 		this.empresa = empresa;
 	}
 
 	/**
-	 * @return the publicacion
-	 */
-	public String getPublicacion() {
-		return publicacion;
-	}
-
-	/**
-	 * @param publicacion the publicacion to set
-	 */
-	public void setPublicacion(String publicacion) {
-		this.publicacion = publicacion;
-	}
-
-	/**
-	 * @return the fechaPubli
+	 * @return El valor de fechaPubli, es un dato de tipo Calendar
 	 */
 	public Calendar getFechaPubli() {
 		return fechaPubli;
 	}
 
 	/**
-	 * @param fechaPubli the fechaPubli to set
+	 * @param fechaPubli Que se seteara en fechaPubli
 	 */
 	public void setFechaPubli(Calendar fechaPubli) {
 		this.fechaPubli = fechaPubli;

@@ -21,7 +21,6 @@ public class daoSuscriptores implements Idao<Suscriptores> {
 
 	private static final String FILE = ARCHIVO + "Suscriptores.txt";
 
-//	número de documento, nombre, apellido, fecha de nacimiento y sexo.
 	private static final int[] ANCHO = { 10, 25, 25, 10, 5 };
 
 	@Override

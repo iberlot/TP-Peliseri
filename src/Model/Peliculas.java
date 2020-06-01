@@ -14,15 +14,20 @@ public class Peliculas extends Publicaciones {
 
 	public Peliculas(int codigo, String nombre, Generos genero, String sinopsis, ArrayList<Actores> actores,
 			String empresa, String publicacion, Calendar fechaPubli) {
-		super(codigo, nombre, genero, sinopsis, actores, empresa, publicacion, fechaPubli);
+		super(codigo, nombre, genero, sinopsis, actores, empresa, fechaPubli);
 	}
 
 	public Peliculas(int anio, float duracion, int codigo, String nombre, Generos genero, String sinopsis,
 			ArrayList<Calificaciones> calificaciones, ArrayList<Actores> actores, String empresa, String publicacion,
 			Calendar fechaPubli) {
-		super(codigo, nombre, genero, sinopsis, calificaciones, actores, empresa, publicacion, fechaPubli);
+		super(codigo, nombre, genero, sinopsis, calificaciones, actores, empresa, fechaPubli);
 		this.anio = anio;
 		this.duracion = duracion;
+	}
+
+	public Peliculas(int parseInt, float parseFloat, int parseInt2, String string, Generos genero, String string2,
+			String string3, Calendar stringToCalendar) {
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
