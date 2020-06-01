@@ -70,4 +70,17 @@ public class daoPeliculas implements Idao<Peliculas> {
 		return peliculas;
 	}
 
+	/**
+	 * @return El valor de generos, es un dato de tipo ArrayList<Generos>
+	 */
+	public static ArrayList<Generos> getGeneros() {
+		return generos;
+	}
+
+	/**
+	 * @param generos Que se seteara en generos
+	 */
+	public static void setGeneros(ArrayList<Generos> generos) {
+		daoPeliculas.generos = generos;
+	}
 }

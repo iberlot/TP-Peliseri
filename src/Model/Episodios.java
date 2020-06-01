@@ -15,10 +15,6 @@ public class Episodios extends Publicaciones {
 
 	private String serie;
 
-	private static int cantEpisodios;
-
-	private static int canTemporadas;
-
 	public Episodios() {
 	}
 
@@ -53,101 +49,74 @@ public class Episodios extends Publicaciones {
 	}
 
 	/**
-	 * @return the temporada
+	 * @return El valor de temporada, es un dato de tipo int
 	 */
 	public int getTemporada() {
 		return temporada;
 	}
 
 	/**
-	 * @param temporada the temporada to set
+	 * @param temporada Que se seteara en temporada
 	 */
 	public void setTemporada(int temporada) {
 		this.temporada = temporada;
 	}
 
 	/**
-	 * @return the nroEpisodio
+	 * @return El valor de nroEpisodio, es un dato de tipo int
 	 */
 	public int getNroEpisodio() {
 		return nroEpisodio;
 	}
 
 	/**
-	 * @param nroEpisodio the nroEpisodio to set
+	 * @param nroEpisodio Que se seteara en nroEpisodio
 	 */
 	public void setNroEpisodio(int nroEpisodio) {
 		this.nroEpisodio = nroEpisodio;
 	}
 
 	/**
-	 * @return the anio
+	 * @return El valor de anio, es un dato de tipo int
 	 */
 	public int getAnio() {
 		return anio;
 	}
 
 	/**
-	 * @param anio the anio to set
+	 * @param anio Que se seteara en anio
 	 */
 	public void setAnio(int anio) {
 		this.anio = anio;
 	}
 
 	/**
-	 * @return the duracion
+	 * @return El valor de duracion, es un dato de tipo int
 	 */
 	public int getDuracion() {
 		return duracion;
 	}
 
 	/**
-	 * @param duracion the duracion to set
+	 * @param duracion Que se seteara en duracion
 	 */
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
 	}
 
 	/**
-	 * @return the serie
+	 * @return El valor de serie, es un dato de tipo String
 	 */
 	public String getSerie() {
 		return serie;
 	}
 
 	/**
-	 * @param serie the serie to set
+	 * @param serie Que se seteara en serie
 	 */
 	public void setSerie(String serie) {
 		this.serie = serie;
 	}
 
-	/**
-	 * @return the cantEpisodios
-	 */
-	public static int getCantEpisodios() {
-		return cantEpisodios;
-	}
-
-	/**
-	 * @param cantEpisodios the cantEpisodios to set
-	 */
-	public static void setCantEpisodios(int cantEpisodios) {
-		Episodios.cantEpisodios = cantEpisodios;
-	}
-
-	/**
-	 * @return the canTemporadas
-	 */
-	public static int getCanTemporadas() {
-		return canTemporadas;
-	}
-
-	/**
-	 * @param canTemporadas the canTemporadas to set
-	 */
-	public static void setCanTemporadas(int canTemporadas) {
-		Episodios.canTemporadas = canTemporadas;
-	}
 
 }

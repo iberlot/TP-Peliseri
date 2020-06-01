@@ -40,7 +40,7 @@ public class daoEpisodios implements Idao<Episodios> {
 		info[5] = dato.getSinopsis();
 		info[6] = Integer.toString(dato.getAnio());
 		info[7] = Float.toString(dato.getDuracion());
-		info[8] = Integer.toString(0);
+		info[8] = Integer.toString(1);
 		info[9] = Integer.toString(dato.getNroEpisodio());
 		info[10] = dato.getSerie();
 		info[11] = Integer.toString(dato.getTemporada());
@@ -78,6 +78,20 @@ public class daoEpisodios implements Idao<Episodios> {
 		}
 		
 		return series;
+	}
+
+	/**
+	 * @return El valor de generos, es un dato de tipo ArrayList<Generos>
+	 */
+	public static ArrayList<Generos> getGeneros() {
+		return generos;
+	}
+
+	/**
+	 * @param generos Que se seteara en generos
+	 */
+	public static void setGeneros(ArrayList<Generos> generos) {
+		daoEpisodios.generos = generos;
 	}
 
 }

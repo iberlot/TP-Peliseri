@@ -9,11 +9,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Calendar;
+
 import org.json.JSONObject;
 
 import org.json.simple.parser.*;
 
 import Model.Actores;
+import Model.Peliculas;
+import funciones.Archivos;
 
 /**
  * DAO relacionado a los autores
@@ -28,31 +32,77 @@ public class daoActores implements Idao<Actores> {
 	 */
 	private final String DIR = ARCHIVO + "Autores/";
 
+	private static final String ACTORES = ARCHIVO + "AudiovisualesActores.txt";
+
+	private int publicacion;
+
 	@Override
 	public void cargar_archivo(Actores dato) throws IOException {
 
-		JSONObject autor = new JSONObject();
+		String[] info = new String[9];
 
-		autor = crearJSON(dato);
+		info[0] = Integer.toString(publicacion);
+		info[1] = dato.getApellido();
+		info[2] = dato.getNombre();
+		info[3] = Boolean.toString(dato.isSexo());
 
-		String nombreArchivo = dato.getApellido() + "_" + dato.getNombre();
+		File archivo = new File(ACTORES);
+		Archivos.escribeCamposSepararPor(archivo, info, '\t');
 
-		cargarArchivoJSON(nombreArchivo, autor);
+//		JSONObject autor = new JSONObject();
+//		autor = crearJSON(dato);
+//		String nombreArchivo = dato.getApellido() + "_" + dato.getNombre();
+//		cargarArchivoJSON(nombreArchivo, autor);
 	}
 
 	@Override
 	public Actores conv_a_objeto(String[] datos) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return new Actores(datos[1], datos[2], Boolean.parseBoolean(datos[3]));
 	}
 
 	@Override
 	public ArrayList<Actores> recuperar_datos_archivo() throws Exception {
-		// TODO Auto-generated method stub
-		// XXX Aca va el codigo en para armar un aray list de actores y retornarlos
-		// tengo que reeleer el enunciado para ver si los actores estan en uno o en
-		// varios archivos
-		return null;
+
+		ArrayList<Actores> actores = new ArrayList<>();
+
+		ArrayList<String[]> act = funciones.Archivos.traeLineasParceadas(ACTORES, "\t");
+
+		for (String[] datos : act) {
+			if (Integer.parseInt(datos[0]) == publicacion) {
+				Actores a = conv_a_objeto(datos);
+
+				actores.add(a);
+			}
+
+		}
+
+		return actores;
+	}
+	
+
+	/**
+	 * Recupera un listado unico de los autores
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public ArrayList<Actores> recuperar_datos_listados() throws Exception {
+
+		ArrayList<Actores> actores = new ArrayList<>();
+
+		ArrayList<String[]> act = funciones.Archivos.traeLineasParceadas(ACTORES, "\t");
+
+		for (String[] datos : act) {
+			Actores a = conv_a_objeto(datos);
+			
+			if (actores.contains(a) == false) {
+
+				actores.add(a);
+			}
+
+		}
+
+		return actores;
 	}
 
 	/**
@@ -128,4 +178,19 @@ public class daoActores implements Idao<Actores> {
 		fw.append("\n");
 		fw.close();
 	}
+
+	/**
+	 * @return El valor de publicacion, es un dato de tipo int
+	 */
+	public int getPublicacion() {
+		return publicacion;
+	}
+
+	/**
+	 * @param publicacion Que se seteara en publicacion
+	 */
+	public void setPublicacion(int publicacion) {
+		this.publicacion = publicacion;
+	}
+	
 }

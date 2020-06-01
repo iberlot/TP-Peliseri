@@ -1,75 +1,86 @@
 package Model.DAO;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Iterator;
-
-
 
 // Sorry - descargue la libreria de https://mvnrepository.com/artifact/org.json/json/20190722
 import org.json.JSONObject;
-import org.json.JSONArray;
-
-import org.json.simple.parser.*;
-
-import Model.Calificaciones;
+import Model.Episodios;
 import Model.Generos;
+import Model.Peliculas;
 import Model.Publicaciones;
-import Model.Suscriptores;
-import funciones.Archivos;
-import funciones.Fechas;
 
 public class daoPublicaciones implements Idao<Publicaciones> {
 
-	private static final String FILE = ARCHIVO+"Audiovisuales.txt";
+	private static final String FILE = ARCHIVO + "Audiovisuales.txt";
 
-	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250 };
+	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1 };
 
 	private static ArrayList<Generos> generos;
-	
+
 	@Override
 	public void cargar_archivo(Publicaciones dato) throws IOException {
 
-		String[] info = new String[6];
+		try {
+			if (dato instanceof Episodios) {
+				daoEpisodios dao = new daoEpisodios();
+				daoEpisodios.setGeneros(generos);
+				dao.cargar_archivo((Episodios) dato);
 
-		info[0] = Integer.toString(dato.getCodigo());
-		info[1] = dato.getEmpresa();
-		info[2] = dato.getFechaPubli().get(Calendar.DATE) + "/" + (dato.getFechaPubli().get(Calendar.MONTH) + 1) + "/"
-				+ dato.getFechaPubli().get(Calendar.YEAR);
-		info[3] = Integer.toString(dato.getGenero().getId());
-		info[4] = dato.getNombre();
-		info[5] = dato.getSinopsis();
-
-		File archivo = new File(FILE);
-		Archivos.escribeCamposAnchoFijo(archivo, info, ANCHO);
+			} else if (dato instanceof Peliculas) {
+				daoPeliculas dao = new daoPeliculas();
+				daoPeliculas.setGeneros(generos);
+				dao.cargar_archivo((Peliculas) dato);
+			} else {
+				throw new Exception("Que paso aca?");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public Publicaciones conv_a_objeto(String[] datos) throws Exception {
-//		for (Generos genero : generos) {
-//			if (genero.getId() == Integer.parseInt(datos[3])) {
-//				
-//				return new Publicaciones();
-////				return new Calificaciones(Integer.parseInt(datos[2]), datos[3], suscriptor,
-////						Fechas.stringToCalendar(datos[0], "dd/M/yyyy"));
-//			}
-//		}
-		throw new Exception("No exste el suscriptor");
+
+		if (Integer.parseInt(datos[8]) == 0) {
+			daoPeliculas dao = new daoPeliculas();
+			daoPeliculas.setGeneros(generos);
+
+			return dao.conv_a_objeto(datos);
+
+		} else if (Integer.parseInt(datos[8]) == 1) {
+			daoEpisodios dao = new daoEpisodios();
+			daoEpisodios.setGeneros(generos);
+
+			return dao.conv_a_objeto(datos);
+
+		} else {
+			throw new Exception("Que paso aca?");
+		}
 	}
 
 	@Override
 	public ArrayList<Publicaciones> recuperar_datos_archivo() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+
+		ArrayList<Publicaciones> publicaciones = new ArrayList<>();
+		daoActores act = new daoActores();
+
+		ArrayList<String[]> publi = funciones.Archivos.traeLineasAnchoFijo(FILE, ANCHO);
+
+		for (String[] datos : publi) {
+			Publicaciones pub = conv_a_objeto(datos);
+
+			act.setPublicacion(pub.getCodigo());
+
+			pub.setActores(act.recuperar_datos_archivo());
+			publicaciones.add(pub);
+		}
+
+		return publicaciones;
 	}
 
-	
-
 	public void crearJSON(Publicaciones publicacion) throws IOException {
-		JSONObject myObject = new JSONObject();
+//		JSONObject myObject = new JSONObject();
 //
 //		// Cadenas de texto básicas
 //		myObject.put("ID", reserva.getIdVenta());
