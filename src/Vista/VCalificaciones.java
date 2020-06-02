@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 import funciones.Fechas;
 
-public class VClasificaciones implements iVistas {
+public class VCalificaciones implements iVistas {
 
 	@Override
 	public boolean crear() throws IOException {
@@ -43,7 +43,7 @@ public class VClasificaciones implements iVistas {
 	}
 
 
-	private void mostrarDescripcion(String dato) {
+	public void mostrarDescripcion(String dato) {
 		System.out.printf("La Descripcion es: %s\n", dato);
 		
 	}
@@ -52,7 +52,7 @@ public class VClasificaciones implements iVistas {
 		return funciones.Funciones.pedirEnteroPositivo("Ingrese la calificacion:",0,6);
 	}
 
-	private void mostrarCalificacion(float dato) {
+	public void mostrarCalificacion(float dato) {
 		System.out.printf("La Calificaciones: %s\n", dato);
 		
 	}
@@ -61,7 +61,7 @@ public class VClasificaciones implements iVistas {
 		return funciones.Funciones.pedirString("Ingrese el Suscriptor:");
 	}
 
-	private void mostrarSuscriptor(String dato) {
+	public void mostrarSuscriptor(String dato) {
 		System.out.printf("El Suscriptor es: %s\n", dato);
 		
 	}
@@ -70,7 +70,7 @@ public class VClasificaciones implements iVistas {
 		return funciones.Funciones.pedirFecha("Ingrese el Fecha:");
 	}
 
-	private void mostrarFecha(Calendar dato) {
+	public void mostrarFecha(Calendar dato) {
 		System.out.printf("La fecha es  es: %s\n", Fechas.fechaAString(dato,'/'));
 		
 	}

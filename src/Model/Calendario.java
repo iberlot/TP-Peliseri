@@ -160,14 +160,14 @@ public class Calendario implements iMontos {
 		this.pulic = pulic;
 	}
 
-	public Object mostMontoTotal() {
+	public float mostMontoTotal() {
+		return codigoID;
 		// TODO Auto-generated method stub
-		return null;
 	}
 
-	public Object mostCodigoID() {
+	public int mostCodigoID() {
+		return codigoID;
 		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

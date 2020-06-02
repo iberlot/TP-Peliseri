@@ -40,7 +40,7 @@ public class VCalendario implements iVistas {
 	public String pedirPubli() {
 		return funciones.Funciones.pedirString("Ingrese la publicacion:");
 	}
-	private void mostrarPubli(String dato) {
+	public void mostrarPubli(String dato) {
 		System.out.printf("LA publicacion es: %s\n", dato);
 		
 	}
@@ -48,7 +48,7 @@ public class VCalendario implements iVistas {
 	public float pedirMonto() {
 		return funciones.Funciones.pedirFloat("Indrese el monto:");
 	}
-	private void mostrarMonto(float dato) {
+	public void mostrarMonto(float dato) {
 		System.out.printf("El monte ess de es: %f\n", dato);
 		
 	}
@@ -57,7 +57,7 @@ public class VCalendario implements iVistas {
 		return funciones.Funciones.pedirFecha("Ingrese la fecha :");
 	}
 	
-	private void mostrarFPago(Calendar dato) {
+	public void mostrarFPago(Calendar dato) {
 		System.out.printf("la feca es: %s\n", dato);
 		
 	}
@@ -65,7 +65,7 @@ public class VCalendario implements iVistas {
 	public int pedirID() {
 		return funciones.Funciones.pedirEnteroPositivo("Ingrese el id:");
 	}
-	private void mostrarID(int dato) {
+	public void mostrarID(int dato) {
 		System.out.printf("El id es: %s\n", dato);
 		
 	}
@@ -73,7 +73,7 @@ public class VCalendario implements iVistas {
 	public int pedirSemPago() {
 		return funciones.Funciones.pedirEnteroPositivo("Ingrese la semana de pago:");
 	}
-	private void mostrarSemPago(int dato) {
+	public void mostrarSemPago(int dato) {
 		System.out.printf("La semana de pago es: %s\n", dato);
 		
 	}

@@ -5,7 +5,6 @@ import java.util.Calendar;
 import Model.Calendario;
 import Model.Publicaciones;
 import Vista.VCalendario;
-import Vista.VPublicaciones;
 
 public class CCalendario {
 
@@ -19,7 +18,7 @@ public class CCalendario {
 	}
 	
 	public void mostrarCodigoID() {
-		vistaCalendario.mostrarCodigoID(modeloCalendario.mostCodigoID());
+		vistaCalendario.mostrarID(modeloCalendario.getCodigoID());
 	}
 	
 	public void setCodigoID() {
@@ -33,26 +32,26 @@ public class CCalendario {
 	}
 	
 	public void mostrarMontoTotal() {
-		vistaCalendario.mostrarMontoTotal(modeloCalendario.mostMontoTotal());
+		vistaCalendario.mostrarMonto(modeloCalendario.mostMontoTotal());
 	}
 	
 	public void setMontoTotal() {
 		modeloCalendario.setMontoTotal(vistaCalendario.pedirMonto());
 	}
 	
-	//
+	// 
 	
 	public Publicaciones getPulico() {
 		return modeloCalendario.getPulic();
 	}
-	
-	public void mostrarPulico() {
-		vistaCalendario.mostrarPulico(modeloCalendario.getPulic());
-	}
-	
-	public void setPulico() {
-		modeloCalendario.setPulic(vistaCalendario.pedirPubli());
-	}
+//	
+//	public void mostrarPulico() {
+//		vistaCalendario.mostrarPubli(modeloCalendario.getPulic());
+//	}
+//	
+//	public void setPulico() {
+//		modeloCalendario.setPulic(vistaCalendario.pedirPubli());
+//	}
 	
 	//
 	
@@ -61,7 +60,7 @@ public class CCalendario {
 	}
 	
 	public void mostrarFechaPago() {
-		vistaCalendario.mostrarFechaPago(modeloCalendario.getFechaPago());
+		vistaCalendario.mostrarFPago(modeloCalendario.getFechaPago());
 	}
 	
 	public void setFechaPago() {

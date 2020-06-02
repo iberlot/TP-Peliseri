@@ -11,7 +11,7 @@ import Model.Suscriptores;
 import funciones.Archivos;
 import funciones.Fechas;
 
-public class daoClasificaciones implements Idao<Calificaciones> {
+public class daoCalificaciones implements Idao<Calificaciones> {
 
 	private static final String FILE = ARCHIVO + "Calificaciones.txt";
 
