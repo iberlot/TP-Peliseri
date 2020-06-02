@@ -1,37 +1,36 @@
 package Controler;
 
-public class CPeliculas {
+import Model.Peliculas;
+import Vista.VPeliculas;
 
-//	private int anio;
-//	private float duracion;
+public class CPeliculas extends CPublicaciones{
 	
-	//
+	private Peliculas modeloPeliculas;
+	private VPeliculas vistaPeliculas;
+	
 	
 	public int GetAnio() {
-		return modeloCalendario.getId();
+		return modeloPeliculas.getAnio();
 	}
 	
 	public void mostrarAnio() {
-		vistaCalendario.mostrarAnio(modeloCalendario.mostAnio());
+		vistaPeliculas.mostrarAnio(modeloPeliculas.getAnio());
 	}
 	
 	public void setAnio() {
-		modeloCalendario.setAnio(vistaCalendario.pedirAnio());
+		modeloPeliculas.setAnio(vistaPeliculas.pedirAnio());
 	}
 	
-	//
-	
-	public int getId() {
-		return modeloCalendario.getId();
+	public int getDuracion() {
+		return modeloPeliculas.getDuracion();
 	}
 	
 	public void mostrarId() {
-		vistaCalendario.mostrarCodigoID(modeloCalendario.mostId());
+		vistaPeliculas.mostrarDuracion(modeloPeliculas.getDuracion());
 	}
 	
 	public void setId() {
-		modeloCalendario.setIdD(vistaCalendario.pedirId());
+		modeloPeliculas.setDuracion(vistaPeliculas.pedirDuracion());
 	}
 	
-	//
 }

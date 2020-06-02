@@ -1,10 +1,7 @@
 package Controler;
 import java.util.Calendar;
 
-import Model.Calendario;
 import Model.Calificaciones;
-import Model.Suscriptores;
-import Vista.VCalendario;
 import Vista.VCalificaciones;
 
 public class CCalificaciones {
@@ -41,12 +38,12 @@ public class CCalificaciones {
 		return modeloCalificaciones.getFecha();
 	}
 	
-	public void mostrarFecha0() {
+	public void mostrarFecha() {
 		vistaCalificaciones.mostrarDescripcion(modeloCalificaciones.getDescripcion());
 	}
 	
-	public void setDescripcion() {
-		modeloCalificaciones.setDescripcion(vistaCalificaciones.pedirDescripcion());
+	public void setFeca() {
+		modeloCalificaciones.setFecha(vistaCalificaciones.pedirFecha());
 	}
 	
 

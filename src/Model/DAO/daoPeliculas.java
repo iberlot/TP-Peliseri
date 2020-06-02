@@ -7,8 +7,6 @@ import java.util.Calendar;
 
 import Model.Generos;
 import Model.Peliculas;
-import Model.Publicaciones;
-import Model.Suscriptores;
 import funciones.Archivos;
 import funciones.Fechas;
 

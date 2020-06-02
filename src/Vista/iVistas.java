@@ -3,7 +3,6 @@
  */
 package Vista;
 
-import funciones.Funciones;
 import java.io.IOException;
 
 /**

@@ -6,12 +6,9 @@ package Model.DAO;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 
-import Model.Calificaciones;
 import Model.Generos;
 import funciones.Archivos;
-import funciones.Fechas;
 
 /**
  * @author IVANB

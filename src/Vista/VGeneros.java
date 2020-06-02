@@ -44,25 +44,24 @@ public class VGeneros implements iVistas {
 		return funciones.Funciones.pedirEnteroPositivo("Ingrese la Cantidad:");
 	}
 
-	private void mostrarCantidad(int dato) {
+	public void mostrarCantidad(int dato) {
 		System.out.printf("La cantidad de titulos es de: %s\n", dato);	
 	}
 
 	public String pedirDescrip() {
 		return funciones.Funciones.pedirString("Ingrese la descripcion:");
 	}
-	private void mostrarDescrip(String dato) {
+	
+	public void mostrarDescrip(String dato) {
 		System.out.printf("El generos es: %s\n", dato);	
-		
 	}
 
 	public int pedirID() {
 		return funciones.Funciones.pedirEnteroPositivo("Ingrese el ID:");
 	}
 	
-	private void mostrarID(int dato) {
+	public void mostrarID(int dato) {
 		System.out.printf("El Id es: %s\n", dato);	
-		
 	}
 
 

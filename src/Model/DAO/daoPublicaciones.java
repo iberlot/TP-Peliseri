@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 // Sorry - descargue la libreria de https://mvnrepository.com/artifact/org.json/json/20190722
-import org.json.JSONObject;
 import Model.Episodios;
 import Model.Generos;
 import Model.Peliculas;

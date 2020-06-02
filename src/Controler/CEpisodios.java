@@ -9,15 +9,10 @@ import Vista.VEpisodios;
  * @author IVANB
  *
  */
-public class CEpisodios {
+public class CEpisodios extends CPublicaciones{
 	
-//	private int temporada;
-//	private int nroEpisodio;
-//	private int anio;
-//	private int duracion;
-//	private String serie;
-	
-	//
+	private Episodios modeloEpisodios;
+	private VEpisodios vistaEpisodios;
 	
 	public int getTemporada() {
 		return modeloEpisodios.getTemporada();
@@ -31,7 +26,6 @@ public class CEpisodios {
 		modeloEpisodios.setTemporada(vistaEpisodios.pedirTemporada());
 	}
 	
-	//
 	
 	public int getNroEpisodio() {
 		return modeloEpisodios.getNroEpisodio();

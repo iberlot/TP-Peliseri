@@ -10,7 +10,6 @@ import java.util.Calendar;
 
 import Model.Episodios;
 import Model.Generos;
-import Model.Peliculas;
 import funciones.Archivos;
 import funciones.Fechas;
 

@@ -9,14 +9,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import org.json.JSONObject;
 
 import org.json.simple.parser.*;
 
 import Model.Actores;
-import Model.Peliculas;
 import funciones.Archivos;
 
 /**

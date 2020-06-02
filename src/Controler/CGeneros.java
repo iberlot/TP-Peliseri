@@ -3,56 +3,53 @@
  */
 package Controler;
 
+import Model.Generos;
+import Vista.VGeneros;
+
 /**
  * @author IVANB
  *
  */
 public class CGeneros {
 
-//	private int id;
-//	private String descripcion;
-//	private int CantidadTitulos;
+	private Generos modeloGeneros;
+	private VGeneros vistaGeneros;
 	
-	//
 	
 	public String getDescripciones() {
-		return modeloGeneros.getDescripciones();
+		return modeloGeneros.getDescripcion();
 	}
 	
 	public void mostrarDescripciones() {
-		vistaGeneros.mostrarDescripciones(modeloGeneros.getDescripciones());
+		vistaGeneros.mostrarDescrip(modeloGeneros.getDescripcion());
 	}
 	
 	public void setDescripciones() {
-		modeloGeneros.setDescripciones(vistaGeneros.pedirDescripciones());
+		modeloGeneros.setDescripcion(vistaGeneros.pedirDescrip());
 	}
-	
-	//
 	
 	public int getCantidadTitulos() {
 		return modeloGeneros.getCantidadTitulos();
 	}
 	
 	public void mostrarCantidadTitulos() {
-		vistaGeneros.mostrarCodigoID(modeloGeneros.mostCantidadTitulos());
+		vistaGeneros.mostrarCantidad(modeloGeneros.getCantidadTitulos());
 	}
 	
 	public void setCantidadTitulos() {
-		modeloGeneros.setIdD(vistaGeneros.pedirCantidadTitulos());
+		modeloGeneros.setCantidadTitulos(vistaGeneros.pedirCantidad());
 	}
-	
-	//
 	
 	public int getId() {
 		return modeloGeneros.getId();
 	}
 	
 	public void mostrarId() {
-		vistaGeneros.mostrarCodigoID(modeloGeneros.mostId());
+		vistaGeneros.mostrarID(modeloGeneros.getId());
 	}
 	
 	public void setId() {
-		modeloGeneros.setIdD(vistaGeneros.pedirId());
+		modeloGeneros.setId(vistaGeneros.pedirID());
 	}
 	
 }

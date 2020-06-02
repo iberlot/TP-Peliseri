@@ -7,7 +7,7 @@ public class Peliculas extends Publicaciones {
 
 	private int anio;
 
-	private float duracion;
+	private int duracion;
 
 	public Peliculas() {
 	}
@@ -17,7 +17,7 @@ public class Peliculas extends Publicaciones {
 		super(codigo, nombre, genero, sinopsis, actores, empresa, fechaPubli);
 	}
 
-	public Peliculas(int anio, float duracion, int codigo, String nombre, Generos genero, String sinopsis,
+	public Peliculas(int anio, int duracion, int codigo, String nombre, Generos genero, String sinopsis,
 			ArrayList<Calificaciones> calificaciones, ArrayList<Actores> actores, String empresa, String publicacion,
 			Calendar fechaPubli) {
 		super(codigo, nombre, genero, sinopsis, calificaciones, actores, empresa, fechaPubli);
@@ -52,14 +52,14 @@ public class Peliculas extends Publicaciones {
 	/**
 	 * @return the duracion
 	 */
-	public float getDuracion() {
+	public int getDuracion() {
 		return duracion;
 	}
 
 	/**
 	 * @param duracion the duracion to set
 	 */
-	public void setDuracion(float duracion) {
+	public void setDuracion(int duracion) {
 		this.duracion = duracion;
 	}
 

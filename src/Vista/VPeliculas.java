@@ -26,7 +26,7 @@ public class VPeliculas extends VPublicaciones {
 		System.out.printf("Los datos de la pelicula son:\n%s\n", dato);
 	}
 
-	public void mostrarElemento(int anio, float duracion) {
+	public void mostrarElemento(int anio, int duracion) {
 
 		System.out.printf("Los datos de la pelicula son:\n");
 		mostrarAnio(anio);
@@ -37,7 +37,7 @@ public class VPeliculas extends VPublicaciones {
 	}
 
 	public void mostrarElemento(int codigo, String nombre, String empresa, Calendar fPubli, String genero,
-			String sinopsis, int anio, float duracion) {
+			String sinopsis, int anio, int duracion) {
 
 		super.mostrarElemento(codigo, nombre, empresa, fPubli, genero, sinopsis);
 		mostrarAnio(anio);
@@ -48,15 +48,15 @@ public class VPeliculas extends VPublicaciones {
 		return funciones.Funciones.pedirEnteroPositivo("Ingrese el anio:");
 	}
 
-	private void mostrarAnio(int anio) {
+	public void mostrarAnio(int anio) {
 		System.out.printf("El apellido es: %s\n", anio);
 	}
 
-	public float pedirDuracion() {
-		return funciones.Funciones.pedirFloat("Ingrese el anio:");
+	public int pedirDuracion() {
+		return funciones.Funciones.pedirEnteroPositivo("Ingrese la duracon en minutos:");
 	}
 
-	private void mostrarDuracion(float duracion) {
+	public void mostrarDuracion(int duracion) {
 		System.out.printf("La duracion es de: %f\n", duracion);
 	}
 

@@ -60,15 +60,15 @@ public class VEpisodios extends VPublicaciones {
 		return funciones.Funciones.pedirEnteroPositivo("Ingrese el anio:");
 	}
 
-	private void mostrarAnio(int dato) {
+	public void mostrarAnio(int dato) {
 		System.out.printf("El apellido es: %s\n", dato);
 	}
 
-	public float pedirDuracion() {
-		return funciones.Funciones.pedirFloat("Ingrese el anio:");
+	public int pedirDuracion() {
+		return funciones.Funciones.pedirEnteroPositivo("Ingrese la duracion en minutos:");
 	}
 
-	private void mostrarDuracion(float dato) {
+	public void mostrarDuracion(float dato) {
 		System.out.printf("La duracion es de: %f\n", dato);
 	}
 
@@ -76,7 +76,7 @@ public class VEpisodios extends VPublicaciones {
 		return funciones.Funciones.pedirEnteroPositivo("Ingrese el Nro de episodio:");
 	}
 
-	private void mostrarNroEpisodio(int dato) {
+	public void mostrarNroEpisodio(int dato) {
 		System.out.printf("Episodio nro: %s\n", dato);
 	}
 
@@ -84,7 +84,7 @@ public class VEpisodios extends VPublicaciones {
 		return funciones.Funciones.pedirString("Ingrese el anio:");
 	}
 
-	private void mostrarSerie(String dato) {
+	public void mostrarSerie(String dato) {
 		System.out.printf("La serie es : %s\n", dato);
 	}
 
@@ -92,7 +92,7 @@ public class VEpisodios extends VPublicaciones {
 		return funciones.Funciones.pedirEnteroPositivo("Ingrese el anio:");
 	}
 
-	private void mostrarTemporada(int dato) {
+	public void mostrarTemporada(int dato) {
 		System.out.printf("La duracion es de: %i\n", dato);
 	}
 
