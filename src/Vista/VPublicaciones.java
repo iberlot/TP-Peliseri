@@ -15,17 +15,17 @@ public class VPublicaciones implements iVistas {
 
 	@Override
 	public boolean crear() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea dar de alta una nueva publicacion? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea dar de alta una nueva publicacion? S/N ", "S", "N");
 	}
 
 	@Override
 	public boolean eliminar() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea eliminar la publicacion? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea eliminar la publicacion? S/N ", "S", "N");
 	}
 
 	@Override
 	public boolean modificar() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea modificar la publicacion? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea modificar la publicacion? S/N ", "S", "N");
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class VPublicaciones implements iVistas {
 	 * 
 	 * @param sinopsis
 	 */
-	private void mostrarSinopsis(String sinopsis) {
+	public void mostrarSinopsis(String sinopsis) {
 		System.out.printf("la sinopsis es: %s\n", sinopsis);
 
 	}
@@ -87,7 +87,7 @@ public class VPublicaciones implements iVistas {
 	 * 
 	 * @param genero
 	 */
-	private void mostrarGenero(String genero) {
+	public void mostrarGenero(String genero) {
 		System.out.printf("El generos es es: %s\n", genero);
 
 	}
@@ -109,7 +109,7 @@ public class VPublicaciones implements iVistas {
 	 * 
 	 * @param empresa
 	 */
-	private void mostrarEmpresa(String empresa) {
+	public void mostrarEmpresa(String empresa) {
 		System.out.printf("la empresa es: %s\n", empresa);
 
 	}
@@ -129,7 +129,7 @@ public class VPublicaciones implements iVistas {
 	 * 
 	 * @param fPubli
 	 */
-	private void mostrarFechaPubli(Calendar fPubli) {
+	public void mostrarFechaPubli(Calendar fPubli) {
 		System.out.printf("La fecha de publicaion es: %s\n", Fechas.fechaAString(fPubli, '/'));
 
 	}
@@ -149,7 +149,7 @@ public class VPublicaciones implements iVistas {
 	 * 
 	 * @param nombre
 	 */
-	private void mostrarNombre(String nombre) {
+	public void mostrarNombre(String nombre) {
 		System.out.printf("El nombre de la publicacion es: %s\n", nombre);
 
 	}
@@ -169,7 +169,7 @@ public class VPublicaciones implements iVistas {
 	 * 
 	 * @param codigo
 	 */
-	private void mostrarCodigo(int codigo) {
+	public void mostrarCodigo(int codigo) {
 		System.out.printf("la codiga es: %s\n", codigo);
 
 	}

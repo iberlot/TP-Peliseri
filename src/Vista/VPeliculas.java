@@ -7,17 +7,17 @@ public class VPeliculas extends VPublicaciones {
 
 	@Override
 	public boolean crear() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea dar de alta una nueva pelicula? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea dar de alta una nueva pelicula? S/N ", "S", "N");
 	}
 
 	@Override
 	public boolean eliminar() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea eliminar la pelicula? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea eliminar la pelicula? S/N ", "S", "N");
 	}
 
 	@Override
 	public boolean modificar() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea modificar la pelicula? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea modificar la pelicula? S/N ", "S", "N");
 	}
 
 	@Override

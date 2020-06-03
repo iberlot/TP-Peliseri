@@ -13,17 +13,17 @@ public class VActores implements iVistas {
 
 	@Override
 	public boolean crear() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea dar de alta un nuevo actor? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea dar de alta un nuevo actor? S/N ", "S", "N");
 	}
 
 	@Override
 	public boolean eliminar() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea eliminar al actor? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea eliminar al actor? S/N ", "S", "N");
 	}
 
 	@Override
 	public boolean modificar() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea modificar al actor? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea modificar al actor? S/N ", "S", "N");
 	}
 
 	@Override

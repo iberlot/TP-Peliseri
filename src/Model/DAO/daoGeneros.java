@@ -3,7 +3,9 @@
  */
 package Model.DAO;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -23,7 +25,7 @@ public class daoGeneros implements Idao<Generos> {
 
 		File arch = new File(FILE);
 
-		String[] info = new String[5];
+		String[] info = new String[2];
 
 		info[0] = Integer.toString(dato.getId());
 		info[1] = dato.getDescripcion();
@@ -50,6 +52,14 @@ public class daoGeneros implements Idao<Generos> {
 		}
 
 		return generos;
+	}
+
+	public void limpiarArchivo() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter(FILE));
+
+		bw.write("");
+
+		bw.close();
 	}
 
 }

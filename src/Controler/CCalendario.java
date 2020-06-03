@@ -8,6 +8,18 @@ import Vista.VCalendario;
 
 public class CCalendario {
 
+	/**
+	 * Constructor de la clase 
+	 *
+	 * @param modeloCalendario
+	 * @param vistaCalendario
+	 */
+	public CCalendario(Calendario modeloCalendario, VCalendario vistaCalendario) {
+		super();
+		this.modeloCalendario = modeloCalendario;
+		this.vistaCalendario = vistaCalendario;
+	}
+
 	private Calendario modeloCalendario;
 	private VCalendario vistaCalendario;
 	

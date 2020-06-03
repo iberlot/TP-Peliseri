@@ -11,24 +11,24 @@ import funciones.Fechas;
 /**
  * Clase de la vista que muestra todo lo relacionado con un suscriptor
  * 
- * @author iberlot <@> 
+ * @author iberlot <@>
  *
  */
-public class VSuscripciones implements iVistas {
+public class VSuscriptores implements iVistas {
 
 	@Override
 	public boolean crear() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea dar de alta un nuevo suscriptor? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea dar de alta un nuevo suscriptor? S/N ", "S", "N");
 	}
 
 	@Override
 	public boolean eliminar() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea eliminar al suscriptor? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea eliminar al suscriptor? S/N ", "S", "N");
 	}
 
 	@Override
 	public boolean modificar() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea modificar al suscriptor? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea modificar al suscriptor? S/N ", "S", "N");
 	}
 
 	@Override
@@ -38,7 +38,8 @@ public class VSuscripciones implements iVistas {
 	}
 
 	/**
-	 * Muestra por pantalla un mensaje con toda la informacion del suscriptor pasada por parametros
+	 * Muestra por pantalla un mensaje con toda la informacion del suscriptor pasada
+	 * por parametros
 	 * 
 	 * @param apellido
 	 * @param nombre
@@ -58,6 +59,7 @@ public class VSuscripciones implements iVistas {
 
 	/**
 	 * Pide que se ingrese por teclado el apellido del suscriptor
+	 * 
 	 * @return
 	 */
 	public String pedirApellido() {
@@ -65,7 +67,8 @@ public class VSuscripciones implements iVistas {
 	}
 
 	/**
-	 * Muestra por pantalla un mensaje con el parametro pasado del apellido del suscriptor
+	 * Muestra por pantalla un mensaje con el parametro pasado del apellido del
+	 * suscriptor
 	 * 
 	 * @param dato
 	 */
@@ -75,6 +78,7 @@ public class VSuscripciones implements iVistas {
 
 	/**
 	 * Pide que se ingrese por teclado el nombre
+	 * 
 	 * @return
 	 */
 	public String pedirNombre() {
@@ -82,7 +86,8 @@ public class VSuscripciones implements iVistas {
 	}
 
 	/**
-	 * Muestra por pantalla un mensaje con el parametro pasado del nombre del suscriptor
+	 * Muestra por pantalla un mensaje con el parametro pasado del nombre del
+	 * suscriptor
 	 * 
 	 * @param dato
 	 */
@@ -92,6 +97,7 @@ public class VSuscripciones implements iVistas {
 
 	/**
 	 * Pregunta por el sexo del suscriptor
+	 * 
 	 * @return
 	 */
 	public boolean pedirSexo() {
@@ -115,6 +121,7 @@ public class VSuscripciones implements iVistas {
 
 	/**
 	 * Pide que se ingrese por teclado la fecha de nacimiento
+	 * 
 	 * @return
 	 */
 	public Calendar pedirFechaNac() {
@@ -122,16 +129,18 @@ public class VSuscripciones implements iVistas {
 	}
 
 	/**
-	 * Muestra por pantalla un mensaje con el parametro pasado de la fecha de nacimiento
+	 * Muestra por pantalla un mensaje con el parametro pasado de la fecha de
+	 * nacimiento
 	 * 
 	 * @param fechaNac
 	 */
-	private void mostrarFechaNac(Calendar fechaNac) {
+	public void mostrarFechaNac(Calendar fechaNac) {
 		System.out.printf("La fecha de nacimiento es: %s\n", Fechas.fechaAString(fechaNac, '/'));
 	}
 
 	/**
 	 * Pide que se ingrese por teclado el numero de documento
+	 * 
 	 * @return
 	 */
 	public long pedirDocumento() {
@@ -143,7 +152,7 @@ public class VSuscripciones implements iVistas {
 	 * 
 	 * @param documento
 	 */
-	private void mostrarDocumento(long documento) {
+	public void mostrarDocumento(long documento) {
 		System.out.printf("El numero de documento es: %l\n", documento);
 	}
 }

@@ -14,17 +14,17 @@ public class VEpisodios extends VPublicaciones {
 
 	@Override
 	public boolean crear() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea dar de alta un nuevo episodio? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea dar de alta un nuevo episodio? S/N ", "S", "N");
 	}
 
 	@Override
 	public boolean eliminar() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea eliminar el episodio? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea eliminar el episodio? S/N ", "S", "N");
 	}
 
 	@Override
 	public boolean modificar() throws IOException {
-		return funciones.Funciones.pedirBooleano("Desea modificar el episodio? ", "S", "N");
+		return funciones.Funciones.pedirBooleano("Desea modificar el episodio? S/N ", "S", "N");
 	}
 
 	@Override
