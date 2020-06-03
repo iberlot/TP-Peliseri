@@ -30,5 +30,7 @@ public class VPeliSeri implements iVistas {
 	public void mostrarElemento(String dato) throws IOException {
 		throw new UnsupportedOperationException("Esta funcion esta deshabilitada para esta clase...");
 	}
+	
+	
 // XXX tengo que chequear que hay que poner aca <@>
 }

@@ -63,6 +63,7 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 
 		ArrayList<Publicaciones> publicaciones = new ArrayList<>();
 		daoActores act = new daoActores();
+		daoCalificaciones cali = new daoCalificaciones();
 
 		ArrayList<String[]> publi = funciones.Archivos.traeLineasAnchoFijo(FILE, ANCHO);
 
@@ -72,6 +73,8 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 			act.setPublicacion(pub.getCodigo());
 
 			pub.setActores(act.recuperar_datos_archivo());
+			pub.setCalificaciones(cali.recuperar_datos_archivo(pub.getCodigo()));
+
 			publicaciones.add(pub);
 		}
 
@@ -114,4 +117,19 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 //		fw.append("\n");
 //		fw.close();
 	}
+
+	/**
+	 * @return El valor de generos, es un dato de tipo ArrayList<Generos>
+	 */
+	public static ArrayList<Generos> getGeneros() {
+		return generos;
+	}
+
+	/**
+	 * @param generos Que se seteara en generos
+	 */
+	public static void setGeneros(ArrayList<Generos> generos) {
+		daoPublicaciones.generos = generos;
+	}
+	
 }

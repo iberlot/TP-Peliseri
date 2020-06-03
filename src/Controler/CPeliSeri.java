@@ -1,17 +1,8 @@
 package Controler;
 
 import java.util.ArrayList;
-
 import Model.*;
-
-/**
- * @author IVANB
- *
- */
-/**
- * @author IVANB
- *
- */
+import Model.DAO.*;
 /**
  * @author IVANB
  *
@@ -43,6 +34,29 @@ public class CPeliSeri {
 	 */
 	private ArrayList<Calendario> pagos;
 
+	private CActores controlerActores = new CActores();
+	private CCalendario controlerCalendario = new CCalendario();
+	private CCalificaciones controlerCalificaciones = new CCalificaciones();
+	private CEpisodios controlerEpisodios = new CEpisodios();
+	private CGeneros controlerGeneros = new CGeneros();
+	private CPeliculas controlerPeliculas = new CPeliculas();
+	private CPublicaciones controlerPublicaciones = new CPublicaciones();
+	private CSuscripciones controlerSuscripciones = new CSuscripciones();
+	
+	
+	
+	// FIXME esto no se pero creeria que tiene que estar en cada controler
+	private daoActores daoActores = new daoActores();
+	private daoCalendario daoCalendario = new daoCalendario();
+	private daoCalificaciones daoCalificaciones = new daoCalificaciones();
+	private daoEpisodios daoEpisodios = new daoEpisodios();
+	private daoGeneros daoGeneros = new daoGeneros();
+	private daoPeliculas daoPeliculas = new daoPeliculas();
+	private daoPublicaciones daoPublicaciones = new daoPublicaciones();
+	private daoSuscriptores daoSuscripciones = new daoSuscriptores();
+	
+	
+	
 	/**
 	 * Retorna la serie con el mejor promedio de calificaciones
 	 * 
@@ -133,5 +147,16 @@ public class CPeliSeri {
 	 */
 	public void actricesActuales() {
 		throw new UnsupportedOperationException("Not supported yet.");
+	}
+	
+
+	public void inicializar_archivos() throws Exception {
+		generos = daoGeneros.recuperar_datos_archivo();
+		actores = daoActores.recuperar_datos_archivo();
+		suscriptores = daoSuscripciones.recuperar_datos_archivo();
+		daoCalificaciones.setSuscriptores(suscriptores);
+		daoPublicaciones.setGeneros(generos);
+		publicaciones = daoPublicaciones.recuperar_datos_archivo();
+
 	}
 }

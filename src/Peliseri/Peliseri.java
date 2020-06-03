@@ -25,6 +25,7 @@ public class Peliseri {
 //			base.setOPERADOR(Funciones.pedirString("Ingrese el operador: "));
 //
 			base.inicializar_archivos();
+			System.out.println("Chupala2");
 //
 //			base.inicio();
 

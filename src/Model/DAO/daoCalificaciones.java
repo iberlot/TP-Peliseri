@@ -20,6 +20,11 @@ public class daoCalificaciones implements Idao<Calificaciones> {
 	 */
 	private static ArrayList<Suscriptores> suscriptores;
 
+//	Esto no va porque el atributo es estatico
+//	public daoCalificaciones(ArrayList<Suscriptores> suscriptores) {
+//		this.suscriptores = suscriptores;
+//	}
+	
 	public void cargar_archivo(Calificaciones dato, int publicacion) throws IOException {
 
 		File arch = new File(FILE);
@@ -75,5 +80,21 @@ public class daoCalificaciones implements Idao<Calificaciones> {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	/**
+	 * @return El valor de suscriptores, es un dato de tipo ArrayList<Suscriptores>
+	 */
+	public static ArrayList<Suscriptores> getSuscriptores() {
+		return suscriptores;
+	}
+
+	/**
+	 * @param suscriptores Que se seteara en suscriptores
+	 */
+	public static void setSuscriptores(ArrayList<Suscriptores> suscriptores) {
+		daoCalificaciones.suscriptores = suscriptores;
+	}
+	
+	
 
 }
