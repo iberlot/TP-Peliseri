@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import funciones.Fechas;
+import funciones.Funciones;
 
 /**
  * Clase de la vista que muestra todo lo relacionado con un suscriptor
@@ -55,6 +56,7 @@ public class VSuscriptores implements iVistas {
 		mostrarSexo(sexo);
 		mostrarDocumento(documento);
 		mostrarFechaNac(fechaNac);
+		System.out.printf("\n");
 	}
 
 	/**
@@ -101,7 +103,7 @@ public class VSuscriptores implements iVistas {
 	 * @return
 	 */
 	public boolean pedirSexo() {
-		return funciones.Funciones.pedirBooleano("Ingrese el sexo: ", "V", "M");
+		return funciones.Funciones.pedirBooleano("Ingrese el sexo - (V)aron - (M)ujer: ", "V", "M");
 	}
 
 	/**
@@ -153,6 +155,43 @@ public class VSuscriptores implements iVistas {
 	 * @param documento
 	 */
 	public void mostrarDocumento(long documento) {
-		System.out.printf("El numero de documento es: %l\n", documento);
+		System.out.println("El numero de documento es: " + documento);
+	}
+
+	public static void mostrarEsta(int i, String descripcion) {
+		System.out.println(i + " - " + descripcion);
+	}
+
+	public static int pedirIdSuscriptor(int max) {
+// FIXME tiene que dar la opcion de cancelar
+		return Funciones.pedirEnteroPositivo("Ingrese el Id del suscriptor", -1, max);
+	}
+
+	public long pedirDocumentoConf() {
+		if (Funciones.pedirBooleano("Desea modificar el dato? s/n", "s", "n")) {
+			return pedirDocumento();
+		}
+		return -99;
+	}
+
+	public String pedirApellidoConf() {
+		if (Funciones.pedirBooleano("Desea modificar el dato? s/n", "s", "n")) {
+			return pedirApellido();
+		}
+		return null;
+	}
+
+	public String pedirNombreConf() {
+		if (Funciones.pedirBooleano("Desea modificar el dato? s/n", "s", "n")) {
+			return pedirNombre();
+		}
+		return null;
+	}
+
+	public Calendar pedirFechaNacConf() {
+		if (Funciones.pedirBooleano("Desea modificar el dato? s/n", "s", "n")) {
+			return pedirFechaNac();
+		}
+		return null;
 	}
 }

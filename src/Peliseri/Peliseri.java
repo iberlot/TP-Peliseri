@@ -28,6 +28,7 @@ public class Peliseri {
 			base.inicio();
 
 		} catch (Exception e) {
+			System.err.println(e);
 			e.printStackTrace();
 		}
 

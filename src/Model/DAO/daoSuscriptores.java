@@ -3,13 +3,14 @@
  */
 package Model.DAO;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import Model.Suscriptores;
-import Model.DAO.Idao;
 import funciones.Archivos;
 import funciones.Fechas;
 
@@ -51,7 +52,6 @@ public class daoSuscriptores implements Idao<Suscriptores> {
 
 		ArrayList<Suscriptores> suscriptoras = new ArrayList<>();
 
-
 		ArrayList<String[]> suscr = funciones.Archivos.traeLineasAnchoFijo(FILE, ANCHO);
 
 		for (String[] datos : suscr) {
@@ -60,8 +60,15 @@ public class daoSuscriptores implements Idao<Suscriptores> {
 
 			suscriptoras.add(susc);
 		}
-		
+
 		return suscriptoras;
 	}
 
+	public void limpiarArchivo() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter(FILE));
+
+		bw.write("");
+
+		bw.close();
+	}
 }

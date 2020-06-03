@@ -43,6 +43,7 @@ public class VPeliSeri implements iVistas {
 		System.out.println("4 - Ver listado de suscriptores");
 		System.out.println("5 - ABM de suscriptores");
 		System.out.println("6 - ABM de generos");
+		System.out.println("7 - Cargar nuevar altas");
 		System.out.println("66 - SALIR");
 
 		return Funciones.pedirEnteroPositivo("");
@@ -54,6 +55,7 @@ public class VPeliSeri implements iVistas {
 		System.out.println("1 - Alta de generos");
 		System.out.println("2 - Baja de generos");
 		System.out.println("3 - Modificar genero");
+		System.out.println("4 - Listar generos");
 		System.out.println("66 - SALIR");
 
 		return Funciones.pedirEnteroPositivo("");
@@ -73,5 +75,16 @@ public class VPeliSeri implements iVistas {
 
 		}
 		return Funciones.pedirEnteroPositivo("Ingrese el nro identificador deseado", -1, generos.size());
+	}
+
+	public static int menuABMSuscriptores() {
+		System.out.println("MENU del programa");
+		System.out.println("1 - Alta de un suscriptor");
+		System.out.println("2 - Baja de un suscriptor");
+		System.out.println("3 - Modificar suscriptor");
+		System.out.println("4 - Listar suscriptores");
+		System.out.println("66 - SALIR");
+
+		return Funciones.pedirEnteroPositivo("");
 	}
 }

@@ -1,13 +1,20 @@
 package Model.DAO;
 
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import Model.Actores;
 // Sorry - descargue la libreria de https://mvnrepository.com/artifact/org.json/json/20190722
 import Model.Episodios;
 import Model.Generos;
 import Model.Peliculas;
 import Model.Publicaciones;
+import funciones.Archivos;
 
 public class daoPublicaciones implements Idao<Publicaciones> {
 
@@ -71,7 +78,7 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 			Publicaciones pub = conv_a_objeto(datos);
 
 			act.setPublicacion(pub.getCodigo());
-
+// FIXME aca tengo que pasar a la clase el arrayList de actores ir comparando y agreando las del arraylist
 			pub.setActores(act.recuperar_datos_archivo());
 			pub.setCalificaciones(cali.recuperar_datos_archivo(pub.getCodigo()));
 
@@ -119,6 +126,56 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 	}
 
 	/**
+	 * Importante: Es para el uso exclusivo de un actor por archivo
+	 * 
+	 * @param nombreArchivo nombre del archivo que se va a abrir, el archivo debe
+	 *                      encontrarse en el directorio definido.
+	 * @return
+	 * @throws Exception
+	 */
+	public Actores conv_a_objeto_dire() throws Exception {
+
+		JSONParser parser = new JSONParser();
+
+		String[] files = Archivos.getFilesDir(ARCHIVO + "Publicaciones/Nuevas");
+
+		if (files != null) {
+
+			for (int i = 0; i < files.length; i++) {
+
+				Reader reader = new FileReader(files[i]);
+
+				JSONObject publicacionJson = (JSONObject) parser.parse(reader);
+
+				System.out.println(files[i]);
+			}
+		}
+		return null;
+
+//		JSONObject autorJson = (JSONObject) parser.parse(reader);
+
+//		Actores actor = convertirJson_a_objeto(autorJson);
+
+//		return actor;
+
+	}
+
+	/**
+	 * Tansforma un objeto de tipo json en uno de actores
+	 * 
+	 * @param json
+	 * @return
+	 */
+	public Actores convertirJson_a_objeto(JSONObject json) {
+
+		Actores actor = new Actores((String) json.get("name"), (String) json.get("apellido"),
+				(boolean) json.get("sexo"));
+
+		return actor;
+
+	}
+
+	/**
 	 * @return El valor de generos, es un dato de tipo ArrayList<Generos>
 	 */
 	public static ArrayList<Generos> getGeneros() {
@@ -131,5 +188,5 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 	public static void setGeneros(ArrayList<Generos> generos) {
 		daoPublicaciones.generos = generos;
 	}
-	
+
 }

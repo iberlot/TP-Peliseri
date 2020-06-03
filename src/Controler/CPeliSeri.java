@@ -65,12 +65,12 @@ public class CPeliSeri {
 //	
 
 	// FIXME esto no se pero creeria que tiene que estar en cada controler
-	private daoActores daoActores = new daoActores();
+	private daoActores daoActor = new daoActores();
 //	private daoCalendario daoCalendario = new daoCalendario();
 //	private daoCalificaciones daoCalificaciones = new daoCalificaciones();
-	private daoGeneros daoGeneros = new daoGeneros();
-	private daoPublicaciones daoPublicaciones = new daoPublicaciones();
-	private daoSuscriptores daoSuscripciones = new daoSuscriptores();
+	private daoGeneros daoGenero = new daoGeneros();
+	private daoPublicaciones daoPublicacion = new daoPublicaciones();
+	private daoSuscriptores daoSuscripcion = new daoSuscriptores();
 
 	/**
 	 * Retorna la serie con el mejor promedio de calificaciones
@@ -109,9 +109,11 @@ public class CPeliSeri {
 
 	/**
 	 * Agrega una publicacion a la lista
+	 * 
+	 * @throws Exception
 	 */
-	public void agregarPublicacion() {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void agregarPublicacion() throws Exception {
+		daoPublicacion.conv_a_objeto_dire();
 	}
 
 	/**
@@ -169,12 +171,12 @@ public class CPeliSeri {
 	}
 
 	public void inicializar_archivos() throws Exception {
-		generos = daoGeneros.recuperar_datos_archivo();
-		actores = daoActores.recuperar_datos_archivo();
-		suscriptores = daoSuscripciones.recuperar_datos_archivo();
+		generos = daoGenero.recuperar_datos_archivo();
+		actores = daoActor.recuperar_datos_archivo();
+		suscriptores = daoSuscripcion.recuperar_datos_archivo();
 		Model.DAO.daoCalificaciones.setSuscriptores(suscriptores);
 		Model.DAO.daoPublicaciones.setGeneros(generos);
-		publicaciones = daoPublicaciones.recuperar_datos_archivo();
+		publicaciones = daoPublicacion.recuperar_datos_archivo();
 
 	}
 
@@ -198,9 +200,14 @@ public class CPeliSeri {
 			listarListas(4);
 			break;
 		case 5:
+			menu_ABM_suscriptores();
 			break;
 		case 6:
 			menu_ABM_generos();
+			break;
+
+		case 7:
+			agregarPublicacion();
 			break;
 		case 66:
 			System.exit(0);
@@ -214,6 +221,99 @@ public class CPeliSeri {
 		stdin.nextLine();
 		inicio();
 
+	}
+
+	private void menu_ABM_suscriptores() throws Exception {
+		switch (VPeliSeri.menuABMSuscriptores()) {
+		case 1:
+			altaSuscriptor();
+			break;
+		case 2:
+			bajaSuscriptor();
+			break;
+		case 3:
+			updateSuscriptor();
+			break;
+		case 4:
+			listarListas(4);
+			break;
+		case 66:
+			inicio();
+			break;
+
+		}
+		@SuppressWarnings("resource")
+		Scanner stdin = new Scanner(System.in);
+
+		System.out.println("Precione una tecla para continuar...");
+		stdin.nextLine();
+		menu_ABM_suscriptores();
+	}
+
+	private void altaSuscriptor() throws IOException {
+		VSuscriptores vistaSuscriptor = new VSuscriptores();
+
+		if (vistaSuscriptor.crear()) {
+			Suscriptores modeloSuscriptor = new Suscriptores();
+			CSuscriptores controlerSuscriptor = new CSuscriptores(modeloSuscriptor, new VSuscriptores());
+
+			controlerSuscriptor.setDocumento();
+			// FIXME aca debe comprobar que el id no exista ya
+			controlerSuscriptor.setApellido();
+			controlerSuscriptor.setNombre();
+			controlerSuscriptor.setFechaNac();
+			controlerSuscriptor.setSexo();
+			controlerSuscriptor.grabar();
+
+			controlerSuscriptor.mostrarDatos();
+
+			suscriptores.add(modeloSuscriptor);
+		}
+	}
+
+	private void bajaSuscriptor() throws IOException {
+		VSuscriptores vistaSuscriptor = new VSuscriptores();
+		int id = pedirIdSuscriptor();
+
+		if (vistaSuscriptor.eliminar()) {
+			suscriptores.remove(id);
+			daoSuscripcion.limpiarArchivo();
+
+			for (Suscriptores suscriptor : suscriptores) {
+
+				CSuscriptores controlerSuscriptores = new CSuscriptores(suscriptor, vistaSuscriptor);
+
+				controlerSuscriptores.grabar();
+			}
+		}
+	}
+
+	private void updateSuscriptor() throws IOException {
+
+		int id = pedirIdSuscriptor();
+
+		VSuscriptores vistaSuscriptor = new VSuscriptores();
+		if (vistaSuscriptor.modificar()) {
+
+			CSuscriptores controlerS = new CSuscriptores(suscriptores.get(id), vistaSuscriptor);
+			controlerS.modificar();
+			controlerS.limpiarArchivo();
+			controlerS.mostrarDatos();
+
+			for (Suscriptores suscriptor : suscriptores) {
+
+				CSuscriptores controlerSuscriptor = new CSuscriptores(suscriptor, vistaSuscriptor);
+
+				controlerSuscriptor.grabar();
+			}
+		}
+	}
+
+	private int pedirIdSuscriptor() {
+		for (int i = 0; i < suscriptores.size(); i++) {
+			VSuscriptores.mostrarEsta(i, suscriptores.get(i).getApellido());
+		}
+		return VSuscriptores.pedirIdSuscriptor(suscriptores.size());
 	}
 
 	private void menu_ABM_generos() throws Exception {
@@ -288,7 +388,7 @@ public class CPeliSeri {
 
 		if (vistaGenero.eliminar()) {
 			generos.remove(id);
-			daoGeneros.limpiarArchivo();
+			daoGenero.limpiarArchivo();
 
 			for (Generos genero : generos) {
 
