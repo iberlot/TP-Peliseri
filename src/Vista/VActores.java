@@ -38,6 +38,7 @@ public class VActores implements iVistas {
 		mostrarApellido(apellido);
 		mostrarNombre(nombre);
 		mostrarSexo(sexo);
+		System.out.println("\n");
 	}
 
 	public String pedirApellido() {

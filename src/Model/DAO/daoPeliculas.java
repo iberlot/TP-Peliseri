@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import Model.Actores;
 import Model.Generos;
 import Model.Peliculas;
 import funciones.Archivos;
@@ -17,6 +18,7 @@ public class daoPeliculas implements Idao<Peliculas> {
 	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1 };
 
 	private static ArrayList<Generos> generos;
+	private static ArrayList<Actores> actores = new ArrayList<Actores>();
 
 	@Override
 	public void cargar_archivo(Peliculas dato) throws IOException {
@@ -31,7 +33,7 @@ public class daoPeliculas implements Idao<Peliculas> {
 		info[4] = dato.getNombre();
 		info[5] = dato.getSinopsis();
 		info[6] = Integer.toString(dato.getAnio());
-		info[7] = Float.toString(dato.getDuracion());
+		info[7] = Integer.toString(dato.getDuracion());
 		info[8] = Integer.toString(0);
 
 		File archivo = new File(FILE);
@@ -79,5 +81,19 @@ public class daoPeliculas implements Idao<Peliculas> {
 	 */
 	public static void setGeneros(ArrayList<Generos> generos) {
 		daoPeliculas.generos = generos;
+	}
+
+	/**
+	 * @return El valor de actores, es un dato de tipo ArrayList<Actores>
+	 */
+	public static ArrayList<Actores> getActores() {
+		return actores;
+	}
+
+	/**
+	 * @param actores Que se seteara en actores
+	 */
+	public static void setActores(ArrayList<Actores> actores) {
+		daoPeliculas.actores = actores;
 	}
 }

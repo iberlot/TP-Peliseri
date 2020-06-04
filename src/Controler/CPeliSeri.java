@@ -118,10 +118,31 @@ public class CPeliSeri {
 	 */
 	public void agregarPublicacion() throws Exception {
 		ArrayList<Publicaciones> pubic = daoPublicacion.conv_a_objeto_dire();
+
 		daoPublicacion.limpiarArchivo();
+
 		for (Publicaciones publicacion : pubic) {
-//			System.out.println(publicacion);
-			if (publicaciones.contains(publicacion) == false) {
+//			XXX deberia saber por que no funciona pero no tengo idea
+//			if (publicaciones.contains(publicacion) == false) {
+//				publicaciones.add(publicacion);
+//			}
+//			XXX Esto que estoy haciendo me parece una cochinada pero funciono asi que por ahora lo dejamos
+
+			boolean agregar = false;
+			if (publicaciones.size() > 0) {
+				for (int i = 0; i < publicaciones.size(); i++) {
+					if (!publicacion.getNombre().equalsIgnoreCase(publicaciones.get(i).getNombre())) {
+						agregar = true;
+					} else {
+						if (publicacion.getCodigo() != publicaciones.get(i).getCodigo()) {
+							agregar = true;
+						}
+					}
+				}
+			} else {
+				agregar = true;
+			}
+			if (agregar == true) {
 				publicaciones.add(publicacion);
 			}
 		}
@@ -138,7 +159,8 @@ public class CPeliSeri {
 	 * Muestra el listado de las series ordenado por genero.
 	 */
 	public void seriesPorGenero() {
-		throw new UnsupportedOperationException("Not supported yet.");
+
+//		dato.getActores().forEach(action);
 	}
 
 	/**

@@ -1,11 +1,13 @@
 package Model.DAO;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 
 import org.json.JSONException;
 import org.json.simple.JSONArray;
@@ -23,12 +25,12 @@ import funciones.Fechas;
 
 public class daoPublicaciones implements Idao<Publicaciones> {
 
-	private static final String FILE = ARCHIVO + "Audiovisuales.txt";
+	protected static final String FILE = ARCHIVO + "Audiovisuales.txt";
 
-	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1 };
+	protected static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1 };
 
-	private static ArrayList<Generos> generos = new ArrayList<Generos>();
-	private static ArrayList<Actores> actores = new ArrayList<Actores>();
+	protected static ArrayList<Generos> generos = new ArrayList<Generos>();
+	protected static ArrayList<Actores> actores = new ArrayList<Actores>();
 
 	@Override
 	public void cargar_archivo(Publicaciones dato) throws IOException {
@@ -37,15 +39,27 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 			if (dato instanceof Episodios) {
 				daoEpisodios dao = new daoEpisodios();
 				daoEpisodios.setGeneros(generos);
+				daoEpisodios.setActores(actores);
 				dao.cargar_archivo((Episodios) dato);
 
 			} else if (dato instanceof Peliculas) {
 				daoPeliculas dao = new daoPeliculas();
 				daoPeliculas.setGeneros(generos);
+				daoPeliculas.setActores(actores);
 				dao.cargar_archivo((Peliculas) dato);
 			} else {
 				throw new Exception("Que paso aca?");
 			}
+
+			Iterator<Actores> it = dato.getActores().iterator();
+
+			while (it.hasNext()) {
+				Actores actor = it.next();
+				daoActores daoA = new daoActores();
+				daoA.setPublicacion(dato.getCodigo());
+				daoA.cargar_archivo(actor);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -249,10 +263,40 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 		daoPublicaciones.generos = generos;
 	}
 
-	public void limpiarArchivo() {
-		daoPublicaciones dao = new daoPublicaciones();
-		dao.limpiarArchivo();
+	public void limpiarArchivo() throws IOException {
+//		BufferedWriter bw = new BufferedWriter(new FileWriter(FILE));
+//
+//		bw.write("");
+//
+//		bw.close();
+		File f = new File(FILE);
 
+		if (f.delete()) {
+
+			System.out.println("se limpio el archivo");
+		}
+		try {
+			f.createNewFile();
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+		}
+
+		daoActores dAct = new daoActores();
+		dAct.limpiarArchivo();
+	}
+
+	/**
+	 * @return El valor de actores, es un dato de tipo ArrayList<Actores>
+	 */
+	public static ArrayList<Actores> getActores() {
+		return actores;
+	}
+
+	/**
+	 * @param actores Que se seteara en actores
+	 */
+	public static void setActores(ArrayList<Actores> actores) {
+		daoPublicaciones.actores = actores;
 	}
 
 }

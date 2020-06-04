@@ -3,6 +3,7 @@
  */
 package Model.DAO;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -37,7 +38,7 @@ public class daoActores implements Idao<Actores> {
 	@Override
 	public void cargar_archivo(Actores dato) throws IOException {
 
-		String[] info = new String[9];
+		String[] info = new String[4];
 
 		info[0] = Integer.toString(publicacion);
 		info[1] = dato.getApellido();
@@ -46,11 +47,6 @@ public class daoActores implements Idao<Actores> {
 
 		File archivo = new File(ACTORES);
 		Archivos.escribeCamposSepararPor(archivo, info, '\t');
-
-//		JSONObject autor = new JSONObject();
-//		autor = crearJSON(dato);
-//		String nombreArchivo = dato.getApellido() + "_" + dato.getNombre();
-//		cargarArchivoJSON(nombreArchivo, autor);
 	}
 
 	@Override
@@ -188,6 +184,15 @@ public class daoActores implements Idao<Actores> {
 	 */
 	public void setPublicacion(int publicacion) {
 		this.publicacion = publicacion;
+	}
+
+	public void limpiarArchivo() throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter(ACTORES));
+
+		bw.write("");
+
+		bw.close();
+
 	}
 
 }

@@ -3,7 +3,10 @@
  */
 package Controler;
 
+import java.io.IOException;
+
 import Model.Actores;
+import Model.DAO.daoActores;
 import Vista.VActores;
 
 /**
@@ -14,9 +17,9 @@ public class CActores {
 
 	private Actores modeloActores;
 	private VActores vistaActores;
-	
+
 	/**
-	 * Constructor de la clase 
+	 * Constructor de la clase
 	 *
 	 * @param modeloActores
 	 * @param vistaActores
@@ -52,7 +55,6 @@ public class CActores {
 		modeloActores.setApellido(vistaActores.pedirApellido());
 	}
 
-
 	public String getNombre() {
 		return modeloActores.getNombre();
 	}
@@ -67,5 +69,18 @@ public class CActores {
 
 	public void mostrarDatos() {
 		vistaActores.mostrarElemento(modeloActores.getApellido(), modeloActores.getNombre(), modeloActores.isSexo());
+	}
+
+	public void grabar() throws IOException {
+
+		daoActores dao = new daoActores();
+
+		dao.cargar_archivo(modeloActores);
+	}
+
+	public void limpiarArchivo() throws IOException {
+
+		daoActores dao = new daoActores();
+		dao.limpiarArchivo();
 	}
 }
