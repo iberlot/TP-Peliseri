@@ -1,0 +1,20 @@
+{
+	"codigo":897, 
+	"anio": 1920,
+	"duracion": 147,
+	"nombre": "Charles", 
+	"genero": "terror",
+	"sinopsis": "Un joven actor se inicia en la comedia",
+	"empresa": "Warner", 
+	"publicacion": 134, 
+	"fechaPubli": "03/06/2020",
+	"actores": [{
+		"nombre": "Carlitos",
+		"apellido": "Chaplin",
+		"sexo": true
+	},{
+		"nombre": "Carlos",
+		"apellido": "Chapin",
+		"sexo": true
+	}]
+}

@@ -10,9 +10,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
 
-import org.json.JSONObject;
-
-import org.json.simple.parser.*;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import Model.Actores;
 import funciones.Archivos;
@@ -76,7 +76,6 @@ public class daoActores implements Idao<Actores> {
 
 		return actores;
 	}
-	
 
 	/**
 	 * Recupera un listado unico de los autores
@@ -92,7 +91,7 @@ public class daoActores implements Idao<Actores> {
 
 		for (String[] datos : act) {
 			Actores a = conv_a_objeto(datos);
-			
+
 			if (actores.contains(a) == false) {
 
 				actores.add(a);
@@ -129,13 +128,13 @@ public class daoActores implements Idao<Actores> {
 	/**
 	 * Tansforma un objeto de tipo json en uno de actores
 	 * 
-	 * @param json
+	 * @param a
 	 * @return
 	 */
-	public Actores convertirJson_a_objeto(JSONObject json) {
+	public Actores convertirJson_a_objeto(JSONObject a) {
 
-		Actores actor = new Actores((String) json.get("name"), (String) json.get("apellido"),
-				(boolean) json.get("sexo"));
+		Actores actor = new Actores(a.get("nombre").toString(), a.get("apellido").toString(),
+				Boolean.parseBoolean(a.get("sexo").toString()));
 
 		return actor;
 
@@ -190,5 +189,5 @@ public class daoActores implements Idao<Actores> {
 	public void setPublicacion(int publicacion) {
 		this.publicacion = publicacion;
 	}
-	
+
 }

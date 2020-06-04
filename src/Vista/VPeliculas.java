@@ -32,6 +32,7 @@ public class VPeliculas extends VPublicaciones {
 		mostrarAnio(anio);
 		mostrarDuracion(duracion);
 
+		System.out.println("\n");
 		// No se si aca tengo que retornar los datos de Publicaciones o llamar a una
 		// funcion de VPublicaciones o Extender esto
 	}
@@ -42,6 +43,9 @@ public class VPeliculas extends VPublicaciones {
 		super.mostrarElemento(codigo, nombre, empresa, fPubli, genero, sinopsis);
 		mostrarAnio(anio);
 		mostrarDuracion(duracion);
+
+		System.out.println("\n");
+
 	}
 
 	public int pedirAnio() {
@@ -57,7 +61,7 @@ public class VPeliculas extends VPublicaciones {
 	}
 
 	public void mostrarDuracion(int duracion) {
-		System.out.printf("La duracion es de: %f\n", duracion);
+		System.out.println("La duracion es de: " + duracion);
 	}
 
 }

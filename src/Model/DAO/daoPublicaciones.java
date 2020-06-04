@@ -7,9 +7,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import Model.Actores;
@@ -27,8 +27,8 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 
 	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1 };
 
-	private static ArrayList<Generos> generos;
-	private static ArrayList<Actores> actores;
+	private static ArrayList<Generos> generos = new ArrayList<Generos>();
+	private static ArrayList<Actores> actores = new ArrayList<Actores>();
 
 	@Override
 	public void cargar_archivo(Publicaciones dato) throws IOException {
@@ -141,7 +141,6 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 	 */
 	public ArrayList<Publicaciones> conv_a_objeto_dire() throws Exception {
 
-		JSONParser parser = new JSONParser();
 		ArrayList<Publicaciones> publiqui = new ArrayList<Publicaciones>();
 
 		String[] files = Archivos.getFilesDir(ARCHIVO + "Publicaciones/Nuevas");
@@ -152,7 +151,10 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 
 				Reader reader = new FileReader(files[i]);
 
-				JSONObject publicacionJson = (JSONObject) parser.parse(reader);
+				JSONParser parser = new JSONParser();
+				Object obj = parser.parse(reader);
+
+				JSONObject publicacionJson = (JSONObject) obj;
 
 				publiqui.add(convertirJson_a_objeto(publicacionJson));
 
@@ -177,7 +179,7 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 	public Publicaciones convertirJson_a_objeto(JSONObject json) throws IOException, JSONException, ParseException {
 
 		Calendar fechaPubli = Calendar.getInstance();
-		fechaPubli = Fechas.stringToCalendar((String) json.get("fechaPubli"), "dd/mm/aaaa");
+		fechaPubli = Fechas.stringToCalendar(json.get("fechaPubli").toString(), "dd/MM/yyyy");
 
 		daoActores dAct = new daoActores();
 		ArrayList<Actores> actor = new ArrayList<Actores>();
@@ -185,7 +187,7 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 
 		int index = -1;
 		for (int i = 0; i < generos.size(); i++) {
-			if (generos.get(i).getDescripcion().equals(json.get("genero"))) {
+			if (generos.get(i).getDescripcion().equalsIgnoreCase(json.get("genero").toString())) {
 				index = i;
 			}
 		}
@@ -193,7 +195,11 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 		for (Object a : act) {
 			Actores actors = dAct.convertirJson_a_objeto((JSONObject) a);
 
-			int indice = actores.indexOf(actors);
+			int indice = -1;
+			if (actores != null) {
+				indice = actores.indexOf(actors);
+			}
+
 			if (indice != -1) {
 				actor.add(actores.get(indice));
 			} else {
@@ -214,12 +220,18 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 
 			return publicacion;
 		} else {
-			return new Peliculas((int) json.get("anio"), (int) json.get("duracion"), (int) json.get("codigo"),
-					(String) json.get("nombre"), generos.get(index), (String) json.get("sinopsis"),
-					(String) json.get("empresa"), fechaPubli);
-		}
+			int an = Integer.parseInt(json.get("anio").toString());
+			int dur = Integer.parseInt(json.get("duracion").toString());
+			int cod = Integer.parseInt(json.get("codigo").toString());
+			String nom = json.get("nombre").toString();
+			String sin = json.get("sinopsis").toString();
+			String emp = json.get("empresa").toString();
 
-//		
+			Peliculas publicacion = new Peliculas(an, dur, cod, nom, generos.get(index), sin, emp, fechaPubli);
+			publicacion.setActores(actor);
+//			System.out.println(publicacion);
+			return publicacion;
+		}
 
 	}
 
@@ -235,6 +247,12 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 	 */
 	public static void setGeneros(ArrayList<Generos> generos) {
 		daoPublicaciones.generos = generos;
+	}
+
+	public void limpiarArchivo() {
+		daoPublicaciones dao = new daoPublicaciones();
+		dao.limpiarArchivo();
+
 	}
 
 }

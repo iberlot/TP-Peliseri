@@ -43,6 +43,7 @@ public class VEpisodios extends VPublicaciones {
 		mostrarTemporada(temporada);
 // No se si aca tengo que retornar los datos de Publicaciones o llamar a una
 		// funcion de VPublicaciones o Extender esto
+		System.out.println("\n");
 	}
 
 	public void mostrarElemento(int codigo, String nombre, String empresa, Calendar fPubli, String genero,
@@ -54,6 +55,8 @@ public class VEpisodios extends VPublicaciones {
 		mostrarNroEpisodio(nroEpisodio);
 		mostrarSerie(serie);
 		mostrarTemporada(temporada);
+
+		System.out.println("\n");
 	}
 
 	public int pedirAnio() {

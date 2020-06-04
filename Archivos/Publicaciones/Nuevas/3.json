@@ -1,0 +1,20 @@
+{
+	"codigo": 901, 
+	"temporada": 2,
+	"nroEpisodio": 06,
+	"anio": 1981,
+	"duracion": 124,
+	"serie": "Vidas de la vida",
+	"nombre": "El deporte del barrio", 
+	"genero": "accion",
+	"sinopsis": "Un joven deportista se inicia en el bowling",
+	"empresa": "Pelingston", 
+	"fechaPubli": "26/04/2013", 
+	"actores": [{
+		"nombre": "Ricky",
+		"apellido": "Lolegra",
+		"sexo": true
+	}]
+}
+
+		

@@ -118,12 +118,19 @@ public class CPeliSeri {
 	 */
 	public void agregarPublicacion() throws Exception {
 		ArrayList<Publicaciones> pubic = daoPublicacion.conv_a_objeto_dire();
-
+		daoPublicacion.limpiarArchivo();
 		for (Publicaciones publicacion : pubic) {
+//			System.out.println(publicacion);
 			if (publicaciones.contains(publicacion) == false) {
 				publicaciones.add(publicacion);
-
 			}
+		}
+
+		for (Publicaciones publica : publicaciones) {
+
+			CPublicaciones controlerPublicaciones = new CPublicaciones(publica, new VPublicaciones());
+
+			controlerPublicaciones.grabar();
 		}
 	}
 
@@ -413,7 +420,7 @@ public class CPeliSeri {
 	}
 
 	private void listarListas(int opcion) {
-		switch (VPeliSeri.menuPrincipal()) {
+		switch (opcion) {
 		case 1:
 			for (Actores item : actores) {
 				CActores control = new CActores(item, new VActores());

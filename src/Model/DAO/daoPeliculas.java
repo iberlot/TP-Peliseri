@@ -12,12 +12,12 @@ import funciones.Fechas;
 
 public class daoPeliculas implements Idao<Peliculas> {
 
-	private static final String FILE = ARCHIVO+"Audiovisuales.txt";
+	private static final String FILE = ARCHIVO + "Audiovisuales.txt";
 
 	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1 };
 
 	private static ArrayList<Generos> generos;
-	
+
 	@Override
 	public void cargar_archivo(Peliculas dato) throws IOException {
 
@@ -42,9 +42,9 @@ public class daoPeliculas implements Idao<Peliculas> {
 	public Peliculas conv_a_objeto(String[] datos) throws Exception {
 		for (Generos genero : generos) {
 			if (genero.getId() == Integer.parseInt(datos[3])) {
-				
-				return new Peliculas(Integer.parseInt(datos[6]), Float.parseFloat(datos[7]), 
-						Integer.parseInt(datos[0]), datos[4], genero, datos[5], datos[1], Fechas.stringToCalendar(datos[2], "dd/M/yyyy"));	
+
+				return new Peliculas(Integer.parseInt(datos[6]), Integer.parseInt(datos[7]), Integer.parseInt(datos[0]),
+						datos[4], genero, datos[5], datos[1], Fechas.stringToCalendar(datos[2], "dd/M/yyyy"));
 			}
 		}
 		throw new Exception("No exste el Genero");
@@ -55,7 +55,6 @@ public class daoPeliculas implements Idao<Peliculas> {
 
 		ArrayList<Peliculas> peliculas = new ArrayList<>();
 
-
 		ArrayList<String[]> pel = funciones.Archivos.traeLineasAnchoFijo(FILE, ANCHO);
 
 		for (String[] datos : pel) {
@@ -64,7 +63,7 @@ public class daoPeliculas implements Idao<Peliculas> {
 
 			peliculas.add(peli);
 		}
-		
+
 		return peliculas;
 	}
 

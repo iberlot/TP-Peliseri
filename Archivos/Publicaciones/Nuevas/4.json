@@ -1,0 +1,20 @@
+{
+	"temporada": 1,
+	"nroEpisodio": 03,
+	"anio": 1985,
+	"duracion": 165,
+	"serie": "Vidas diarias",
+	"codigo": 900, 
+	"nombre": "El deporte sub-urbano", 
+	"genero": "accion",
+	"sinopsis": "Un joven deportista se inicia en el deporte",
+	"empresa": "Schnee fur Viele", 
+	"fechaPubli": "11/05/2012", 
+	"actores": [{
+		"nombre": "Miguel",
+		"apellido": "Fiagri",
+		"sexo": true
+	}]
+}
+
+	

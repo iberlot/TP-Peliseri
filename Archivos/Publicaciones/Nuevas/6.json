@@ -1,0 +1,25 @@
+{
+	"codigo": 898, 
+	"nombre": "Carlitos", 
+	"genero": "Porno",
+	"sinopsis": "Un joven actor se inicia en la vida",
+	"empresa": "Guarner", 
+	"anio": 2007,
+	"duracion": 147,
+	"fechaPubli": "03/02/2019",
+	"actores": [{
+        "nombre": "Carlin",
+        "apellido": "Bailarin",
+        "sexo": true
+	},{
+        "nombre": "Carlitos",
+        "apellido": "Chaplin",
+        "sexo": true
+	},{
+		"nombre": "Carlos",
+        "apellido": "Chapin",
+        "sexo": true
+	}]
+}
+	
+	

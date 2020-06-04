@@ -25,14 +25,18 @@ public class Peliculas extends Publicaciones {
 		this.duracion = duracion;
 	}
 
-	public Peliculas(int parseInt, float parseFloat, int parseInt2, String string, Generos genero, String string2,
-			String string3, Calendar stringToCalendar) {
-		// TODO Auto-generated constructor stub
+	public Peliculas(int anio, int duracion, int codigo, String nombre, Generos genero, String sinopsis, String empresa,
+			Calendar fechaPubli) {
+		super(codigo, nombre, genero, sinopsis, empresa, fechaPubli);
+		this.anio = anio;
+		this.duracion = duracion;
 	}
 
 	@Override
 	public String toString() {
-		return "Peliculas{" + "anio=" + anio + ", duracion=" + duracion + '}';
+		return "Publicaciones{" + "codigo=" + codigo + ", nombre=" + nombre + ", genero=" + genero + ", sinopsis="
+				+ sinopsis + ", clasificaciones=" + calificaciones + ", actores=" + actores + ", empresa=" + empresa
+				+ ", fechaPubli=" + fechaPubli + '}' + "Peliculas{" + "anio=" + anio + ", duracion=" + duracion + '}';
 	}
 
 	/**

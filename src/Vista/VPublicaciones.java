@@ -170,7 +170,7 @@ public class VPublicaciones implements iVistas {
 	 * @param codigo
 	 */
 	public void mostrarCodigo(int codigo) {
-		System.out.printf("la codiga es: %s\n", codigo);
+		System.out.printf("El codigo es: %s\n", codigo);
 
 	}
 

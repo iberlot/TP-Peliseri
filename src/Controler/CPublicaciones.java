@@ -1,8 +1,10 @@
 package Controler;
 
+import java.io.IOException;
 import java.util.Calendar;
 
 import Model.Publicaciones;
+import Model.DAO.daoPublicaciones;
 import Vista.VPublicaciones;
 
 public class CPublicaciones {
@@ -85,5 +87,12 @@ public class CPublicaciones {
 		vistaPublicaciones.mostrarElemento(modeloPublicaciones.getCodigo(), modeloPublicaciones.getNombre(),
 				modeloPublicaciones.getEmpresa(), modeloPublicaciones.getFechaPubli(),
 				modeloPublicaciones.getGenero().getDescripcion(), modeloPublicaciones.getSinopsis());
+	}
+
+	public void grabar() throws IOException {
+
+		daoPublicaciones dao = new daoPublicaciones();
+
+		dao.cargar_archivo(modeloPublicaciones);
 	}
 }

@@ -1,0 +1,24 @@
+{
+	"codigo": 899, 
+	"nombre": "Domingo de Sábado", 
+	"genero": "accion",
+	"duracion": 147,
+	"sinopsis": "Un joven actor se inicia en el baile de domingo",
+	"empresa": "Buarner", 
+	"publicacion": 167, 
+	"fechaPubli": "03/09/2015",
+	"anio": 2007,
+	"actores": [{
+		"nombre": "Domingo",
+		"apellido": "Sarmiento",
+		"sexo": true
+	},{
+		"nombre": "Susana",
+		"apellido": "Oria",
+		"sexo": false
+	},{
+		"nombre": "mansa",
+		"apellido": "thees",
+		"sexo": false
+	}]
+}

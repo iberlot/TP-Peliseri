@@ -1,0 +1,18 @@
+{
+	"temporada": 1,
+	"nroEpisodio": 15,
+	"anio": 2007,
+	"duracion": 147,
+	"serie": "Vidas de la vida",
+	"codigo": 902, 
+	"nombre": "El sub-urbano del deporte", 
+	"genero": "accion",
+	"sinopsis": "Un joven deportista se inicia en el sub-urbano",
+	"empresa": "FOX", 
+	"fechaPubli": "12/06/2014", 
+	"actores": [{
+		"nombre": "Juan",
+		"apellido": "Ñoquis",
+		"sexo": true
+	}]
+}
