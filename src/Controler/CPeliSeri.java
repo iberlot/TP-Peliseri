@@ -20,6 +20,7 @@ import Vista.VEpisodios;
 import Vista.VGeneros;
 import Vista.VPeliSeri;
 import Vista.VPeliculas;
+import Vista.VPublicaciones;
 import Vista.VSuscriptores;
 
 /**
@@ -94,7 +95,10 @@ public class CPeliSeri {
 	 * Recorre los suscriptores y les recomienda la publicacion que les corresponda
 	 */
 	public void recomendar() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		VPublicaciones vistaPublicacion = new VPublicaciones();
+
+		listarListas(3);
+
 	}
 
 	/**
@@ -113,7 +117,14 @@ public class CPeliSeri {
 	 * @throws Exception
 	 */
 	public void agregarPublicacion() throws Exception {
-		daoPublicacion.conv_a_objeto_dire();
+		ArrayList<Publicaciones> pubic = daoPublicacion.conv_a_objeto_dire();
+
+		for (Publicaciones publicacion : pubic) {
+			if (publicaciones.contains(publicacion) == false) {
+				publicaciones.add(publicacion);
+
+			}
+		}
 	}
 
 	/**
@@ -205,9 +216,11 @@ public class CPeliSeri {
 		case 6:
 			menu_ABM_generos();
 			break;
-
 		case 7:
 			agregarPublicacion();
+			break;
+		case 8:
+			recomendar();
 			break;
 		case 66:
 			System.exit(0);

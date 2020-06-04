@@ -3,8 +3,12 @@ package Model.DAO;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -15,6 +19,7 @@ import Model.Generos;
 import Model.Peliculas;
 import Model.Publicaciones;
 import funciones.Archivos;
+import funciones.Fechas;
 
 public class daoPublicaciones implements Idao<Publicaciones> {
 
@@ -23,6 +28,7 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1 };
 
 	private static ArrayList<Generos> generos;
+	private static ArrayList<Actores> actores;
 
 	@Override
 	public void cargar_archivo(Publicaciones dato) throws IOException {
@@ -133,9 +139,10 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 	 * @return
 	 * @throws Exception
 	 */
-	public Actores conv_a_objeto_dire() throws Exception {
+	public ArrayList<Publicaciones> conv_a_objeto_dire() throws Exception {
 
 		JSONParser parser = new JSONParser();
+		ArrayList<Publicaciones> publiqui = new ArrayList<Publicaciones>();
 
 		String[] files = Archivos.getFilesDir(ARCHIVO + "Publicaciones/Nuevas");
 
@@ -147,16 +154,14 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 
 				JSONObject publicacionJson = (JSONObject) parser.parse(reader);
 
-				System.out.println(files[i]);
+				publiqui.add(convertirJson_a_objeto(publicacionJson));
+
+				// FIXME arreglar luego. Tiene que mover el archivo a cargadas.
+				String[] parts = files[i].split("-");
+
 			}
 		}
-		return null;
-
-//		JSONObject autorJson = (JSONObject) parser.parse(reader);
-
-//		Actores actor = convertirJson_a_objeto(autorJson);
-
-//		return actor;
+		return publiqui;
 
 	}
 
@@ -165,13 +170,56 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 	 * 
 	 * @param json
 	 * @return
+	 * @throws IOException
+	 * @throws ParseException
+	 * @throws JSONException
 	 */
-	public Actores convertirJson_a_objeto(JSONObject json) {
+	public Publicaciones convertirJson_a_objeto(JSONObject json) throws IOException, JSONException, ParseException {
 
-		Actores actor = new Actores((String) json.get("name"), (String) json.get("apellido"),
-				(boolean) json.get("sexo"));
+		Calendar fechaPubli = Calendar.getInstance();
+		fechaPubli = Fechas.stringToCalendar((String) json.get("fechaPubli"), "dd/mm/aaaa");
 
-		return actor;
+		daoActores dAct = new daoActores();
+		ArrayList<Actores> actor = new ArrayList<Actores>();
+		JSONArray act = (JSONArray) json.get("actores");
+
+		int index = -1;
+		for (int i = 0; i < generos.size(); i++) {
+			if (generos.get(i).getDescripcion().equals(json.get("genero"))) {
+				index = i;
+			}
+		}
+
+		for (Object a : act) {
+			Actores actors = dAct.convertirJson_a_objeto((JSONObject) a);
+
+			int indice = actores.indexOf(actors);
+			if (indice != -1) {
+				actor.add(actores.get(indice));
+			} else {
+				actores.add(actors);
+				dAct.cargar_archivo(actors);
+
+				actor.add(actores.get(actores.size() - 1));
+			}
+		}
+
+		if (json.get("episodio") != null) {
+			Episodios publicacion = new Episodios((int) json.get("anio"), (int) json.get("duracion"),
+					(int) json.get("codigo"), (String) json.get("nombre"), generos.get(index),
+					(String) json.get("sinopsis"), (String) json.get("empresa"), fechaPubli,
+					(int) json.get("nroEpisodio"), (String) json.get("serie"), (int) json.get("temporada"));
+
+			publicacion.setActores(actor);
+
+			return publicacion;
+		} else {
+			return new Peliculas((int) json.get("anio"), (int) json.get("duracion"), (int) json.get("codigo"),
+					(String) json.get("nombre"), generos.get(index), (String) json.get("sinopsis"),
+					(String) json.get("empresa"), fechaPubli);
+		}
+
+//		
 
 	}
 

@@ -27,8 +27,8 @@ public class Episodios extends Publicaciones {
 		this.temporada = temporada;
 	}
 
-	public Episodios(int anio, float duracion, int codigo, String nombre, Generos genero, String sinopsis,
-			String empresa, Calendar fechaPubli, int nroEpisodio, String serie, int temporada) {
+	public Episodios(int anio, int duracion, int codigo, String nombre, Generos genero, String sinopsis, String empresa,
+			Calendar fechaPubli, int nroEpisodio, String serie, int temporada) {
 
 		super(codigo, nombre, genero, sinopsis, empresa, fechaPubli);
 
@@ -44,6 +44,7 @@ public class Episodios extends Publicaciones {
 				+ ", duracion=" + duracion + ", serie=" + serie + '}';
 	}
 
+	@Override
 	public float promedioCalificaciones() {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
@@ -117,6 +118,5 @@ public class Episodios extends Publicaciones {
 	public void setSerie(String serie) {
 		this.serie = serie;
 	}
-
 
 }
