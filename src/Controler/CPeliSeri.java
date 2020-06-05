@@ -1,21 +1,29 @@
 package Controler;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Random;
 import java.util.Scanner;
 
 import Model.Actores;
 import Model.Calendario;
+import Model.Calificaciones;
 import Model.Episodios;
 import Model.Generos;
 import Model.Peliculas;
 import Model.Publicaciones;
 import Model.Suscriptores;
 import Model.DAO.daoActores;
+import Model.DAO.daoCalificaciones;
 import Model.DAO.daoGeneros;
 import Model.DAO.daoPublicaciones;
 import Model.DAO.daoSuscriptores;
 import Vista.VActores;
+import Vista.VCalificaciones;
 import Vista.VEpisodios;
 import Vista.VGeneros;
 import Vista.VPeliSeri;
@@ -54,32 +62,47 @@ public class CPeliSeri {
 	 */
 	private ArrayList<Calendario> pagos;
 
-//XXX Esto esta solo para recordarme que tengo que crearlos al usarlos
-//	private CActores controlerActores = new CActores();
-//	private CCalendario controlerCalendario = new CCalendario();
-//	private CCalificaciones controlerCalificaciones = new CCalificaciones();
-//	private CEpisodios controlerEpisodios = new CEpisodios();
-//	private CGeneros controlerGeneros = new CGeneros();
-//	private CPeliculas controlerPeliculas = new CPeliculas();
-//	private CPublicaciones controlerPublicaciones = new CPublicaciones();
-//	private CSuscripciones controlerSuscripciones = new CSuscripciones();
-//	
+	private Calendar fActual = Calendar.getInstance();
 
 	// FIXME esto no se pero creeria que tiene que estar en cada controler
 	private daoActores daoActor = new daoActores();
-//	private daoCalendario daoCalendario = new daoCalendario();
-//	private daoCalificaciones daoCalificaciones = new daoCalificaciones();
 	private daoGeneros daoGenero = new daoGeneros();
 	private daoPublicaciones daoPublicacion = new daoPublicaciones();
 	private daoSuscriptores daoSuscripcion = new daoSuscriptores();
+
+	public void recomendarSerie() {
+
+	}
 
 	/**
 	 * Retorna la serie con el mejor promedio de calificaciones
 	 * 
 	 * @return
+	 * @throws ParseException
 	 */
-	public Episodios buscarSerieMejorCalif() {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public Episodios buscarSerieMejorCalif() throws ParseException {
+		// XXX En realidad habria que usar algo como esto pero no se como se hace y ya
+		// no me da la cabeza =)
+		// Collections.sort(publicaciones);
+
+		// @Override
+		// public int compareTo(Publicaciones o) {
+		// return new Float(promedioCalificaciones()).compareTo(new
+		// Float(o.promedioCalificaciones()));
+		// }
+		// }
+		Iterator<Publicaciones> it = publicaciones.iterator();
+		Episodios publiMostrar = new Episodios();
+		while (it.hasNext()) {
+			Publicaciones pub = it.next();
+			if (pub instanceof Episodios) {
+				if (((Episodios) pub).promedioCalificacionesMenores() > publiMostrar.promedioCalificacionesMenores()) {
+					publiMostrar = (Episodios) pub;
+				}
+			}
+		}
+
+		return publiMostrar;
 	}
 
 	/**
@@ -88,16 +111,40 @@ public class CPeliSeri {
 	 * @return
 	 */
 	public Peliculas buscarPeliMejorCalif() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		// XXX En realidad habria que usar algo como esto pero no se como se hace y ya
+		// no me da la cabeza =)
+		// Collections.sort(publicaciones);
+		// Collections.sort((List<Peliculas>) publicaciones);
+
+		Iterator<Publicaciones> it = publicaciones.iterator();
+		Peliculas publiMostrar = new Peliculas();
+		while (it.hasNext()) {
+			Publicaciones pub = it.next();
+			if (pub instanceof Peliculas) {
+				if (pub.promedioCalificaciones() > publiMostrar.promedioCalificaciones()) {
+					publiMostrar = (Peliculas) pub;
+				}
+			}
+		}
+
+		return publiMostrar;
 	}
 
 	/**
 	 * Recorre los suscriptores y les recomienda la publicacion que les corresponda
+	 * 
+	 * @throws IOException
 	 */
-	public void recomendar() {
-		VPublicaciones vistaPublicacion = new VPublicaciones();
+	public void recomendar() throws IOException {
+		int idPublic = pedirIdPublicacion();
 
-		listarListas(3);
+		int idSusc = pedirIdSuscriptor();
+
+//		dato.getActores().forEach(action);
+		CPublicaciones conPubli = new CPublicaciones(publicaciones.get(idPublic), new VPublicaciones());
+		if (conPubli.existeSuscriptor(suscriptores.get(idSusc)) == false) {
+			conPubli.nuevoComentario(suscriptores.get(idSusc));
+		}
 
 	}
 
@@ -160,7 +207,84 @@ public class CPeliSeri {
 	 */
 	public void seriesPorGenero() {
 
-//		dato.getActores().forEach(action);
+		VPeliSeri vista = new VPeliSeri();
+
+		for (Generos genero : generos) {
+			ArrayList<Episodios> epi = new ArrayList<Episodios>();
+
+			Iterator<Publicaciones> it = publicaciones.iterator();
+
+			while (it.hasNext()) {
+				Publicaciones pub = it.next();
+
+				if (pub instanceof Episodios) {
+
+					if (((Episodios) pub).getGenero().equals(genero)) {
+
+						boolean agregar = false;
+						if (epi.size() > 0) {
+							for (int i = 0; i < epi.size(); i++) {
+								if (epi.get(i).getSerie().equalsIgnoreCase(((Episodios) pub).getSerie())) {
+									agregar = false;
+
+									if (epi.get(i).getTemporada() < ((Episodios) pub).getTemporada()) {
+										epi.remove(i);
+										epi.add((Episodios) pub);
+
+									} else if (epi.get(i).getTemporada() == ((Episodios) pub).getTemporada()) {
+										if (epi.get(i).getNroEpisodio() < ((Episodios) pub).getNroEpisodio()) {
+											epi.remove(i);
+											epi.add((Episodios) pub);
+
+										}
+									}
+								} else {
+									agregar = true;
+								}
+							}
+
+							if (agregar == true) {
+								epi.add((Episodios) pub);
+							}
+						} else {
+							epi.add((Episodios) pub);
+						}
+
+					}
+				}
+			}
+
+			vista.mostrarGenero(genero.getId(), genero.getDescripcion(), epi.size());
+
+			Collections.sort(epi);
+
+			for (Episodios episodios : epi) {
+				ArrayList<Actores> acto = new ArrayList<Actores>();
+				int cantidad = 0;
+				int cantidadActores = 0;
+				for (Publicaciones put : publicaciones) {
+					if (put instanceof Episodios) {
+						if (((Episodios) put).getSerie().equalsIgnoreCase(episodios.getSerie())) {
+							cantidad++;
+
+							for (Actores a : put.getActores()) {
+								if (acto.size() > 0) {
+									if (!acto.contains(a)) {
+										cantidadActores++;
+										acto.add(a);
+									}
+								} else {
+									cantidadActores++;
+									acto.add(a);
+								}
+							}
+						}
+					}
+				}
+				vista.mostrarSerie(episodios.getNombre(), episodios.getTemporada(), cantidadActores);
+			}
+
+		}
 	}
 
 	/**
@@ -174,7 +298,37 @@ public class CPeliSeri {
 	 * Muesra los datos de una pelicula al azar
 	 */
 	public void datosPeliculaAlAzar() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		try {
+			Random r = new Random();
+			int id = r.nextInt(publicaciones.size() + 1);
+
+			if (publicaciones.get(id) instanceof Peliculas) {
+
+				VPeliculas vpeli = new VPeliculas();
+				vpeli.mostrarNombre(publicaciones.get(id).getNombre());
+
+				Collections.sort(publicaciones.get(id).getActores());
+
+				for (Actores act : publicaciones.get(id).getActores()) {
+					VActores vaca = new VActores();
+					vaca.mostrarVaca(act.getApellido(), act.getNombre());
+				}
+
+				vpeli.mostrarDuracion(((Peliculas) publicaciones.get(id)).getDuracion());
+				vpeli.mostrarFechaPubli(((Peliculas) publicaciones.get(id)).getFechaPubli());
+
+				for (Calificaciones califa : ((Peliculas) publicaciones.get(id)).getCalificaciones()) {
+					VCalificaciones vCalifa = new VCalificaciones();
+					vCalifa.mostrarElemento(califa.getFecha(), califa.getCalificacion(),
+							califa.getSuscriptor().getApellido() + ", " + califa.getSuscriptor().getNombre(),
+							califa.getDescripcion());
+				}
+			} else {
+				throw new Exception();
+			}
+		} catch (Exception e) {
+			datosPeliculaAlAzar();
+		}
 	}
 
 	/**
@@ -190,8 +344,24 @@ public class CPeliSeri {
 	 * 
 	 * @return
 	 */
-	public int actoresTematicos() {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void actoresTematicos() {
+		VPeliSeri vista = new VPeliSeri();
+		int total = 0;
+		for (Actores actor : actores) {
+			ArrayList<Generos> gene = new ArrayList<Generos>();
+			for (Publicaciones publicacion : publicaciones) {
+				if (publicacion.getActores().contains(actor)) {
+					if (!gene.contains(publicacion.getGenero())) {
+						gene.add(publicacion.getGenero());
+					}
+				}
+			}
+			if (gene.size() > 0) {
+				total++;
+			}
+		}
+
+		vista.actoresTematicos(total);
 	}
 
 	/**
@@ -207,7 +377,32 @@ public class CPeliSeri {
 	 * anios
 	 */
 	public void actricesActuales() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		Iterator<Actores> itAc = actores.iterator();
+		VActores vaca = new VActores();
+
+		while (itAc.hasNext()) {
+
+			boolean mostrar = false;
+			Actores act = itAc.next();
+			if (act.isSexo() == false) {
+				Iterator<Publicaciones> it = publicaciones.iterator();
+
+				while (it.hasNext()) {
+
+					Publicaciones pub = it.next();
+					if (pub instanceof Peliculas) {
+						if ((fActual.get(Calendar.DAY_OF_YEAR) - ((Peliculas) pub).getAnio()) < 2) {
+							mostrar = true;
+						}
+					}
+				}
+			}
+
+			if (mostrar == true) {
+				vaca.mostrarVaca(act.getApellido(), act.getNombre());
+
+			}
+		}
 	}
 
 	public void inicializar_archivos() throws Exception {
@@ -216,8 +411,15 @@ public class CPeliSeri {
 		suscriptores = daoSuscripcion.recuperar_datos_archivo();
 		Model.DAO.daoCalificaciones.setSuscriptores(suscriptores);
 		Model.DAO.daoPublicaciones.setGeneros(generos);
+		Model.DAO.daoPublicaciones.setActores(actores);
 		publicaciones = daoPublicacion.recuperar_datos_archivo();
 
+		for (Publicaciones publica : publicaciones) {
+			daoCalificaciones dCali = new daoCalificaciones();
+
+			publica.setCalificaciones(dCali.recuperar_datos_archivo(publica.getCodigo()));
+
+		}
 	}
 
 	public void inicio() throws Exception {
@@ -250,6 +452,18 @@ public class CPeliSeri {
 			break;
 		case 8:
 			recomendar();
+			break;
+		case 9:
+			actoresTematicos();
+			break;
+		case 10:
+			seriesPorGenero();
+			break;
+		case 11:
+			actricesActuales();
+			break;
+		case 12:
+			datosPeliculaAlAzar();
 			break;
 		case 66:
 			System.exit(0);
@@ -349,6 +563,13 @@ public class CPeliSeri {
 				controlerSuscriptor.grabar();
 			}
 		}
+	}
+
+	private int pedirIdPublicacion() {
+		for (int i = 0; i < publicaciones.size(); i++) {
+			VPublicaciones.mostrarEsta(i, publicaciones.get(i).getNombre());
+		}
+		return VPublicaciones.pedirId(publicaciones.size());
 	}
 
 	private int pedirIdSuscriptor() {

@@ -48,7 +48,17 @@ public class VCalificaciones implements iVistas {
 	}
 
 	public int pedirCalificacion() {
-		return funciones.Funciones.pedirEnteroPositivo("Ingrese la calificacion:", 0, 6);
+		try {
+			int c = funciones.Funciones.pedirEnteroPositivo("Ingrese la calificacion:");
+			if (c > 5 || c < 0) {
+				throw new Exception();
+			}
+			return c;
+		} catch (Exception e) {
+			System.out.println("Recuerde que la calificacion debe ser un entero entre 0 y 5");
+			pedirCalificacion();
+		}
+		return 0;
 	}
 
 	public void mostrarCalificacion(float dato) {

@@ -71,4 +71,8 @@ public class VActores implements iVistas {
 		}
 	}
 
+	public void mostrarVaca(String apellido, String nombre) {
+		System.out.println(apellido + ", " + nombre);
+	}
+
 }

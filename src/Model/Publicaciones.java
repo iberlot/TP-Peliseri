@@ -2,6 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 
 public abstract class Publicaciones {
 
@@ -24,7 +25,8 @@ public abstract class Publicaciones {
 	public Publicaciones() {
 	}
 
-	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis, String empresa, Calendar fechaPubli) {
+	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis, String empresa,
+			Calendar fechaPubli) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.genero = genero;
@@ -32,9 +34,9 @@ public abstract class Publicaciones {
 		this.empresa = empresa;
 		this.fechaPubli = fechaPubli;
 	}
-	
-	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis,
-			ArrayList<Actores> actores, String empresa, Calendar fechaPubli) {
+
+	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis, ArrayList<Actores> actores,
+			String empresa, Calendar fechaPubli) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.genero = genero;
@@ -45,8 +47,7 @@ public abstract class Publicaciones {
 	}
 
 	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis,
-			ArrayList<Calificaciones> calificaciones, ArrayList<Actores> actores, String empresa,
-			Calendar fechaPubli) {
+			ArrayList<Calificaciones> calificaciones, ArrayList<Actores> actores, String empresa, Calendar fechaPubli) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.genero = genero;
@@ -65,7 +66,18 @@ public abstract class Publicaciones {
 	}
 
 	public float promedioCalificaciones() {
-		throw new UnsupportedOperationException("Not supported yet.");
+		float total = 0;
+		int cantidad = 0;
+		for (Iterator<Calificaciones> iterator = calificaciones.iterator(); iterator.hasNext();) {
+			Calificaciones calificacion = iterator.next();
+			cantidad++;
+			total += calificacion.getCalificacion();
+
+		}
+		if (cantidad > 0) {
+			total = total / cantidad;
+		}
+		return total;
 	}
 
 	public int cantidadDeActores() {
@@ -129,7 +141,8 @@ public abstract class Publicaciones {
 	}
 
 	/**
-	 * @return El valor de calificaciones, es un dato de tipo ArrayList<Calificaciones>
+	 * @return El valor de calificaciones, es un dato de tipo
+	 *         ArrayList<Calificaciones>
 	 */
 	public ArrayList<Calificaciones> getCalificaciones() {
 		return calificaciones;

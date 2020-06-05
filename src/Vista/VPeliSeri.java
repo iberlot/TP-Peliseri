@@ -44,6 +44,11 @@ public class VPeliSeri implements iVistas {
 		System.out.println("5 - ABM de suscriptores");
 		System.out.println("6 - ABM de generos");
 		System.out.println("7 - Cargar nuevar altas");
+		System.out.println("8 - Calificar una publicacion");
+		System.out.println("9 - Cantidad de actores monotematicos");
+		System.out.println("10 - Series por genero");
+		System.out.println("11 - Actrices actuales");
+		System.out.println("12 - Peli al azar");
 		System.out.println("66 - SALIR");
 
 		return Funciones.pedirEnteroPositivo("");
@@ -86,5 +91,18 @@ public class VPeliSeri implements iVistas {
 		System.out.println("66 - SALIR");
 
 		return Funciones.pedirEnteroPositivo("");
+	}
+
+	public void actoresTematicos(int total) {
+		System.out.println("Hay un total de " + total + " actores que trabajan con un solo genero.");
+	}
+
+	public void mostrarGenero(int id, String descripcion, int cantidadTitulos) {
+		System.out.println("El genero " + id + " - " + descripcion + " " + cantidadTitulos);
+	}
+
+	public void mostrarSerie(String nombre, int temporada, int cantidadActores) {
+		System.out.println(nombre + " con " + temporada + " temporadas, y " + cantidadActores + " actores");
+
 	}
 }

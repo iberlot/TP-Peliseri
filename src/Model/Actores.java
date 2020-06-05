@@ -1,10 +1,10 @@
 package Model;
 
 /**
- * @author iberlot 
+ * @author iberlot
  *
  */
-public class Actores {
+public class Actores implements Comparable<Actores> {
 
 	/**
 	 * Nombre del actor
@@ -87,5 +87,13 @@ public class Actores {
 		this.sexo = sexo;
 	}
 
-	
+	public String apellidoNombre() {
+		return apellido + nombre;
+	}
+
+	@Override
+	public int compareTo(Actores a) {
+		return apellidoNombre().compareTo(a.apellidoNombre());
+	}
+
 }

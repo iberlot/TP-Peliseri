@@ -24,7 +24,7 @@ public class daoCalificaciones implements Idao<Calificaciones> {
 //	public daoCalificaciones(ArrayList<Suscriptores> suscriptores) {
 //		this.suscriptores = suscriptores;
 //	}
-	
+
 	public void cargar_archivo(Calificaciones dato, int publicacion) throws IOException {
 
 		File arch = new File(FILE);
@@ -71,8 +71,7 @@ public class daoCalificaciones implements Idao<Calificaciones> {
 
 	@Override
 	public void cargar_archivo(Calificaciones dato) throws IOException {
-		// TODO Auto-generated method stub
-		
+		throw new IOException("Parametro no soportado en esta clase");
 	}
 
 	@Override
@@ -94,7 +93,5 @@ public class daoCalificaciones implements Idao<Calificaciones> {
 	public static void setSuscriptores(ArrayList<Suscriptores> suscriptores) {
 		daoCalificaciones.suscriptores = suscriptores;
 	}
-	
-	
 
 }

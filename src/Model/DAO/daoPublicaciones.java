@@ -224,11 +224,21 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 			}
 		}
 
-		if (json.get("episodio") != null) {
-			Episodios publicacion = new Episodios((int) json.get("anio"), (int) json.get("duracion"),
-					(int) json.get("codigo"), (String) json.get("nombre"), generos.get(index),
-					(String) json.get("sinopsis"), (String) json.get("empresa"), fechaPubli,
-					(int) json.get("nroEpisodio"), (String) json.get("serie"), (int) json.get("temporada"));
+		if (json.get("nroEpisodio") != null) {
+
+			int an = Integer.parseInt(json.get("anio").toString());
+			int dur = Integer.parseInt(json.get("duracion").toString());
+			int cod = Integer.parseInt(json.get("codigo").toString());
+			String nom = json.get("nombre").toString();
+			String sin = json.get("sinopsis").toString();
+			String emp = json.get("empresa").toString();
+
+			int nr = Integer.parseInt(json.get("nroEpisodio").toString());
+			String ser = json.get("serie").toString();
+			int tem = Integer.parseInt(json.get("temporada").toString());
+
+			Episodios publicacion = new Episodios(an, dur, cod, nom, generos.get(index), sin, emp, fechaPubli, nr, ser,
+					tem);
 
 			publicacion.setActores(actor);
 
@@ -273,7 +283,7 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 
 		if (f.delete()) {
 
-			System.out.println("se limpio el archivo");
+			System.err.println("se limpio el archivo");
 		}
 		try {
 			f.createNewFile();

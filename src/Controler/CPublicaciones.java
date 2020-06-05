@@ -3,8 +3,11 @@ package Controler;
 import java.io.IOException;
 import java.util.Calendar;
 
+import Model.Calificaciones;
 import Model.Publicaciones;
+import Model.Suscriptores;
 import Model.DAO.daoPublicaciones;
+import Vista.VCalificaciones;
 import Vista.VPublicaciones;
 
 public class CPublicaciones {
@@ -100,5 +103,29 @@ public class CPublicaciones {
 
 		daoPublicaciones dao = new daoPublicaciones();
 		dao.limpiarArchivo();
+	}
+
+	public boolean existeSuscriptor(Suscriptores suscriptores) {
+		if (modeloPublicaciones.getCalificaciones().contains(suscriptores)) {
+			return true;
+		}
+		return false;
+	}
+
+	public void nuevoComentario(Suscriptores suscriptores) throws IOException {
+		if (!modeloPublicaciones.getCalificaciones().contains(suscriptores)) {
+			cargarNuevaCalificacion(suscriptores);
+		}
+	}
+
+	private void cargarNuevaCalificacion(Suscriptores suscriptores) throws IOException {
+		CCalificaciones califica = new CCalificaciones(new Calificaciones(), new VCalificaciones());
+		califica.setSuscriptor(suscriptores);
+		califica.setFeca();
+		califica.setCalificacion();
+		califica.setDescripcion();
+
+		modeloPublicaciones.getCalificaciones().add(califica.get());
+		califica.grabar(modeloPublicaciones.getCodigo());
 	}
 }

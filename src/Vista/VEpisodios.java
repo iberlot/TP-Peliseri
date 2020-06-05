@@ -96,7 +96,7 @@ public class VEpisodios extends VPublicaciones {
 	}
 
 	public void mostrarTemporada(int dato) {
-		System.out.printf("La duracion es de: %i\n", dato);
+		System.out.println("La duracion es de: " + dato);
 	}
 
 }

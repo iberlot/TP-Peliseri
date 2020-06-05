@@ -1,9 +1,13 @@
 package Model;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
 
-public class Episodios extends Publicaciones {
+import funciones.Fechas;
+
+public class Episodios extends Publicaciones implements Comparable<Episodios> {
 
 	private int temporada;
 
@@ -44,9 +48,23 @@ public class Episodios extends Publicaciones {
 				+ ", duracion=" + duracion + ", serie=" + serie + '}';
 	}
 
-	@Override
-	public float promedioCalificaciones() {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public float promedioCalificacionesMenores() throws ParseException {
+		float total = 0;
+		int cantidad = 0;
+		Calendar fActual = Calendar.getInstance();
+		for (Iterator<Calificaciones> iterator = calificaciones.iterator(); iterator.hasNext();) {
+			Calificaciones calificacion = iterator.next();
+			if (Fechas.diferenciaDiasTotal(calificacion.getFecha(), fActual) < 91) {
+				if (Fechas.diferencia_anios(calificacion.getSuscriptor().getFechaNac(), fActual) < 35) {
+					cantidad++;
+					total += calificacion.getCalificacion();
+				}
+			}
+		}
+		if (cantidad > 0) {
+			total = total / cantidad;
+		}
+		return total;
 	}
 
 	/**
@@ -117,6 +135,11 @@ public class Episodios extends Publicaciones {
 	 */
 	public void setSerie(String serie) {
 		this.serie = serie;
+	}
+
+	@Override
+	public int compareTo(Episodios o) {
+		return new Integer(temporada).compareTo(new Integer(o.getTemporada()));
 	}
 
 }

@@ -22,7 +22,7 @@ public class daoEpisodios implements Idao<Episodios> {
 
 	private static final String FILE = ARCHIVO + "Audiovisuales.txt";
 
-	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1 };
+	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1, 3, 25, 2 };
 
 	private static ArrayList<Generos> generos;
 	private static ArrayList<Actores> actores = new ArrayList<Actores>();
@@ -55,9 +55,18 @@ public class daoEpisodios implements Idao<Episodios> {
 		for (Generos genero : generos) {
 			if (genero.getId() == Integer.parseInt(datos[3])) {
 
-				return new Episodios(Integer.parseInt(datos[6]), Integer.parseInt(datos[7]), Integer.parseInt(datos[0]),
-						datos[4], genero, datos[5], datos[1], Fechas.stringToCalendar(datos[2], "dd/M/yyyy"),
-						Integer.parseInt(datos[9]), datos[10], Integer.parseInt(datos[11]));
+				int an = Integer.parseInt(datos[6]);
+				int du = Integer.parseInt(datos[7]);
+				int co = Integer.parseInt(datos[0]);
+				String no = datos[4];
+				String si = datos[5];
+				String em = datos[1];
+				Calendar fe = Fechas.stringToCalendar(datos[2], "dd/M/yyyy");
+				int ep = Integer.parseInt(datos[9]);
+				String se = datos[10];
+				int tp = Integer.parseInt(datos[11]);
+
+				return new Episodios(an, du, co, no, genero, si, em, fe, ep, se, tp);
 			}
 		}
 		throw new Exception("No exste el Genero");

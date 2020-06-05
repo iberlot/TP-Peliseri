@@ -1,8 +1,11 @@
 package Controler;
 
+import java.io.IOException;
 import java.util.Calendar;
 
 import Model.Calificaciones;
+import Model.Suscriptores;
+import Model.DAO.daoCalificaciones;
 import Vista.VCalificaciones;
 
 public class CCalificaciones {
@@ -57,12 +60,32 @@ public class CCalificaciones {
 		modeloCalificaciones.setFecha(vistaCalificaciones.pedirFecha());
 	}
 
+	public void setSuscriptor(Suscriptores susc) {
+		modeloCalificaciones.setSuscriptor(susc);
+	}
+
 	public void mostrarDatos() {
 		vistaCalificaciones
 				.mostrarElemento(modeloCalificaciones.getFecha(), modeloCalificaciones.getCalificacion(),
 						modeloCalificaciones.getSuscriptor().getApellido() + " "
 								+ modeloCalificaciones.getSuscriptor().getNombre(),
 						modeloCalificaciones.getDescripcion());
+
+	}
+
+	public Calificaciones nuevaCali(Suscriptores suscriptores) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Calificaciones get() {
+		return modeloCalificaciones;
+	}
+
+	public void grabar(int codigo) throws IOException {
+		daoCalificaciones dao = new daoCalificaciones();
+
+		dao.cargar_archivo(modeloCalificaciones, codigo);
 
 	}
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import funciones.Fechas;
+import funciones.Funciones;
 
 /**
  * Clase de la vista que muestra todo lo relacionado con una publicacion
@@ -181,6 +182,15 @@ public class VPublicaciones implements iVistas {
 	 */
 	public int pedirCodigo() {
 		return funciones.Funciones.pedirEnteroPositivo("Inferese el codigo de lapublicacion.: ");
+	}
+
+	public static void mostrarEsta(int i, String descripcion) {
+		System.out.println(i + " - " + descripcion);
+	}
+
+	public static int pedirId(int max) {
+// FIXME tiene que dar la opcion de cancelar
+		return Funciones.pedirEnteroPositivo("Ingrese el Id de la publicacion", -1, max);
 	}
 
 }

@@ -3,7 +3,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class Peliculas extends Publicaciones {
+public class Peliculas extends Publicaciones implements Comparable<Peliculas> {
 
 	private int anio;
 
@@ -65,6 +65,12 @@ public class Peliculas extends Publicaciones {
 	 */
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
+	}
+
+	@Override
+	public int compareTo(Peliculas o) {
+
+		return new Float(promedioCalificaciones()).compareTo(new Float(o.promedioCalificaciones()));
 	}
 
 }
