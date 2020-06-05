@@ -49,6 +49,10 @@ public class VPeliSeri implements iVistas {
 		System.out.println("10 - Series por genero");
 		System.out.println("11 - Actrices actuales");
 		System.out.println("12 - Peli al azar");
+		System.out.println("13 - Recomendar Pelicula a mayores");
+		System.out.println("14 - Recomendar serie a jovenes");
+		System.out.println("15 - Mayores sin calificacion");
+		System.out.println("16 - Siries para mayores");
 		System.out.println("66 - SALIR");
 
 		return Funciones.pedirEnteroPositivo("");

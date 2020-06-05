@@ -313,10 +313,35 @@ public class CPeliSeri {
 	}
 
 	/**
+	 * @throws ParseException
 	 * 
 	 */
-	public void mayoresSinClasificacion() {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void mayoresSinClasificacion() throws ParseException {
+
+		Iterator<Suscriptores> it = suscriptores.iterator();
+
+		while (it.hasNext()) {
+			Suscriptores susc = it.next();
+			if (susc.getEdad() > 60) {
+				boolean mostrar = true;
+				for (Publicaciones publicacion : publicaciones) {
+					Iterator<Calificaciones> et = publicacion.getCalificaciones().iterator();
+
+					while (et.hasNext()) {
+						Calificaciones califa = et.next();
+						if (califa.getSuscriptor().equals(susc)) {
+							mostrar = false;
+						}
+					}
+				}
+
+				if (mostrar == true) {
+					CSuscriptores control = new CSuscriptores(susc, new VSuscriptores());
+					control.mostrarApellido();
+					control.mostrarNombre();
+				}
+			}
+		}
 	}
 
 	/**
@@ -357,10 +382,39 @@ public class CPeliSeri {
 	}
 
 	/**
+	 * @throws ParseException
 	 * 
 	 */
-	public void seriesParaMayores() {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void seriesParaMayores() throws ParseException {
+
+		Iterator<Publicaciones> it = publicaciones.iterator();
+
+		while (it.hasNext()) {
+			Publicaciones epic = it.next();
+			if (epic instanceof Episodios) {
+
+				boolean mostrar = true;
+
+				Iterator<Calificaciones> ct = epic.getCalificaciones().iterator();
+
+				while (it.hasNext()) {
+					Calificaciones calif = ct.next();
+					if (calif.getSuscriptor().isSexo() == true && calif.getSuscriptor().getEdad() > 17
+							&& calif.getSuscriptor().getEdad() < 45) {
+						mostrar = false;
+					}
+				}
+				if (mostrar == true) {
+					CEpisodios contro = new CEpisodios((Episodios) epic, new VEpisodios());
+					contro.mostrarCodigo();
+					contro.mostrarSerie();
+					contro.mostrarTemporada();
+					contro.mostrarNroEpisodio();
+					contro.mostrarnombre();
+				}
+			}
+		}
+
 	}
 
 	/**
@@ -489,6 +543,18 @@ public class CPeliSeri {
 			break;
 		case 12:
 			datosPeliculaAlAzar();
+			break;
+		case 13:
+			recomendarPelicula();
+			break;
+		case 14:
+			recomendarSerie();
+			break;
+		case 15:
+			mayoresSinClasificacion();
+			break;
+		case 16:
+			seriesParaMayores();
 			break;
 		case 66:
 			System.exit(0);
