@@ -21,7 +21,7 @@ public class daoPeliculas implements Idao<Peliculas> {
 	private static final String FILE = ARCHIVO + "Audiovisuales.txt";
 	private static final String DIREC = ARCHIVO + "Recomendaciones/Peliculas/";
 
-	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1 };
+	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1, 3, 25, 2 };
 
 	private static ArrayList<Generos> generos;
 	private static ArrayList<Actores> actores = new ArrayList<Actores>();
@@ -29,7 +29,7 @@ public class daoPeliculas implements Idao<Peliculas> {
 	@Override
 	public void cargar_archivo(Peliculas dato) throws IOException {
 
-		String[] info = new String[9];
+		String[] info = new String[12];
 
 		info[0] = Integer.toString(dato.getCodigo());
 		info[1] = dato.getEmpresa();

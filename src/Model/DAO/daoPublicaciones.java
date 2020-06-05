@@ -27,7 +27,8 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 
 	protected static final String FILE = ARCHIVO + "Audiovisuales.txt";
 
-	protected static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1 };
+//	protected static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1 };
+	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1, 3, 25, 2 };
 
 	protected static ArrayList<Generos> generos = new ArrayList<Generos>();
 	protected static ArrayList<Actores> actores = new ArrayList<Actores>();
