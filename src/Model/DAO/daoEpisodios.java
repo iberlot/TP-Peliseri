@@ -4,9 +4,14 @@
 package Model.DAO;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import org.json.JSONArray;
+import org.json.simple.JSONObject;
 
 import Model.Actores;
 import Model.Episodios;
@@ -21,6 +26,7 @@ import funciones.Fechas;
 public class daoEpisodios implements Idao<Episodios> {
 
 	private static final String FILE = ARCHIVO + "Audiovisuales.txt";
+	private static final String DIREC = ARCHIVO + "Recomendaciones/Series/";
 
 	private static final int[] ANCHO = { 4, 25, 10, 2, 25, 250, 4, 10, 1, 3, 25, 2 };
 
@@ -87,6 +93,43 @@ public class daoEpisodios implements Idao<Episodios> {
 		}
 
 		return series;
+	}
+
+	public void crearJSON(Episodios episodio, String nombreArchivo) throws IOException, ParseException {
+		JSONObject myObject = new JSONObject();
+
+		// Cadenas de texto básicas
+		myObject.put("Empresa", episodio.getEmpresa());
+		myObject.put("Serie", episodio.getSerie());
+		myObject.put("Genero", episodio.getGenero().getDescripcion());
+
+		JSONArray pas = new JSONArray();
+
+		for (int i = 0; i < episodio.getActores().size(); i++) {
+			JSONObject actor = new JSONObject();
+
+			actor.put("Apellido", episodio.getActores().get(i).getApellido());
+			actor.put("Nombre", episodio.getActores().get(i).getNombre());
+			actor.put("Sexo", episodio.getActores().get(i).isSexo());
+
+			pas.put(actor);
+		}
+
+		myObject.put("Actores", pas);
+
+		myObject.put("Sinopsis", episodio.getSinopsis());
+		myObject.put("Temporada", episodio.getTemporada());
+		myObject.put("Episodio", episodio.getNroEpisodio());
+		myObject.put("Calificacion", episodio.promedioCalificacionesMenores());
+
+		File archivo = new File(DIREC + nombreArchivo);
+
+		FileWriter fw = new FileWriter(archivo.getAbsoluteFile(), true);
+
+		fw.append(myObject + "\t");
+
+		fw.append("\n");
+		fw.close();
 	}
 
 	/**

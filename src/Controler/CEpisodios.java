@@ -3,7 +3,11 @@
  */
 package Controler;
 
+import java.io.IOException;
+import java.text.ParseException;
+
 import Model.Episodios;
+import Model.DAO.daoEpisodios;
 import Vista.VEpisodios;
 import Vista.VPublicaciones;
 
@@ -102,5 +106,10 @@ public class CEpisodios extends CPublicaciones {
 		vistaEpisodios.mostrarElemento(modeloEpisodios.getAnio(), modeloEpisodios.getDuracion(),
 				modeloEpisodios.getNroEpisodio(), modeloEpisodios.getSerie(), modeloEpisodios.getTemporada());
 
+	}
+
+	public void recomendarSerieMenor(long documento) throws IOException, ParseException {
+		daoEpisodios dao = new daoEpisodios();
+		dao.crearJSON(modeloEpisodios, Long.toString(documento));
 	}
 }

@@ -1,6 +1,9 @@
 package Model;
 
+import java.text.ParseException;
 import java.util.Calendar;
+
+import funciones.Fechas;
 
 public class Suscriptores {
 
@@ -101,5 +104,9 @@ public class Suscriptores {
 		this.fechaNac = fechaNac;
 	}
 
+	public int getEdad() throws ParseException {
+		Calendar fActual = Calendar.getInstance();
+		return Fechas.diferencia_anios(getFechaNac(), fActual);
+	}
 
 }

@@ -1,6 +1,10 @@
 package Controler;
 
+import java.io.IOException;
+import java.text.ParseException;
+
 import Model.Peliculas;
+import Model.DAO.daoPeliculas;
 import Vista.VPeliculas;
 import Vista.VPublicaciones;
 
@@ -45,9 +49,15 @@ public class CPeliculas extends CPublicaciones {
 		modeloPeliculas.setDuracion(vistaPeliculas.pedirDuracion());
 	}
 
+	@Override
 	public void mostrarDatos() {
 		super.mostrarDatos();
 		vistaPeliculas.mostrarElemento(modeloPeliculas.getAnio(), modeloPeliculas.getDuracion());
+	}
+
+	public void recomendarPeliMayor(long documento) throws IOException, ParseException {
+		daoPeliculas dao = new daoPeliculas();
+		dao.crearJSON(modeloPeliculas, Long.toString(documento));
 	}
 
 }

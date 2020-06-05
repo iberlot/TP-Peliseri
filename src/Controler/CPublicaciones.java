@@ -128,4 +128,5 @@ public class CPublicaciones {
 		modeloPublicaciones.getCalificaciones().add(califica.get());
 		califica.grabar(modeloPublicaciones.getCodigo());
 	}
+
 }

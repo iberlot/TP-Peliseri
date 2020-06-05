@@ -70,8 +70,32 @@ public class CPeliSeri {
 	private daoPublicaciones daoPublicacion = new daoPublicaciones();
 	private daoSuscriptores daoSuscripcion = new daoSuscriptores();
 
-	public void recomendarSerie() {
+	public void recomendarSerie() throws ParseException, IOException {
+		CEpisodios conPe = new CEpisodios(buscarSerieMejorCalif(), new VEpisodios());
 
+		Iterator<Suscriptores> it = suscriptores.iterator();
+
+		while (it.hasNext()) {
+			Suscriptores susc = it.next();
+			if (susc.getEdad() < 35) {
+				conPe.recomendarSerieMenor(susc.getDocumento());
+			}
+
+		}
+	}
+
+	public void recomendarPelicula() throws ParseException, IOException {
+		CPeliculas conPe = new CPeliculas(buscarPeliMejorCalif(), new VPeliculas());
+
+		Iterator<Suscriptores> it = suscriptores.iterator();
+
+		while (it.hasNext()) {
+			Suscriptores susc = it.next();
+			if (susc.getEdad() < 35) {
+				conPe.recomendarPeliMayor(susc.getDocumento());
+			}
+
+		}
 	}
 
 	/**
@@ -109,8 +133,9 @@ public class CPeliSeri {
 	 * Retorna la pelicula con el mejor promedio de calificaciones
 	 * 
 	 * @return
+	 * @throws ParseException
 	 */
-	public Peliculas buscarPeliMejorCalif() {
+	public Peliculas buscarPeliMejorCalif() throws ParseException {
 		// XXX En realidad habria que usar algo como esto pero no se como se hace y ya
 		// no me da la cabeza =)
 		// Collections.sort(publicaciones);
@@ -119,10 +144,10 @@ public class CPeliSeri {
 		Iterator<Publicaciones> it = publicaciones.iterator();
 		Peliculas publiMostrar = new Peliculas();
 		while (it.hasNext()) {
-			Publicaciones pub = it.next();
+			Peliculas pub = (Peliculas) it.next();
 			if (pub instanceof Peliculas) {
-				if (pub.promedioCalificaciones() > publiMostrar.promedioCalificaciones()) {
-					publiMostrar = (Peliculas) pub;
+				if (pub.promedioCalificacionesMes() > publiMostrar.promedioCalificacionesMes()) {
+					publiMostrar = pub;
 				}
 			}
 		}

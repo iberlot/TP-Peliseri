@@ -52,10 +52,12 @@ public class Episodios extends Publicaciones implements Comparable<Episodios> {
 		float total = 0;
 		int cantidad = 0;
 		Calendar fActual = Calendar.getInstance();
+
 		for (Iterator<Calificaciones> iterator = calificaciones.iterator(); iterator.hasNext();) {
 			Calificaciones calificacion = iterator.next();
 			if (Fechas.diferenciaDiasTotal(calificacion.getFecha(), fActual) < 91) {
-				if (Fechas.diferencia_anios(calificacion.getSuscriptor().getFechaNac(), fActual) < 35) {
+
+				if (calificacion.getSuscriptor().getEdad() < 35) {
 					cantidad++;
 					total += calificacion.getCalificacion();
 				}

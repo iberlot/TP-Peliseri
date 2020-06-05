@@ -1,7 +1,11 @@
 package Model;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Iterator;
+
+import funciones.Fechas;
 
 public class Peliculas extends Publicaciones implements Comparable<Peliculas> {
 
@@ -73,4 +77,23 @@ public class Peliculas extends Publicaciones implements Comparable<Peliculas> {
 		return new Float(promedioCalificaciones()).compareTo(new Float(o.promedioCalificaciones()));
 	}
 
+	public float promedioCalificacionesMes() throws ParseException {
+		float total = 0;
+		int cantidad = 0;
+		Calendar fActual = Calendar.getInstance();
+
+		for (Iterator<Calificaciones> iterator = calificaciones.iterator(); iterator.hasNext();) {
+			Calificaciones calificacion = iterator.next();
+			if (Fechas.diferenciaDiasTotal(calificacion.getFecha(), fActual) < 30) {
+
+				cantidad++;
+				total += calificacion.getCalificacion();
+			}
+
+		}
+		if (cantidad > 0) {
+			total = total / cantidad;
+		}
+		return total;
+	}
 }
