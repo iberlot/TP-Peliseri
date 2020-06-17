@@ -1,6 +1,6 @@
 package Model.DAO;
 
-import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -174,7 +174,7 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 				publiqui.add(convertirJson_a_objeto(publicacionJson));
 
 				// FIXME arreglar luego. Tiene que mover el archivo a cargadas.
-				String[] parts = files[i].split("-");
+//				String[] parts = files[i].split("-");
 
 			}
 		}
@@ -274,23 +274,22 @@ public class daoPublicaciones implements Idao<Publicaciones> {
 		daoPublicaciones.generos = generos;
 	}
 
-	public void limpiarArchivo() throws IOException {
+	public void limpiarArchivo() throws Exception {
+
 //		BufferedWriter bw = new BufferedWriter(new FileWriter(FILE));
 //
 //		bw.write("");
 //
 //		bw.close();
-		File f = new File(FILE);
 
-		if (f.delete()) {
-
-			System.err.println("se limpio el archivo");
-		}
-		try {
-			f.createNewFile();
-		} catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
+		// XXX no me deja borrarlo
+//		File fichero = new File(FILE);
+//
+//		if (!fichero.delete()) {
+//			throw new Exception("El fichero no pudó ser borrado");
+//		}
+		FileOutputStream fso = new FileOutputStream(FILE);
+		fso.close();
 
 		daoActores dAct = new daoActores();
 		dAct.limpiarArchivo();

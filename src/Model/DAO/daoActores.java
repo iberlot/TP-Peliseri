@@ -3,8 +3,8 @@
  */
 package Model.DAO;
 
-import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -187,12 +187,8 @@ public class daoActores implements Idao<Actores> {
 	}
 
 	public void limpiarArchivo() throws IOException {
-		BufferedWriter bw = new BufferedWriter(new FileWriter(ACTORES));
-
-		bw.write("");
-
-		bw.close();
-
+		FileOutputStream fso = new FileOutputStream(ACTORES);
+		fso.close();
 	}
 
 }

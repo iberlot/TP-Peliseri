@@ -53,6 +53,8 @@ public class VPeliSeri implements iVistas {
 		System.out.println("14 - Recomendar serie a jovenes");
 		System.out.println("15 - Mayores sin calificacion");
 		System.out.println("16 - Siries para mayores");
+		System.out.println("17 - Generar calendario de pagos");
+		System.out.println("18 - Publicaciones caras");
 		System.out.println("66 - SALIR");
 
 		return Funciones.pedirEnteroPositivo("");
@@ -108,5 +110,14 @@ public class VPeliSeri implements iVistas {
 	public void mostrarSerie(String nombre, int temporada, int cantidadActores) {
 		System.out.println(nombre + " con " + temporada + " temporadas, y " + cantidadActores + " actores");
 
+	}
+
+	public float pedirValorPeliculas() {
+
+		return Funciones.pedirFloat("Ingrese el monto a abonar por las Peliculas");
+	}
+
+	public float pedirValorSerie() {
+		return Funciones.pedirFloat("Ingrese el monto a abonar por las Series");
 	}
 }

@@ -18,6 +18,7 @@ import Model.Peliculas;
 import Model.Publicaciones;
 import Model.Suscriptores;
 import Model.DAO.daoActores;
+import Model.DAO.daoCalendario;
 import Model.DAO.daoCalificaciones;
 import Model.DAO.daoGeneros;
 import Model.DAO.daoPublicaciones;
@@ -30,6 +31,7 @@ import Vista.VPeliSeri;
 import Vista.VPeliculas;
 import Vista.VPublicaciones;
 import Vista.VSuscriptores;
+import funciones.Fechas;
 
 /**
  * @author IVANB
@@ -57,12 +59,12 @@ public class CPeliSeri {
 	 */
 	private ArrayList<Suscriptores> suscriptores;
 
-	/**
-	 * Listado del calendario de pagos
-	 */
-	private ArrayList<Calendario> pagos;
-
 	private Calendar fActual = Calendar.getInstance();
+
+	float valorPelicla = 0;
+	float valorSerie = 0;
+
+	float montoTope = 0;
 
 	// FIXME esto no se pero creeria que tiene que estar en cada controler
 	private daoActores daoActor = new daoActores();
@@ -178,9 +180,78 @@ public class CPeliSeri {
 	 * mas
 	 * 
 	 * @return
+	 * @throws ParseException
+	 * @throws IOException
 	 */
-	public ArrayList<Publicaciones> publicacionesVencidas() {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void publicacionesVencidas() throws ParseException, IOException {
+		int cantidad = 0;
+		float totalPago = 0;
+
+		Calendar fechaPago = Calendar.getInstance();
+		fechaPago.set(fActual.get(Calendar.YEAR), fActual.get(Calendar.MONTH) + 1, fActual.get(Calendar.DATE));
+
+		ArrayList<Calendario> calenderios = new ArrayList<Calendario>();
+
+		Iterator<Publicaciones> it = publicaciones.iterator();
+
+		while (it.hasNext()) {
+			Publicaciones pub = it.next();
+
+			if (Fechas.diferenciaDiasTotal(pub.getFechaPubli(), fActual) < 30) {
+				cantidad++;
+
+				if (pub instanceof Peliculas) {
+
+					calenderios.add(new Calendario(cantidad, valorPelicla, fechaPago, pub));
+					totalPago += valorPelicla;
+				} else {
+					calenderios.add(new Calendario(cantidad, valorSerie, fechaPago, pub));
+					totalPago += valorSerie;
+				}
+
+				fechaPago.add(Calendar.DAY_OF_MONTH, 7);
+			} else if ((Fechas.diferenciaDiasTotal(pub.getFechaPubli(), fActual) < 395)
+					&& (Fechas.diferenciaDiasTotal(pub.getFechaPubli(), fActual) > 365)) {
+				cantidad++;
+
+				if (pub instanceof Peliculas) {
+					calenderios.add(new Calendario(cantidad, valorPelicla * 60 / 100, fechaPago, pub));
+					totalPago += valorPelicla * 60 / 100;
+				} else {
+					float valor = 0;
+					valor = (cantidadEpisodiosTemporadaSerie((Episodios) pub) > 12) ? valorSerie * 30 / 100
+							: valorSerie * 45 / 100;
+					calenderios.add(new Calendario(cantidad, valor, fechaPago, pub));
+					totalPago += valor;
+				}
+				fechaPago.add(Calendar.DAY_OF_MONTH, 7);
+			}
+		}
+
+		daoCalendario dao = new daoCalendario();
+		dao.cargarTodos(calenderios, totalPago);
+	}
+
+	private int cantidadEpisodiosTemporadaSerie(Episodios episodio) {
+
+		Iterator<Publicaciones> it = publicaciones.iterator();
+		int cantidadEpisodios = 0;
+		int maximaTemporada = 0;
+		while (it.hasNext()) {
+			Publicaciones pub = it.next();
+			if (((Episodios) pub).getSerie().equalsIgnoreCase(episodio.getSerie())) {
+				maximaTemporada = (((Episodios) pub).getTemporada() > maximaTemporada)
+						? ((Episodios) pub).getTemporada()
+						: maximaTemporada;
+
+				if (((Episodios) pub).getTemporada() == episodio.getTemporada()) {
+					cantidadEpisodios = (((Episodios) pub).getNroEpisodio() > cantidadEpisodios)
+							? ((Episodios) pub).getNroEpisodio()
+							: cantidadEpisodios;
+				}
+			}
+		}
+		return cantidadEpisodios;
 	}
 
 	/**
@@ -446,9 +517,47 @@ public class CPeliSeri {
 	/**
 	 * 
 	 * @return
+	 * @throws ParseException
+	 * @throws IOException
 	 */
-	public Publicaciones pelisPobres() {
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void pelisPobres() throws ParseException, IOException {
+
+		Iterator<Publicaciones> it = publicaciones.iterator();
+
+		while (it.hasNext()) {
+			Publicaciones pub = it.next();
+			boolean mostrar = false;
+
+			if ((Fechas.diferenciaDiasTotal(pub.getFechaPubli(), fActual) < 395)
+					&& (Fechas.diferenciaDiasTotal(pub.getFechaPubli(), fActual) > 365)) {
+
+				if (pub instanceof Peliculas) {
+
+					if ((valorPelicla * 60 / 100) > (montoTope + (montoTope * 10 / 100))) {
+						mostrar = true;
+					}
+
+				} else {
+					float valor = 0;
+					valor = (cantidadEpisodiosTemporadaSerie((Episodios) pub) > 12) ? valorSerie * 30 / 100
+							: valorSerie * 45 / 100;
+
+					if (valor > (montoTope + (montoTope * 10 / 100))) {
+						mostrar = true;
+					}
+				}
+				if (mostrar == true) {
+					if (pub.promedioCalificaciones() < 3) {
+						VPublicaciones vite = new VPublicaciones();
+
+						vite.mostrarNombre(pub.getNombre());
+						vite.mostrarGenero(pub.getGenero().getDescripcion());
+
+					}
+				}
+			}
+		}
+
 	}
 
 	/**
@@ -555,6 +664,15 @@ public class CPeliSeri {
 			break;
 		case 16:
 			seriesParaMayores();
+			break;
+		case 17:
+			pelisPobres();
+			break;
+		case 18:
+			publicacionesVencidas();
+			break;
+		case 20:
+			daoPublicacion.limpiarArchivo();
 			break;
 		case 66:
 			System.exit(0);
@@ -791,5 +909,54 @@ public class CPeliSeri {
 			break;
 
 		}
+	}
+
+	public void pedirValores() {
+		VPeliSeri vista = new VPeliSeri();
+
+		valorPelicla = vista.pedirValorPeliculas();
+		valorSerie = vista.pedirValorSerie();
+	}
+
+	/**
+	 * @return El valor de valorPelicla, es un dato de tipo float
+	 */
+	public float getValorPelicla() {
+		return valorPelicla;
+	}
+
+	/**
+	 * @param valorPelicla Que se seteara en valorPelicla
+	 */
+	public void setValorPelicla(float valorPelicla) {
+		this.valorPelicla = valorPelicla;
+	}
+
+	/**
+	 * @return El valor de valorSerie, es un dato de tipo float
+	 */
+	public float getValorSerie() {
+		return valorSerie;
+	}
+
+	/**
+	 * @param valorSerie Que se seteara en valorSerie
+	 */
+	public void setValorSerie(float valorSerie) {
+		this.valorSerie = valorSerie;
+	}
+
+	/**
+	 * @return El valor de montoTope, es un dato de tipo float
+	 */
+	public float getMontoTope() {
+		return montoTope;
+	}
+
+	/**
+	 * @param montoTope Que se seteara en montoTope
+	 */
+	public void setMontoTope(float montoTope) {
+		this.montoTope = montoTope;
 	}
 }

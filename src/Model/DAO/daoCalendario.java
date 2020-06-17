@@ -13,7 +13,7 @@ public class daoCalendario implements Idao<Calendario> {
 	private static final String FILE = ARCHIVO + "CronogramaPagos";
 
 	private Calendar fActial = Calendar.getInstance();
-	
+
 	public void crearNuevoArchivo(int cantidad, float totalPagar) throws IOException {
 
 		File file = new File(getNombreArchivo());
@@ -41,28 +41,38 @@ public class daoCalendario implements Idao<Calendario> {
 		info[0] = dato.getFechaPago().get(Calendar.DATE) + "/" + (dato.getFechaPago().get(Calendar.MONTH) + 1) + "/"
 				+ dato.getFechaPago().get(Calendar.YEAR);
 		info[1] = dato.getPulic().getNombre();
-		info[2] = dato.getPulic().getFechaPubli().get(Calendar.DATE) + "/" + (dato.getPulic().getFechaPubli().get(Calendar.MONTH) + 1) + "/"
+		info[2] = dato.getPulic().getFechaPubli().get(Calendar.DATE) + "/"
+				+ (dato.getPulic().getFechaPubli().get(Calendar.MONTH) + 1) + "/"
 				+ dato.getPulic().getFechaPubli().get(Calendar.YEAR);
 		info[3] = Double.toString(dato.calculaMonto());
-		
+
 		Archivos.escribeCamposPipe(arch, info);
+	}
+
+	public void cargarTodos(ArrayList<Calendario> cale, float totalPagar) throws IOException {
+		crearNuevoArchivo(cale.size(), totalPagar);
+
+		for (Calendario calendario : cale) {
+			cargar_archivo(calendario);
+		}
 	}
 
 	@Override
 	public Calendario conv_a_objeto(String[] datos) throws Exception {
 		// TODO Auto-generated method stub
-		// XXX Creo que ahora no es necesario asi que veo si me alcanza el tiempo para implementarlo mas tarde
+		// XXX Creo que ahora no es necesario asi que veo si me alcanza el tiempo para
+		// implementarlo mas tarde
 		return null;
 	}
 
 	@Override
 	public ArrayList<Calendario> recuperar_datos_archivo() throws Exception {
 		// TODO Auto-generated method stub
-		// XXX Creo que ahora no es necesario asi que veo si me alcanza el tiempo para implementarlo mas tarde
+		// XXX Creo que ahora no es necesario asi que veo si me alcanza el tiempo para
+		// implementarlo mas tarde
 		return null;
 	}
 
-	
 	private String getNombreArchivo() {
 		return FILE + fActial.get(Calendar.MONTH) + fActial.get(Calendar.YEAR) + ".txt";
 	}

@@ -99,7 +99,7 @@ public class CPublicaciones {
 		dao.cargar_archivo(modeloPublicaciones);
 	}
 
-	public void limpiarArchivo() throws IOException {
+	public void limpiarArchivo() throws Exception {
 
 		daoPublicaciones dao = new daoPublicaciones();
 		dao.limpiarArchivo();

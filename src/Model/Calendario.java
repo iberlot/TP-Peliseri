@@ -63,27 +63,6 @@ public class Calendario implements iMontos {
 		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
-	// FIXME No me gusta la implementacion de esta interfaz =( la quitaria y le
-	// preguntaria a angy si con las interfaz del dao y la vista alcanza
-	@Override
-	public int alto() {
-		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-																		// Tools | Templates.
-	}
-
-	@Override
-	public int medio() {
-		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-																		// Tools | Templates.
-	}
-
-	@Override
-	public int bajo() {
-		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-																		// Tools | Templates.
-	}
-
-	@Override
 	public double calculaMonto() {
 		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
 																		// Tools | Templates.

@@ -19,12 +19,11 @@ public class Peliseri {
 
 		try {
 			CPeliSeri base = new CPeliSeri();
-//
-//			base.setOPERADOR(Funciones.pedirString("Ingrese el operador: "));
-//
+
+			base.setMontoTope(Float.parseFloat(args[0]));
 			base.inicializar_archivos();
-//			System.out.println("Chupala2");
-//
+
+			base.pedirValores();
 			base.inicio();
 
 		} catch (Exception e) {
