@@ -25,14 +25,14 @@ public class Calificaciones {
 	private Calendar fecha;
 
 	/**
-	 * Constructor de la clase 
+	 * Constructor de la clase
 	 *
 	 */
 	public Calificaciones() {
 	}
 
 	/**
-	 * Constructor de la clase 
+	 * Constructor de la clase
 	 *
 	 * @param calificacion
 	 * @param descripcion
@@ -107,6 +107,5 @@ public class Calificaciones {
 	public void setFecha(Calendar fecha) {
 		this.fecha = fecha;
 	}
-
 
 }

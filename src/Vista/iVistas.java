@@ -6,9 +6,10 @@ package Vista;
 import java.io.IOException;
 
 /**
- * interfaz de las vistas para asegurarnos que todas tengan el conjunto basico de funciones.
+ * interfaz de las vistas para asegurarnos que todas tengan el conjunto basico
+ * de funciones.
  * 
- * @author iberlot <@> 
+ * @author iberlot <@>
  *
  */
 public interface iVistas {
@@ -38,8 +39,8 @@ public interface iVistas {
 	boolean modificar() throws IOException;
 
 	/**
-	 * Muestra por pantalla un string que contiene la informacion del objeto.
-	 * Ideal para utilizar junto a la funcion toString()
+	 * Muestra por pantalla un string que contiene la informacion del objeto. Ideal
+	 * para utilizar junto a la funcion toString()
 	 * 
 	 * @param dato
 	 * @throws IOException
