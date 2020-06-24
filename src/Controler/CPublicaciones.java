@@ -3,7 +3,6 @@ package Controler;
 import java.io.IOException;
 import java.util.Calendar;
 
-import Model.Calificaciones;
 import Model.Publicaciones;
 import Model.Suscriptores;
 import Model.DAO.daoPublicaciones;
@@ -44,10 +43,6 @@ public class CPublicaciones {
 
 	public void mostrarEmpresa() {
 		vistaPublicaciones.mostrarEmpresa(modeloPublicaciones.getEmpresa());
-	}
-
-	public void setEmpresa() {
-		modeloPublicaciones.setEmpresa(vistaPublicaciones.pedirEmpresa());
 	}
 
 	public Calendar getFechaPubli() {
@@ -119,13 +114,13 @@ public class CPublicaciones {
 	}
 
 	private void cargarNuevaCalificacion(Suscriptores suscriptores) throws IOException {
-		CCalificaciones califica = new CCalificaciones(new Calificaciones(), new VCalificaciones());
+		CCalificaciones califica = new CCalificaciones(modeloPublicaciones.nuevoComentario(), new VCalificaciones());
 		califica.setSuscriptor(suscriptores);
 		califica.setFeca();
 		califica.setCalificacion();
 		califica.setDescripcion();
 
-		modeloPublicaciones.getCalificaciones().add(califica.get());
+//		modeloPublicaciones.getCalificaciones().add(califica.get());
 		califica.grabar(modeloPublicaciones.getCodigo());
 	}
 

@@ -23,8 +23,8 @@ public class Episodios extends Publicaciones implements Comparable<Episodios> {
 	}
 
 	public Episodios(int codigo, String nombre, Generos genero, String sinopsis, ArrayList<Actores> actores,
-			String empresa, String publicacion, Calendar fechaPubli, int nroEpisodio, String serie, int temporada) {
-		super(codigo, nombre, genero, sinopsis, actores, empresa, fechaPubli);
+			String publicacion, Calendar fechaPubli, int nroEpisodio, String serie, int temporada) {
+		super(codigo, nombre, genero, sinopsis, actores, fechaPubli);
 
 		this.serie = serie;
 		this.nroEpisodio = nroEpisodio;
@@ -34,7 +34,7 @@ public class Episodios extends Publicaciones implements Comparable<Episodios> {
 	public Episodios(int anio, int duracion, int codigo, String nombre, Generos genero, String sinopsis, String empresa,
 			Calendar fechaPubli, int nroEpisodio, String serie, int temporada) {
 
-		super(codigo, nombre, genero, sinopsis, empresa, fechaPubli);
+		super(codigo, nombre, genero, sinopsis, fechaPubli);
 
 		this.serie = serie;
 		this.nroEpisodio = nroEpisodio;
@@ -142,6 +142,58 @@ public class Episodios extends Publicaciones implements Comparable<Episodios> {
 	@Override
 	public int compareTo(Episodios o) {
 		return new Integer(temporada).compareTo(new Integer(o.getTemporada()));
+	}
+
+	@Override
+	public boolean comprobarIguales(Publicaciones publicacion) {
+
+		if (publicacion.getCodigo() != this.codigo) {
+			return false;
+		}
+
+		if (!publicacion.getNombre().equalsIgnoreCase(this.nombre)) {
+			return false;
+		}
+
+		if (!publicacion.getGenero().equals(this.genero)) {
+			return false;
+		}
+
+		if (!publicacion.getSinopsis().equalsIgnoreCase(this.sinopsis)) {
+			return false;
+		}
+//
+//		for (Calificaciones calificacion : calificaciones) {
+//
+//		}
+//		protected ArrayList<Calificaciones> calificaciones;
+//
+//		for (Actores actores2 : actores) {
+//
+//		}
+//		protected ArrayList<Actores> actores;
+
+		if (!publicacion.getFechaPubli().equals(this.fechaPubli)) {
+			return false;
+		}
+
+		if (((Episodios) publicacion).getTemporada() != this.temporada) {
+			return false;
+
+		}
+		if (((Episodios) publicacion).getNroEpisodio() != this.nroEpisodio) {
+			return false;
+
+		}
+		if (((Episodios) publicacion).getAnio() != this.anio) {
+			return false;
+
+		}
+		if (((Episodios) publicacion).getDuracion() != this.duracion) {
+			return false;
+
+		}
+		return true;
 	}
 
 }

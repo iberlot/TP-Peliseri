@@ -18,50 +18,48 @@ public abstract class Publicaciones {
 
 	protected ArrayList<Actores> actores;
 
-	protected String empresa;
+	protected static final String EMPRESA = "PeliSeri";
 
 	protected Calendar fechaPubli;
+
+	protected Calendario fPago;
 
 	public Publicaciones() {
 	}
 
-	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis, String empresa,
+	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis, Calendar fechaPubli) {
+		this.codigo = codigo;
+		this.nombre = nombre;
+		this.genero = genero;
+		this.sinopsis = sinopsis;
+		this.fechaPubli = fechaPubli;
+	}
+
+	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis, ArrayList<Actores> actores,
 			Calendar fechaPubli) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.genero = genero;
 		this.sinopsis = sinopsis;
-		this.empresa = empresa;
-		this.fechaPubli = fechaPubli;
-	}
-
-	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis, ArrayList<Actores> actores,
-			String empresa, Calendar fechaPubli) {
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.genero = genero;
-		this.sinopsis = sinopsis;
 		this.actores = actores;
-		this.empresa = empresa;
 		this.fechaPubli = fechaPubli;
 	}
 
 	public Publicaciones(int codigo, String nombre, Generos genero, String sinopsis,
-			ArrayList<Calificaciones> calificaciones, ArrayList<Actores> actores, String empresa, Calendar fechaPubli) {
+			ArrayList<Calificaciones> calificaciones, ArrayList<Actores> actores, Calendar fechaPubli) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.genero = genero;
 		this.sinopsis = sinopsis;
 		this.calificaciones = calificaciones;
 		this.actores = actores;
-		this.empresa = empresa;
 		this.fechaPubli = fechaPubli;
 	}
 
 	@Override
 	public String toString() {
 		return "Publicaciones{" + "codigo=" + codigo + ", nombre=" + nombre + ", genero=" + genero + ", sinopsis="
-				+ sinopsis + ", clasificaciones=" + calificaciones + ", actores=" + actores + ", empresa=" + empresa
+				+ sinopsis + ", clasificaciones=" + calificaciones + ", actores=" + actores + ", empresa=" + EMPRESA
 				+ ", fechaPubli=" + fechaPubli + '}';
 	}
 
@@ -173,15 +171,15 @@ public abstract class Publicaciones {
 	 * @return El valor de empresa, es un dato de tipo String
 	 */
 	public String getEmpresa() {
-		return empresa;
+		return EMPRESA;
 	}
 
-	/**
-	 * @param empresa Que se seteara en empresa
-	 */
-	public void setEmpresa(String empresa) {
-		this.empresa = empresa;
-	}
+//	/**
+//	 * @param empresa Que se seteara en empresa
+//	 */
+//	public void setEmpresa(String empresa) {
+//		this.empresa = empresa;
+//	}
 
 	/**
 	 * @return El valor de fechaPubli, es un dato de tipo Calendar
@@ -197,4 +195,34 @@ public abstract class Publicaciones {
 		this.fechaPubli = fechaPubli;
 	}
 
+	/**
+	 * Esto seria una especie de implementacion de equals pero por parametros.
+	 * comprueba que los dos objetos tengan los mismos atributos.
+	 *
+	 * @param publicacion
+	 */
+	public abstract boolean comprobarIguales(Publicaciones publicacion);
+
+	/**
+	 * @return el dato de fPago
+	 */
+	public Calendario getfPago() {
+		return fPago;
+	}
+
+	/**
+	 * @param fPago para cargar en fPago
+	 */
+	public void setfPago(Calendario fPago) {
+		this.fPago = fPago;
+	}
+
+	public void agregarFPago(int codigoF, float monto, Calendar fechaPago) {
+		this.fPago = new Calendario(codigoF, monto, fechaPago);
+	}
+
+	public Calificaciones nuevoComentario() {
+		this.calificaciones.add(new Calificaciones());
+		return this.calificaciones.get(calificaciones.size() - 1);
+	}
 }

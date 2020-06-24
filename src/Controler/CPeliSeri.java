@@ -10,7 +10,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Model.Actores;
-import Model.Calendario;
 import Model.Calificaciones;
 import Model.Episodios;
 import Model.Generos;
@@ -59,6 +58,9 @@ public class CPeliSeri {
 	 */
 	private ArrayList<Suscriptores> suscriptores;
 
+	/**
+	 * Fecha actual para usar en las comparaciones
+	 */
 	private Calendar fActual = Calendar.getInstance();
 
 	float valorPelicla = 0;
@@ -102,7 +104,7 @@ public class CPeliSeri {
 
 	/**
 	 * Retorna la serie con el mejor promedio de calificaciones
-	 * 
+	 *
 	 * @return
 	 * @throws ParseException
 	 */
@@ -133,7 +135,7 @@ public class CPeliSeri {
 
 	/**
 	 * Retorna la pelicula con el mejor promedio de calificaciones
-	 * 
+	 *
 	 * @return
 	 * @throws ParseException
 	 */
@@ -159,7 +161,7 @@ public class CPeliSeri {
 
 	/**
 	 * Recorre los suscriptores y les recomienda la publicacion que les corresponda
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	public void recomendar() throws IOException {
@@ -178,7 +180,7 @@ public class CPeliSeri {
 	/**
 	 * Retorna el listado de las publicaciones cuyo pago se realizo hace un año o
 	 * mas
-	 * 
+	 *
 	 * @return
 	 * @throws ParseException
 	 * @throws IOException
@@ -187,49 +189,53 @@ public class CPeliSeri {
 		int cantidad = 0;
 		float totalPago = 0;
 
-		Calendar fechaPago = Calendar.getInstance();
-		fechaPago.set(fActual.get(Calendar.YEAR), fActual.get(Calendar.MONTH) + 1, fActual.get(Calendar.DATE));
-
-		ArrayList<Calendario> calenderios = new ArrayList<Calendario>();
+		// FIXME la siguiente no es la opcion mas optima pero si la mas rapida de
+		// desarrollar en estos momentos
+		ArrayList<Publicaciones> pubPagar = new ArrayList<Publicaciones>();
 
 		Iterator<Publicaciones> it = publicaciones.iterator();
 
 		while (it.hasNext()) {
 			Publicaciones pub = it.next();
 
+			Calendar fechaPago = Calendar.getInstance();
+			fechaPago.set(fActual.get(Calendar.YEAR), fActual.get(Calendar.MONTH) + 1, fActual.get(Calendar.DATE));
+
+			fechaPago.add(Calendar.DAY_OF_MONTH, (7 * cantidad));
+
 			if (Fechas.diferenciaDiasTotal(pub.getFechaPubli(), fActual) < 30) {
+
 				cantidad++;
 
 				if (pub instanceof Peliculas) {
-
-					calenderios.add(new Calendario(cantidad, valorPelicla, fechaPago, pub));
+					pub.agregarFPago(cantidad, valorPelicla, fechaPago);
 					totalPago += valorPelicla;
 				} else {
-					calenderios.add(new Calendario(cantidad, valorSerie, fechaPago, pub));
+					pub.agregarFPago(cantidad, valorSerie, fechaPago);
 					totalPago += valorSerie;
 				}
-
-				fechaPago.add(Calendar.DAY_OF_MONTH, 7);
+				pubPagar.add(pub);
 			} else if ((Fechas.diferenciaDiasTotal(pub.getFechaPubli(), fActual) < 395)
 					&& (Fechas.diferenciaDiasTotal(pub.getFechaPubli(), fActual) > 365)) {
 				cantidad++;
 
 				if (pub instanceof Peliculas) {
-					calenderios.add(new Calendario(cantidad, valorPelicla * 60 / 100, fechaPago, pub));
+					pub.agregarFPago(cantidad, valorPelicla * 60 / 100, fechaPago);
 					totalPago += valorPelicla * 60 / 100;
 				} else {
 					float valor = 0;
 					valor = (cantidadEpisodiosTemporadaSerie((Episodios) pub) > 12) ? valorSerie * 30 / 100
 							: valorSerie * 45 / 100;
-					calenderios.add(new Calendario(cantidad, valor, fechaPago, pub));
+					pub.agregarFPago(cantidad, valor, fechaPago);
 					totalPago += valor;
 				}
-				fechaPago.add(Calendar.DAY_OF_MONTH, 7);
+
+				pubPagar.add(pub);
 			}
 		}
 
 		daoCalendario dao = new daoCalendario();
-		dao.cargarTodos(calenderios, totalPago);
+		dao.cargarTodos(pubPagar, totalPago);
 	}
 
 	private int cantidadEpisodiosTemporadaSerie(Episodios episodio) {
@@ -256,10 +262,11 @@ public class CPeliSeri {
 
 	/**
 	 * Agrega una publicacion a la lista
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	public void agregarPublicacion() throws Exception {
+
 		ArrayList<Publicaciones> pubic = daoPublicacion.conv_a_objeto_dire();
 
 		daoPublicacion.limpiarArchivo();
@@ -279,6 +286,10 @@ public class CPeliSeri {
 					} else {
 						if (publicacion.getCodigo() != publicaciones.get(i).getCodigo()) {
 							agregar = true;
+						} else {
+							// XXX aca tiene que comprobar que los datos de la publicacion en el json sean
+							// iguales pero diferentes y cambiar los que correspondan
+							comprobarYUpdetear(publicacion);
 						}
 					}
 				}
@@ -295,6 +306,22 @@ public class CPeliSeri {
 			CPublicaciones controlerPublicaciones = new CPublicaciones(publica, new VPublicaciones());
 
 			controlerPublicaciones.grabar();
+		}
+	}
+
+	/**
+	 * @param publicacion
+	 *
+	 */
+	private void comprobarYUpdetear(Publicaciones publicacion) {
+		for (int i = 0; i < publicaciones.size(); i++) {
+			if (!publicacion.getNombre().equalsIgnoreCase(publicaciones.get(i).getNombre())) {
+				if (publicacion.getCodigo() == publicaciones.get(i).getCodigo()) {
+					if (publicaciones.get(i).comprobarIguales(publicacion) == false) {
+						publicaciones.set(i, publicacion);
+					}
+				}
+			}
 		}
 	}
 
@@ -385,7 +412,7 @@ public class CPeliSeri {
 
 	/**
 	 * @throws ParseException
-	 * 
+	 *
 	 */
 	public void mayoresSinClasificacion() throws ParseException {
 
@@ -454,7 +481,7 @@ public class CPeliSeri {
 
 	/**
 	 * @throws ParseException
-	 * 
+	 *
 	 */
 	public void seriesParaMayores() throws ParseException {
 
@@ -491,7 +518,7 @@ public class CPeliSeri {
 	/**
 	 * Cuenta todos aquellos autores que trabajan en publicaciones de un solo
 	 * genero.
-	 * 
+	 *
 	 * @return
 	 */
 	public void actoresTematicos() {
@@ -515,7 +542,7 @@ public class CPeliSeri {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 * @throws ParseException
 	 * @throws IOException
@@ -593,9 +620,15 @@ public class CPeliSeri {
 		}
 	}
 
+	/**
+	 * Carga en memoria los archivos de datos
+	 * 
+	 * @throws Exception
+	 */
 	public void inicializar_archivos() throws Exception {
 		generos = daoGenero.recuperar_datos_archivo();
-		actores = daoActor.recuperar_datos_archivo();
+//		actores = daoActor.recuperar_datos_archivo();
+		actores = daoActor.recuperar_datos_archivo_base();
 		suscriptores = daoSuscripcion.recuperar_datos_archivo();
 		Model.DAO.daoCalificaciones.setSuscriptores(suscriptores);
 		Model.DAO.daoPublicaciones.setGeneros(generos);
@@ -815,6 +848,11 @@ public class CPeliSeri {
 		menu_ABM_generos();
 	}
 
+	/**
+	 * Actualia los datos del genero.
+	 *
+	 * @throws Exception
+	 */
 	private void updateGenero() throws Exception {
 		VGeneros vistaGenero = new VGeneros();
 		int id = VPeliSeri.pedirIdGenero(generos);
@@ -835,6 +873,11 @@ public class CPeliSeri {
 		}
 	}
 
+	/**
+	 * Crea un nuevo genero
+	 *
+	 * @throws IOException
+	 */
 	private void altaGenero() throws IOException {
 		VGeneros vistaGenero = new VGeneros();
 
@@ -854,6 +897,11 @@ public class CPeliSeri {
 		}
 	}
 
+	/**
+	 * Elimina un genero del listado.
+	 *
+	 * @throws IOException
+	 */
 	private void bajaGenero() throws IOException {
 		VGeneros vistaGenero = new VGeneros();
 		int id = VPeliSeri.pedirIdGenero(generos);
@@ -871,6 +919,11 @@ public class CPeliSeri {
 		}
 	}
 
+	/**
+	 * Dependiendo la opcion muestra el listado de los datos cargados en el sistema.
+	 *
+	 * @param opcion
+	 */
 	private void listarListas(int opcion) {
 		switch (opcion) {
 		case 1:
@@ -911,6 +964,10 @@ public class CPeliSeri {
 		}
 	}
 
+	/**
+	 * Pide el ingreso por teclado de los valores correspondientes a las peliculas y
+	 * a las series para poder realiar el calendatio de pagos
+	 */
 	public void pedirValores() {
 		VPeliSeri vista = new VPeliSeri();
 

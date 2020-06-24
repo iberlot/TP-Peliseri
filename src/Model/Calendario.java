@@ -25,11 +25,6 @@ public class Calendario implements iMontos {
 	private Calendar fechaPago;
 
 	/**
-	 * Publicacion que se va a abonar
-	 */
-	private Publicaciones pulic;
-
-	/**
 	 * Constructor de la clase
 	 */
 	public Calendario() {
@@ -37,23 +32,21 @@ public class Calendario implements iMontos {
 
 	/**
 	 * Constructor de la clase con los parametros correspondientes.
-	 * 
+	 *
 	 * @param codigoID
 	 * @param montoTotal
 	 * @param fechaPago
 	 * @param pulic
 	 */
-	public Calendario(int codigoID, float montoTotal, Calendar fechaPago, Publicaciones pulic) {
+	public Calendario(int codigoID, float montoTotal, Calendar fechaPago) {
 		this.codigoID = codigoID;
 		this.montoTotal = montoTotal;
 		this.fechaPago = fechaPago;
-		this.pulic = pulic;
 	}
 
 	@Override
 	public String toString() {
-		return "Calendario{" + "codigoID=" + codigoID + ", montoTotal=" + montoTotal + ", fechaPago=" + fechaPago
-				+ ", pulic=" + pulic + '}';
+		return "Calendario{" + "codigoID=" + codigoID + ", montoTotal=" + montoTotal + ", fechaPago=" + fechaPago + '}';
 	}
 
 	/**
@@ -122,20 +115,6 @@ public class Calendario implements iMontos {
 	 */
 	public void setFechaPago(Calendar fechaPago) {
 		this.fechaPago = fechaPago;
-	}
-
-	/**
-	 * @return the pulic
-	 */
-	public Publicaciones getPulic() {
-		return pulic;
-	}
-
-	/**
-	 * @param pulic the pulic to set
-	 */
-	public void setPulic(Publicaciones pulic) {
-		this.pulic = pulic;
 	}
 
 	public float mostMontoTotal() {

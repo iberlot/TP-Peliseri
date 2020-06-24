@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package Model.DAO;
 
@@ -20,7 +20,7 @@ import funciones.Archivos;
 
 /**
  * DAO relacionado a los autores
- * 
+ *
  * @author IVANB
  *
  */
@@ -29,7 +29,7 @@ public class daoActores implements Idao<Actores> {
 	/**
 	 * Directorio donde se encontraran los archivos
 	 */
-	private final String DIR = ARCHIVO + "Autores/";
+	private final String DIR = ARCHIVO + "Actores/";
 
 	private static final String ACTORES = ARCHIVO + "AudiovisualesActores.txt";
 
@@ -73,9 +73,27 @@ public class daoActores implements Idao<Actores> {
 		return actores;
 	}
 
+	public ArrayList<Actores> recuperar_datos_archivo_base() throws Exception {
+
+		ArrayList<Actores> actores = new ArrayList<>();
+
+		ArrayList<String[]> act = funciones.Archivos.traeLineasParceadas(ACTORES, "\t");
+
+		for (String[] datos : act) {
+			if (Integer.parseInt(datos[0]) == publicacion) {
+				Actores a = conv_a_objeto(datos);
+
+				actores.add(a);
+			}
+
+		}
+
+		return actores;
+	}
+
 	/**
 	 * Recupera un listado unico de los autores
-	 * 
+	 *
 	 * @return
 	 * @throws Exception
 	 */
@@ -83,7 +101,7 @@ public class daoActores implements Idao<Actores> {
 
 		ArrayList<Actores> actores = new ArrayList<>();
 
-		ArrayList<String[]> act = funciones.Archivos.traeLineasParceadas(ACTORES, "\t");
+		ArrayList<String[]> act = funciones.Archivos.traeLineasParceadas(ARCHIVO + "Actores.txt", "\t");
 
 		for (String[] datos : act) {
 			Actores a = conv_a_objeto(datos);
@@ -100,7 +118,7 @@ public class daoActores implements Idao<Actores> {
 
 	/**
 	 * Importante: Es para el uso exclusivo de un actor por archivo
-	 * 
+	 *
 	 * @param nombreArchivo nombre del archivo que se va a abrir, el archivo debe
 	 *                      encontrarse en el directorio definido.
 	 * @return
@@ -123,7 +141,7 @@ public class daoActores implements Idao<Actores> {
 
 	/**
 	 * Tansforma un objeto de tipo json en uno de actores
-	 * 
+	 *
 	 * @param a
 	 * @return
 	 */
@@ -138,7 +156,7 @@ public class daoActores implements Idao<Actores> {
 
 	/**
 	 * En base a los parametros de un actor genera un objeto de tipo JSON
-	 * 
+	 *
 	 * @param actor
 	 * @return
 	 */
@@ -154,7 +172,7 @@ public class daoActores implements Idao<Actores> {
 
 	/**
 	 * Agrega un json pasado a archivo
-	 * 
+	 *
 	 * @param nombreArchivo nombre del archivo que se va a abrir, el archivo debe
 	 *                      encontrarse en el directorio definido.
 	 * @param autor

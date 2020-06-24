@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import Model.Calendario;
+import Model.Publicaciones;
 import funciones.Archivos;
 
 public class daoCalendario implements Idao<Calendario> {
@@ -31,29 +32,28 @@ public class daoCalendario implements Idao<Calendario> {
 		Archivos.escribeCamposPipe(file, info);
 	}
 
-	@Override
-	public void cargar_archivo(Calendario dato) throws IOException {
+	public void cargar_archivo(Publicaciones dato) throws IOException {
 
 		File arch = new File(getNombreArchivo());
 //		fecha de pago, nombre de la publicación, fecha de la publicación, monto a abonar,
 		String[] info = new String[4];
 
-		info[0] = dato.getFechaPago().get(Calendar.DATE) + "/" + (dato.getFechaPago().get(Calendar.MONTH) + 1) + "/"
-				+ dato.getFechaPago().get(Calendar.YEAR);
-		info[1] = dato.getPulic().getNombre();
-		info[2] = dato.getPulic().getFechaPubli().get(Calendar.DATE) + "/"
-				+ (dato.getPulic().getFechaPubli().get(Calendar.MONTH) + 1) + "/"
-				+ dato.getPulic().getFechaPubli().get(Calendar.YEAR);
-		info[3] = Double.toString(dato.calculaMonto());
+		info[0] = dato.getfPago().getFechaPago().get(Calendar.DATE) + "/"
+				+ (dato.getfPago().getFechaPago().get(Calendar.MONTH) + 1) + "/"
+				+ dato.getfPago().getFechaPago().get(Calendar.YEAR);
+		info[1] = dato.getNombre();
+		info[2] = dato.getFechaPubli().get(Calendar.DATE) + "/" + (dato.getFechaPubli().get(Calendar.MONTH) + 1) + "/"
+				+ dato.getFechaPubli().get(Calendar.YEAR);
+		info[3] = Double.toString(dato.getfPago().calculaMonto());
 
 		Archivos.escribeCamposPipe(arch, info);
 	}
 
-	public void cargarTodos(ArrayList<Calendario> cale, float totalPagar) throws IOException {
-		crearNuevoArchivo(cale.size(), totalPagar);
+	public void cargarTodos(ArrayList<Publicaciones> publ, float totalPagar) throws IOException {
+		crearNuevoArchivo(publ.size(), totalPagar);
 
-		for (Calendario calendario : cale) {
-			cargar_archivo(calendario);
+		for (Publicaciones publicacion : publ) {
+			cargar_archivo(publicacion);
 		}
 	}
 
@@ -75,5 +75,10 @@ public class daoCalendario implements Idao<Calendario> {
 
 	private String getNombreArchivo() {
 		return FILE + fActial.get(Calendar.MONTH) + fActial.get(Calendar.YEAR) + ".txt";
+	}
+
+	@Override
+	public void cargar_archivo(Calendario dato) {
+//		throw new Exception("Metodo no implementado");
 	}
 }

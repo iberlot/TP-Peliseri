@@ -17,21 +17,21 @@ public class Peliculas extends Publicaciones implements Comparable<Peliculas> {
 	}
 
 	public Peliculas(int codigo, String nombre, Generos genero, String sinopsis, ArrayList<Actores> actores,
-			String empresa, String publicacion, Calendar fechaPubli) {
-		super(codigo, nombre, genero, sinopsis, actores, empresa, fechaPubli);
+			String publicacion, Calendar fechaPubli) {
+		super(codigo, nombre, genero, sinopsis, actores, fechaPubli);
 	}
 
 	public Peliculas(int anio, int duracion, int codigo, String nombre, Generos genero, String sinopsis,
-			ArrayList<Calificaciones> calificaciones, ArrayList<Actores> actores, String empresa, String publicacion,
+			ArrayList<Calificaciones> calificaciones, ArrayList<Actores> actores, String publicacion,
 			Calendar fechaPubli) {
-		super(codigo, nombre, genero, sinopsis, calificaciones, actores, empresa, fechaPubli);
+		super(codigo, nombre, genero, sinopsis, calificaciones, actores, fechaPubli);
 		this.anio = anio;
 		this.duracion = duracion;
 	}
 
 	public Peliculas(int anio, int duracion, int codigo, String nombre, Generos genero, String sinopsis, String empresa,
 			Calendar fechaPubli) {
-		super(codigo, nombre, genero, sinopsis, empresa, fechaPubli);
+		super(codigo, nombre, genero, sinopsis, fechaPubli);
 		this.anio = anio;
 		this.duracion = duracion;
 	}
@@ -39,8 +39,8 @@ public class Peliculas extends Publicaciones implements Comparable<Peliculas> {
 	@Override
 	public String toString() {
 		return "Publicaciones{" + "codigo=" + codigo + ", nombre=" + nombre + ", genero=" + genero + ", sinopsis="
-				+ sinopsis + ", clasificaciones=" + calificaciones + ", actores=" + actores + ", empresa=" + empresa
-				+ ", fechaPubli=" + fechaPubli + '}' + "Peliculas{" + "anio=" + anio + ", duracion=" + duracion + '}';
+				+ sinopsis + ", clasificaciones=" + calificaciones + ", actores=" + actores + ", fechaPubli="
+				+ fechaPubli + '}' + "Peliculas{" + "anio=" + anio + ", duracion=" + duracion + '}';
 	}
 
 	/**
@@ -96,4 +96,49 @@ public class Peliculas extends Publicaciones implements Comparable<Peliculas> {
 		}
 		return total;
 	}
+
+	@Override
+	public boolean comprobarIguales(Publicaciones publicacion) {
+
+		if (publicacion.getCodigo() != this.codigo) {
+			return false;
+		}
+
+		if (!publicacion.getNombre().equalsIgnoreCase(this.nombre)) {
+			return false;
+		}
+
+		if (!publicacion.getGenero().equals(this.genero)) {
+			return false;
+		}
+
+		if (!publicacion.getSinopsis().equalsIgnoreCase(this.sinopsis)) {
+			return false;
+		}
+//
+//		for (Calificaciones calificacion : calificaciones) {
+//
+//		}
+//		protected ArrayList<Calificaciones> calificaciones;
+//
+//		for (Actores actores2 : actores) {
+//
+//		}
+//		protected ArrayList<Actores> actores;
+
+		if (!publicacion.getFechaPubli().equals(this.fechaPubli)) {
+			return false;
+		}
+
+		if (((Peliculas) publicacion).getAnio() != this.anio) {
+			return false;
+
+		}
+		if (((Peliculas) publicacion).getDuracion() != this.duracion) {
+			return false;
+
+		}
+		return true;
+	}
+
 }
